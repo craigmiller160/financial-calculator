@@ -10,8 +10,12 @@ export interface PerPaycheckIncome {
 }
 
 export interface PastData {
-	readonly totalIncome: number;
 	readonly totalTaxableIncome: number;
-	readonly totalBenefitsCost: number;
 	readonly total401kContribution: number;
+}
+
+export interface FutureData {
+	readonly totalIncome: number;
+	readonly staticTaxesCost: number;
+	readonly totalBenefitsCost: number;
 }

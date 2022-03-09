@@ -1,48 +1,14 @@
-import {
-	BaseBonus,
-	BasePaycheck,
-	BenefitsCost,
-	Data,
-	PastBonus,
-	PastPaycheck
-} from '../data/decoders';
+import { Data, PastBonus, PastPaycheck } from '../data/decoders';
 import { pipe } from 'fp-ts/function';
 import * as RArray from 'fp-ts/ReadonlyArray';
 import * as Monoid from 'fp-ts/Monoid';
 import * as Num from 'fp-ts/number';
-import { PastData, PerPaycheckBenefitsCost } from './CalculationTypes';
+import { PastData } from './CalculationTypes';
 import {
-	totalBenefitsCostPerPaycheckMonoid,
-	totalPaycheckIncomeMonoid
-} from './CalculationMonoids';
-
-const sumBenefits = (benefits: BenefitsCost): number =>
-	benefits.dental + benefits.hsa + benefits.medical + benefits.vision;
-
-const getTotalBenefitsCost = (paychecks: ReadonlyArray<BasePaycheck>): number =>
-	pipe(
-		paychecks,
-		RArray.map(
-			(_): PerPaycheckBenefitsCost => ({
-				..._.benefitsCost,
-				numberOfChecks: _.numberOfChecks
-			})
-		),
-		Monoid.concatAll(totalBenefitsCostPerPaycheckMonoid),
-		sumBenefits
-	);
-
-const getTotalBonusIncome = (bonuses: ReadonlyArray<BaseBonus>): number =>
-	pipe(
-		bonuses,
-		RArray.map((_) => _.grossPay),
-		Monoid.concatAll(Num.MonoidSum)
-	);
-
-const getTotalPaycheckIncome = (
-	paychecks: ReadonlyArray<BasePaycheck>
-): number =>
-	pipe(paychecks, Monoid.concatAll(totalPaycheckIncomeMonoid)).grossPay;
+	getTotalBenefitsCost,
+	getTotalBonusIncome,
+	getTotalPaycheckIncome
+} from './CommonCalculations';
 
 const getTotalPaycheck401k = (paychecks: ReadonlyArray<PastPaycheck>): number =>
 	pipe(
@@ -75,9 +41,7 @@ export const calculatePastData = (data: Data): PastData => {
 		totalBenefitsCost -
 		total401kContribution;
 	return {
-		totalIncome,
 		totalTaxableIncome,
-		totalBenefitsCost,
 		total401kContribution
 	};
 };
