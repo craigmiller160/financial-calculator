@@ -12,19 +12,21 @@ import * as Json from '@craigmiller160/ts-functions/Json';
 
 const decodeData = TypeValidation.decode(personalDataV);
 
-const getDataFilePath = (): IOT<string> =>
+const getPersonalDataFilePath = (): IOT<string> =>
 	pipe(
 		Process.cwd(),
 		IO.map((cwd) => path.join(cwd, 'data', 'personalData.json'))
 	);
 
-export const getData = (): IOTryT<PersonalData> =>
+export const getPersonalData = (): IOTryT<PersonalData> =>
 	pipe(
-		logger.info('Loading data'),
-		IO.chain(getDataFilePath),
+		logger.info('Loading personal data'),
+		IO.chain(getPersonalDataFilePath),
 		IOEither.rightIO,
 		IOEither.chain((filePath) => File.readFileSync(filePath)),
-		IOEither.chainFirstIOK((content) => logger.debug(`Data: ${content}`)),
+		IOEither.chainFirstIOK((content) =>
+			logger.debug(`Personal Data: ${content}`)
+		),
 		IOEither.chainEitherK(Json.parseE),
 		IOEither.chainEitherK(decodeData)
 	);

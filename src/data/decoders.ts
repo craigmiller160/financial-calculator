@@ -22,7 +22,7 @@ const rate401kV = Codecs.readonlyType({
 
 const pastPaycheckV = ioType.intersection([basePaycheckV, rate401kV]);
 
-const staticTaxRatesV = Codecs.readonlyType({
+const payrollTaxRates = Codecs.readonlyType({
 	socialSecurity: ioType.number,
 	medicare: ioType.number
 });
@@ -37,15 +37,14 @@ export const personalDataV = Codecs.readonlyType({
 	pastPaychecks: ioType.readonlyArray(pastPaycheckV),
 	futurePaychecks: ioType.readonlyArray(basePaycheckV),
 	pastBonuses: ioType.readonlyArray(pastBonusesV),
-	futureBonuses: ioType.readonlyArray(baseBonusV),
-	staticTaxRates: staticTaxRatesV
+	futureBonuses: ioType.readonlyArray(baseBonusV)
 });
 
 export type BasePaycheck = ioType.TypeOf<typeof basePaycheckV>;
 export type PastPaycheck = ioType.TypeOf<typeof pastPaycheckV>;
 export type FuturePaycheck = ioType.TypeOf<typeof basePaycheckV>;
 export type BenefitsCost = ioType.TypeOf<typeof benefitsCostV>;
-export type StaticTaxRates = ioType.TypeOf<typeof staticTaxRatesV>;
+export type StaticTaxRates = ioType.TypeOf<typeof payrollTaxRates>;
 export type BaseBonus = ioType.TypeOf<typeof baseBonusV>;
 export type PastBonus = ioType.TypeOf<typeof pastBonusesV>;
 export type FutureBonus = ioType.TypeOf<typeof baseBonusV>;
