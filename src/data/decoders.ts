@@ -30,7 +30,8 @@ const payrollTaxRatesV = Codecs.readonlyType({
 const federalTaxBracketV = Codecs.readonlyType({
 	rate: ioType.number,
 	minimumIncome: ioType.number,
-	maximumIncome: ioType.union([ioType.number, ioType.undefined])
+	maximumIncome: ioType.union([ioType.number, ioType.undefined]),
+	baseAmountOwed: ioType.number
 });
 
 const baseBonusV = Codecs.readonlyType({
