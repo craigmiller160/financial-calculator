@@ -1,8 +1,8 @@
-import { Data } from '../data/decoders';
+import { PersonalData } from '../data/decoders';
 import { calculatePastData } from './calculatePastData';
 import { calculateFutureData } from './calculateFutureData';
 
-export const runCalculations = (data: Data): string => {
+export const runCalculations = (data: PersonalData): string => {
 	const pastData = calculatePastData(data);
 	const futureData = calculateFutureData(data);
 	return '';

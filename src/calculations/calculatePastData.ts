@@ -1,4 +1,4 @@
-import { Data, PastBonus, PastPaycheck } from '../data/decoders';
+import { PersonalData, PastBonus, PastPaycheck } from '../data/decoders';
 import { pipe } from 'fp-ts/function';
 import * as RArray from 'fp-ts/ReadonlyArray';
 import * as Monoid from 'fp-ts/Monoid';
@@ -24,7 +24,7 @@ const getTotalBonus401k = (bonuses: ReadonlyArray<PastBonus>): number =>
 		Monoid.concatAll(Num.MonoidSum)
 	);
 
-export const calculatePastData = (data: Data): PastData => {
+export const calculatePastData = (data: PersonalData): PastData => {
 	const totalBenefitsCost = getTotalBenefitsCost(data.pastPaychecks);
 	const totalPaycheckIncome = getTotalPaycheckIncome(data.pastPaychecks);
 	const totalBonusIncome = getTotalBonusIncome(data.pastBonuses);
