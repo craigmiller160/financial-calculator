@@ -2,6 +2,8 @@ import * as ioType from 'io-ts';
 import * as Codecs from '@craigmiller160/ts-functions/Codecs';
 
 const basePaycheckV = Codecs.readonlyType({
+	startDate: ioType.string,
+	endDate: ioType.string,
 	benefitsCost: Codecs.readonlyType({
 		dental: ioType.number,
 		hsa: ioType.number,
@@ -24,6 +26,7 @@ const staticTaxRatesV = Codecs.readonlyType({
 });
 
 const baseBonusV = Codecs.readonlyType({
+	date: ioType.string,
 	grossPay: ioType.number
 });
 const pastBonusesV = ioType.intersection([baseBonusV, rate401kV]);
