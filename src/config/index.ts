@@ -1,12 +1,8 @@
-import ioType, { Props } from 'io-ts';
+import ioType from 'io-ts';
+import * as Codecs from '@craigmiller160/ts-functions/Codecs';
 
-// TODO move to lib
-const readonlyType = <P extends Props>(
-	props: P
-): ioType.ReadonlyC<ioType.TypeC<P>> => ioType.readonly(ioType.type(props));
-
-const basePaycheckV = readonlyType({
-	benefitsCost: readonlyType({
+const basePaycheckV = Codecs.readonlyType({
+	benefitsCost: Codecs.readonlyType({
 		dental: ioType.number,
 		hsa: ioType.number,
 		medical: ioType.number,
@@ -16,23 +12,23 @@ const basePaycheckV = readonlyType({
 	grossPay: ioType.number
 });
 
-const rate401kV = readonlyType({
+const rate401kV = Codecs.readonlyType({
 	rate401k: ioType.number
 });
 
 const pastPaycheckV = ioType.intersection([basePaycheckV, rate401kV]);
 
-const staticTaxRatesV = readonlyType({
+const staticTaxRatesV = Codecs.readonlyType({
 	socialSecurity: ioType.number,
 	medicare: ioType.number
 });
 
-const baseBonusV = readonlyType({
+const baseBonusV = Codecs.readonlyType({
 	grossPay: ioType.number
 });
 const pastBonusesV = ioType.intersection([baseBonusV, rate401kV]);
 
-export const dataV = readonlyType({
+export const dataV = Codecs.readonlyType({
 	pastPaychecks: ioType.readonlyArray(pastPaycheckV),
 	futurePaychecks: ioType.readonlyArray(basePaycheckV),
 	pastBonuses: ioType.readonlyArray(pastBonusesV),

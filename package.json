@@ -20,7 +20,7 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
-    "@craigmiller160/ts-functions": "^1.3.0",
+    "@craigmiller160/ts-functions": "^1.4.0-beta",
     "fp-ts": "^2.11.8",
     "io-ts": "^2.2.16"
   }
