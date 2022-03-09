@@ -1,0 +1,23 @@
+{
+  "paychecks": [
+    [
+      {
+        "benefitsCost": {
+          "dental": 5.84,
+          "hsa": 38.46,
+          "medical": 68.92,
+          "vision": 3.35
+        },
+        "numberOfChecks": 26,
+        "gross": 3724.43,
+        "rate401k": 0.21,
+        "effectiveFederalTaxRate": 0.143
+      }
+    ]
+  ],
+  "bonuses": [],
+  "staticTaxRates": {
+    "socialSecurity": 0.062,
+    "medicare": 0.0145
+  }
+}
