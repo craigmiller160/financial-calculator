@@ -22,9 +22,15 @@ const rate401kV = Codecs.readonlyType({
 
 const pastPaycheckV = ioType.intersection([basePaycheckV, rate401kV]);
 
-const payrollTaxRates = Codecs.readonlyType({
+const payrollTaxRatesV = Codecs.readonlyType({
 	socialSecurity: ioType.number,
 	medicare: ioType.number
+});
+
+const federalTaxBracketV = Codecs.readonlyType({
+	rate: ioType.number,
+	minimumIncome: ioType.number,
+	maximumIncome: ioType.union([ioType.number, ioType.undefined])
 });
 
 const baseBonusV = Codecs.readonlyType({
@@ -40,12 +46,20 @@ export const personalDataV = Codecs.readonlyType({
 	futureBonuses: ioType.readonlyArray(baseBonusV)
 });
 
+export const legalDataV = Codecs.readonlyType({
+	contributionLimit401k: ioType.number,
+	payrollTaxRates: payrollTaxRatesV,
+	federalTaxBrackets: federalTaxBracketV
+});
+
 export type BasePaycheck = ioType.TypeOf<typeof basePaycheckV>;
 export type PastPaycheck = ioType.TypeOf<typeof pastPaycheckV>;
 export type FuturePaycheck = ioType.TypeOf<typeof basePaycheckV>;
 export type BenefitsCost = ioType.TypeOf<typeof benefitsCostV>;
-export type StaticTaxRates = ioType.TypeOf<typeof payrollTaxRates>;
 export type BaseBonus = ioType.TypeOf<typeof baseBonusV>;
 export type PastBonus = ioType.TypeOf<typeof pastBonusesV>;
 export type FutureBonus = ioType.TypeOf<typeof baseBonusV>;
 export type PersonalData = ioType.TypeOf<typeof personalDataV>;
+export type PayrollTaxRates = ioType.TypeOf<typeof payrollTaxRatesV>;
+export type FederalTaxBracket = ioType.TypeOf<typeof federalTaxBracketV>;
+export type LegalData = ioType.TypeOf<typeof legalDataV>;

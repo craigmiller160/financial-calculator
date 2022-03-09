@@ -1,4 +1,5 @@
 {
+  "contributionLimit401k": 20500,
   "payrollTaxRates": {
     "socialSecurity": 0.062,
     "medicare": 0.0145
