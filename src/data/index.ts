@@ -26,7 +26,7 @@ const getLegalDataFilePath = (): IOT<string> =>
 		IO.map((cwd) => path.join(cwd, 'data', 'legalData.json'))
 	);
 
-const getDataFromFile = <T>(
+export const getDataFromFile = <T>(
 	filePath: IOT<string>,
 	decoder: TypeDecoder<T>
 ): IOTryT<T> =>
