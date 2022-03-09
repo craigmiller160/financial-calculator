@@ -1,0 +1,17 @@
+Past Total Income = (paycheckGrossPay * numChecks) + bonuses
+Past Total 401k = totalIncome * rate401k
+Past Benefits Total = sumBenefits * numChecks
+Past Taxable Income = totalIncome - (totalIncome * ssnRate) - (totalIncome * medRate) - benefitsTotal - past401k
+
+Future Total Income = (paycheckGrossPay * numChecks) + bonuses
+Future Benefits Total = sumBenefits * numChecks
+Remaining 401k = 20500 - past401k
+401k Percent = Loop (start = 0.1, increment = +0.1, stop = (value * totalIncome) + past401 > 20500)
+    - NOTE: go back 0.1 after the above calculation
+Future Taxable Income = totalIncome - (totalIncome * ssnRate) - (totalIncome * medRate) - benefitsTotal - future401k
+
+Total Taxable Income = pastTaxableIncome + futureTaxableIncome
+Tax Rate = totalTaxableIncome compared to tax rate brackets
+Total Taxes = totalTaxableIncome * tax rate OR just use the tax brackets and ignore effective tax rate
+    - NOTE: Probably would be easier to do total taxes and then calculate effective tax rate from that
+New Take Home = futurePaycheckGrossPay - benefitsTotal - (futurePaycheckGrossPay * ssnRate) - (futurePaycheckGrossPay * medRate) - (futurePaycheckGrossPay * rate401k)
