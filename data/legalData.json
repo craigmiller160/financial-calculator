@@ -1,0 +1,42 @@
+{
+  "payrollTaxRates": {
+    "socialSecurity": 0.062,
+    "medicare": 0.0145
+  },
+  "federalTaxBrackets": [
+    {
+      "rate": 0.1,
+      "minimumIncome": 0,
+      "maximumIncome": 10275
+    },
+    {
+      "rate": 0.12,
+      "minimumIncome": 10275,
+      "maximumIncome": 41775
+    },
+    {
+      "rate": 0.22,
+      "minimumIncome": 41775,
+      "maximumIncome": 89075
+    },
+    {
+      "rate": 0.24,
+      "minimumIncome": 89075,
+      "maximumIncome": 170050
+    },
+    {
+      "rate": 0.32,
+      "minimumIncome": 170050,
+      "maximumIncome": 215950
+    },
+    {
+      "rate": 0.35,
+      "minimumIncome": 215950,
+      "maximumIncome": 539900
+    },
+    {
+      "rate": 0.37,
+      "minimumIncome": 539900
+    }
+  ]
+}

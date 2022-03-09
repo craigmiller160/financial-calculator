@@ -35,9 +35,5 @@
       "date": "2022-03-11"
     }
   ],
-  "futureBonuses": [],
-  "staticTaxRates": {
-    "socialSecurity": 0.062,
-    "medicare": 0.0145
-  }
+  "futureBonuses": []
 }
