@@ -1,5 +1,5 @@
 {
-  "paychecks": [
+  "pastPaychecks": [
     [
       {
         "benefitsCost": {
@@ -10,10 +10,21 @@
         },
         "numberOfChecks": 26,
         "gross": 3724.43,
-        "rate401k": 0.21,
-        "effectiveFederalTaxRate": 0.143
+        "rate401k": 0.21
       }
     ]
+  ],
+  "futurePaychecks": [
+    {
+      "benefitsCost": {
+        "dental": 0,
+        "hsa": 0,
+        "medical": 0,
+        "vision": 0
+      },
+      "numberOfChecks": 0,
+      "gross": 0
+    }
   ],
   "bonuses": [],
   "staticTaxRates": {
