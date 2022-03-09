@@ -7,8 +7,11 @@ import Decimal from 'decimal.js';
 export const runCalculations = (data: Data): string => {
 	const pastData = calculatePastData(data);
 	const futureData = calculateFutureData(data);
+	const remainingAmount401k = new Decimal(
+		data.legalData.contributionLimit401k
+	).minus(pastData.total401kContribution);
 	const [futureRate401k, futureAmount401k] = calculateFuture401k(
-		new Decimal(data.legalData.contributionLimit401k),
+		remainingAmount401k,
 		futureData.totalIncome
 	);
 	return `${pastData} ${futureData} ${futureRate401k} ${futureAmount401k}`;
