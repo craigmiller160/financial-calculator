@@ -47,5 +47,8 @@ export const runCalculations = (data: Data): IOT<string> =>
 		IO.bind('future401k', ({ pastData, futureData }) =>
 			runFuture401kCalculation(data, pastData, futureData)
 		),
-		IO.map(() => '')
+		IO.map(
+			({ future401k: [rate401k] }) =>
+				`${rate401k.times(100).toNumber().toFixed(2)}%`
+		)
 	);
