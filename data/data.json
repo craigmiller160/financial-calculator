@@ -26,7 +26,13 @@
       "grossPay": 0
     }
   ],
-  "bonuses": [],
+  "pastBonuses": [
+    {
+      "grossPay": 0,
+      "rate401k": 0.21
+    }
+  ],
+  "futureBonuses": [],
   "staticTaxRates": {
     "socialSecurity": 0.062,
     "medicare": 0.0145

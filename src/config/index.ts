@@ -1,36 +1,45 @@
 import ioType, { Props } from 'io-ts';
 
 // TODO move to lib
-const readonlyType = <P extends Props>(props: P): ioType.ReadonlyC<ioType.TypeC<P>> =>
-    ioType.readonly(ioType.type(props))
+const readonlyType = <P extends Props>(
+	props: P
+): ioType.ReadonlyC<ioType.TypeC<P>> => ioType.readonly(ioType.type(props));
 
 const basePaycheckV = readonlyType({
-    benefitsCost: readonlyType({
-        dental: ioType.number,
-        hsa: ioType.number,
-        medical: ioType.number,
-        vision: ioType.number
-    }),
-    numberOfChecks: ioType.number,
-    grossPay: ioType.number
+	benefitsCost: readonlyType({
+		dental: ioType.number,
+		hsa: ioType.number,
+		medical: ioType.number,
+		vision: ioType.number
+	}),
+	numberOfChecks: ioType.number,
+	grossPay: ioType.number
 });
 
-const paycheckWithRateV = readonlyType({
-    rate401k: ioType.number
+const rate401kV = readonlyType({
+	rate401k: ioType.number
 });
 
-const pastPaycheckV = ioType.intersection([basePaycheckV, paycheckWithRateV]);
+const pastPaycheckV = ioType.intersection([basePaycheckV, rate401kV]);
 
 const staticTaxRatesV = readonlyType({
-    socialSecurity: ioType.number,
-    medicare: ioType.number
+	socialSecurity: ioType.number,
+	medicare: ioType.number
 });
 
-const dataV = readonlyType({
-    pastPaychecks: ioType.readonlyArray(pastPaycheckV),
-    futurePaychecks: ioType.readonlyArray(basePaycheckV)
-})
+const baseBonusV = readonlyType({
+	grossPay: ioType.number
+});
+const pastBonusesV = ioType.intersection([baseBonusV, rate401kV]);
 
-type PastPaycheck = ioType.TypeOf<typeof pastPaycheckV>;
-type FuturePaycheck = ioType.TypeOf<typeof basePaycheckV>;
-type StaticTaxRates = ioType.TypeOf<typeof staticTaxRatesV>;
+export const dataV = readonlyType({
+	pastPaychecks: ioType.readonlyArray(pastPaycheckV),
+	futurePaychecks: ioType.readonlyArray(basePaycheckV),
+	pastBonuses: ioType.readonlyArray(pastBonusesV),
+	futureBonuses: ioType.readonlyArray(baseBonusV),
+	staticTaxRates: staticTaxRatesV
+});
+
+export type PastPaycheck = ioType.TypeOf<typeof pastPaycheckV>;
+export type FuturePaycheck = ioType.TypeOf<typeof basePaycheckV>;
+export type StaticTaxRates = ioType.TypeOf<typeof staticTaxRatesV>;
