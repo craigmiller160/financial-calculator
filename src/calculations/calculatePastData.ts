@@ -1,4 +1,11 @@
-import { BaseBonus, BasePaycheck, BenefitsCost, Data } from '../data/decoders';
+import {
+	BaseBonus,
+	BasePaycheck,
+	BenefitsCost,
+	Data,
+	PastBonus,
+	PastPaycheck
+} from '../data/decoders';
 import { pipe } from 'fp-ts/function';
 import * as RArray from 'fp-ts/ReadonlyArray';
 import * as Monoid from 'fp-ts/Monoid';
@@ -9,9 +16,10 @@ import {
 	totalPaycheckIncomeMonoid
 } from './CalculationMonoids';
 
-const getTotalBenefitsCost = (
-	paychecks: ReadonlyArray<BasePaycheck>
-): BenefitsCost =>
+const sumBenefits = (benefits: BenefitsCost): number =>
+	benefits.dental + benefits.hsa + benefits.medical + benefits.vision;
+
+const getTotalBenefitsCost = (paychecks: ReadonlyArray<BasePaycheck>): number =>
 	pipe(
 		paychecks,
 		RArray.map(
@@ -20,7 +28,8 @@ const getTotalBenefitsCost = (
 				numberOfChecks: _.numberOfChecks
 			})
 		),
-		Monoid.concatAll(totalBenefitsCostPerPaycheckMonoid)
+		Monoid.concatAll(totalBenefitsCostPerPaycheckMonoid),
+		sumBenefits
 	);
 
 const getTotalBonusIncome = (bonuses: ReadonlyArray<BaseBonus>): number =>
@@ -30,11 +39,32 @@ const getTotalBonusIncome = (bonuses: ReadonlyArray<BaseBonus>): number =>
 		Monoid.concatAll(Num.MonoidSum)
 	);
 
+const getTotalPaycheckIncome = (
+	paychecks: ReadonlyArray<BasePaycheck>
+): number =>
+	pipe(paychecks, Monoid.concatAll(totalPaycheckIncomeMonoid)).grossPay;
+
+const getTotalPaycheck401k = (paychecks: ReadonlyArray<PastPaycheck>): number =>
+	pipe(
+		paychecks,
+		RArray.map((_) => _.grossPay * _.rate401k),
+		Monoid.concatAll(Num.MonoidSum)
+	);
+
+const getTotalBonus401k = (bonuses: ReadonlyArray<PastBonus>): number =>
+	pipe(
+		bonuses,
+		RArray.map((_) => _.grossPay * _.rate401k),
+		Monoid.concatAll(Num.MonoidSum)
+	);
+
 export const calculatePastData = (data: Data): unknown => {
 	const totalBenefitsCost = getTotalBenefitsCost(data.pastPaychecks);
-	const totalPaycheckIncome = Monoid.concatAll(totalPaycheckIncomeMonoid)(
-		data.pastPaychecks
-	);
+	const totalPaycheckIncome = getTotalPaycheckIncome(data.pastPaychecks);
 	const totalBonusIncome = getTotalBonusIncome(data.pastBonuses);
+	const totalIncome = totalPaycheckIncome + totalBonusIncome;
+	const totalPaycheck401k = getTotalPaycheck401k(data.pastPaychecks);
+	const totalBonus401k = getTotalBonus401k(data.pastBonuses);
+	const total401k = totalPaycheck401k + totalBonus401k;
 	return totalBenefitsCost;
 };
