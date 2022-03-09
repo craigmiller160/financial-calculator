@@ -11,13 +11,13 @@ describe('calculateFutureData', () => {
 			IOEither.map(calculateFutureData),
 			IOEither.map((decimalResult) => ({
 				totalIncome: decimalResult.totalIncome.toFixed(2),
-				staticTaxesCost: decimalResult.staticTaxesCost.toFixed(2),
+				payrollTaxesCost: decimalResult.payrollTaxesCost.toFixed(2),
 				totalBenefitsCost: decimalResult.totalBenefitsCost.toFixed(2)
 			}))
 		)();
 		expect(result).toEqualRight({
 			totalIncome: '126153.83',
-			staticTaxesCost: '9650.77',
+			payrollTaxesCost: '9650.77',
 			totalBenefitsCost: '1227.66'
 		});
 	});

@@ -28,6 +28,6 @@ export const calculateFutureData = (data: Data): FutureData => {
 	return {
 		totalIncome,
 		totalBenefitsCost,
-		staticTaxesCost
+		payrollTaxesCost: staticTaxesCost
 	};
 };

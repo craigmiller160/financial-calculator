@@ -17,7 +17,7 @@ export interface PastData {
 
 export interface FutureData {
 	readonly totalIncome: Decimal;
-	readonly staticTaxesCost: Decimal; // TODO rename this
+	readonly payrollTaxesCost: Decimal;
 	readonly totalBenefitsCost: Decimal;
 }
 
