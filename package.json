@@ -4,7 +4,8 @@
   "scripts": {
     "prepare": "husky install",
     "start": "ts-node src",
-    "lint": "craig-lint"
+    "lint": "craig-lint",
+    "test": "craig-test"
   },
   "lint-staged": {
     "*.{ts,tsx}": "eslint --fix --max-warnings=0"
