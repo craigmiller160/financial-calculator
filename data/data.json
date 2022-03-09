@@ -9,7 +9,7 @@
           "vision": 3.35
         },
         "numberOfChecks": 26,
-        "gross": 3724.43,
+        "grossPay": 3724.43,
         "rate401k": 0.21
       }
     ]
@@ -23,7 +23,7 @@
         "vision": 0
       },
       "numberOfChecks": 0,
-      "gross": 0
+      "grossPay": 0
     }
   ],
   "bonuses": [],
