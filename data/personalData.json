@@ -9,7 +9,7 @@
         "medical": 68.92,
         "vision": 3.35
       },
-      "numberOfChecks": 26,
+      "numberOfChecks": 5,
       "grossPay": 3724.43,
       "rate401k": 0.21
     }
@@ -19,13 +19,13 @@
       "startDate": "2022-03-14",
       "endDate": "2022-12-31",
       "benefitsCost": {
-        "dental": 0,
-        "hsa": 0,
+        "dental": 10,
+        "hsa": 38.46,
         "medical": 0,
-        "vision": 0
+        "vision": 10
       },
-      "numberOfChecks": 0,
-      "grossPay": 0
+      "numberOfChecks": 21,
+      "grossPay": 5769.23
     }
   ],
   "pastBonuses": [
