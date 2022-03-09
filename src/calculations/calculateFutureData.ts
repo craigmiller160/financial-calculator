@@ -1,4 +1,4 @@
-import { PersonalData } from '../data/decoders';
+import { Data } from '../data/decoders';
 import {
 	getTotalBenefitsCost,
 	getTotalBonusIncome,
@@ -6,13 +6,19 @@ import {
 } from './CommonCalculations';
 import { FutureData } from './CalculationTypes';
 
-export const calculateFutureData = (data: PersonalData): FutureData => {
-	const totalBenefitsCost = getTotalBenefitsCost(data.futurePaychecks);
-	const totalPaycheckIncome = getTotalPaycheckIncome(data.futurePaychecks);
-	const totalBonusIncome = getTotalBonusIncome(data.futureBonuses);
+export const calculateFutureData = (data: Data): FutureData => {
+	const totalBenefitsCost = getTotalBenefitsCost(
+		data.personalData.futurePaychecks
+	);
+	const totalPaycheckIncome = getTotalPaycheckIncome(
+		data.personalData.futurePaychecks
+	);
+	const totalBonusIncome = getTotalBonusIncome(
+		data.personalData.futureBonuses
+	);
 	const totalIncome = totalPaycheckIncome + totalBonusIncome;
-	const ssnCost = totalIncome * data.staticTaxRates.socialSecurity;
-	const medicareCost = totalIncome * data.staticTaxRates.medicare;
+	const ssnCost = totalIncome * data.legalData.payrollTaxRates.socialSecurity;
+	const medicareCost = totalIncome * data.legalData.payrollTaxRates.medicare;
 	const staticTaxesCost = ssnCost + medicareCost;
 	return {
 		totalIncome,
