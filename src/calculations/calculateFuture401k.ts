@@ -7,7 +7,8 @@ interface Context {
 	readonly amount401k: number;
 }
 
-const INTERVAL = 0.1;
+// 0.1%
+const INTERVAL = 0.001;
 
 export const calculateFuture401k = (
 	remainingAmount401k: number,
