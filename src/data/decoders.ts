@@ -1,4 +1,4 @@
-import ioType from 'io-ts';
+import * as ioType from 'io-ts';
 import * as Codecs from '@craigmiller160/ts-functions/Codecs';
 
 const basePaycheckV = Codecs.readonlyType({

@@ -1396,6 +1396,11 @@ ts-node@^10.7.0:
     v8-compile-cache-lib "^3.0.0"
     yn "3.1.1"
 
+ts-pattern@^3.3.5:
+  version "3.3.5"
+  resolved "https://craigmiller160.ddns.net:30003/repository/npm-group/ts-pattern/-/ts-pattern-3.3.5.tgz#9a4bde1d44f9afe7e82409820f68790232c2544c"
+  integrity sha512-LD+wFR/RNckk1DrKV0LTH4KIT9wRqnnOjtEf77ovhKcVi8gf83Uf6U7OdywEua6KD9SbHadUdfolayfIUiPxzw==
+
 tslib@^1.8.1:
   version "1.14.1"
   resolved "https://craigmiller160.ddns.net:30003/repository/npm-group/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"

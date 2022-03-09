@@ -24,6 +24,7 @@
     "@craigmiller160/ts-functions": "^1.4.0-beta",
     "fp-ts": "^2.11.8",
     "io-ts": "^2.2.16",
+    "ts-pattern": "^3.3.5",
     "winston": "^3.6.0"
   }
 }
