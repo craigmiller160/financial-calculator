@@ -6,7 +6,7 @@ export const runUntil =
 	(init: A): A => {
 		let result: A = init;
 		while (!stop(result)) {
-			result = action(init);
+			result = action(result);
 		}
 		return result;
 	};

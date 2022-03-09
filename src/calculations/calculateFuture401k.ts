@@ -23,10 +23,11 @@ export const calculateFuture401k = (
 		(ctx) => ctx.amount401k > ctx.remainingAmount401k
 	)((ctx) => {
 		const newRate = ctx.rate401k + INTERVAL;
+		const newAmount = ctx.totalFutureIncome * newRate;
 		return {
 			...ctx,
 			rate401k: newRate,
-			amount401k: ctx.totalFutureIncome * newRate
+			amount401k: newAmount
 		};
 	})(initContext);
 	const finalRate = resultContext.rate401k - INTERVAL;
