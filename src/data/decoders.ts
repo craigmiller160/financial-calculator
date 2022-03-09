@@ -49,7 +49,7 @@ export const personalDataV = Codecs.readonlyType({
 export const legalDataV = Codecs.readonlyType({
 	contributionLimit401k: ioType.number,
 	payrollTaxRates: payrollTaxRatesV,
-	federalTaxBrackets: federalTaxBracketV
+	federalTaxBrackets: ioType.readonlyArray(federalTaxBracketV)
 });
 
 export type BasePaycheck = ioType.TypeOf<typeof basePaycheckV>;
