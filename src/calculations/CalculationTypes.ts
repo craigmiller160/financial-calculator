@@ -8,3 +8,10 @@ export interface PerPaycheckIncome {
 	readonly grossPay: number;
 	readonly numberOfChecks: number;
 }
+
+export interface PastData {
+	readonly totalIncome: number;
+	readonly totalTaxableIncome: number;
+	readonly totalBenefitsCost: number;
+	readonly total401kContribution: number;
+}
