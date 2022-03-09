@@ -12,13 +12,12 @@ interface Context {
 const INTERVAL = new Decimal(0.001);
 
 export const calculateFuture401k = (
-	remainingAmount401k: number,
-	totalFutureIncome: number
+	remainingAmount401k: Decimal,
+	totalFutureIncome: Decimal
 ): [rate: Decimal, amount: Decimal] => {
-	// TODO if I change all values to Decimals, fix this
 	const initContext: Context = {
-		remainingAmount401k: new Decimal(remainingAmount401k),
-		totalFutureIncome: new Decimal(totalFutureIncome),
+		remainingAmount401k,
+		totalFutureIncome,
 		rate401k: new Decimal(0),
 		amount401k: new Decimal(0)
 	};
