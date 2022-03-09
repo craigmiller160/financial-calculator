@@ -5,8 +5,8 @@ export const runUntil =
 	(action: (a: A) => A) =>
 	(init: A): A => {
 		let result: A = init;
-		while (!stop(result)) {
+		do {
 			result = action(result);
-		}
+		} while (!stop(result));
 		return result;
 	};
