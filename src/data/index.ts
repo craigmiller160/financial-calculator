@@ -7,6 +7,7 @@ import * as IOEither from 'fp-ts/IOEither';
 import * as IO from 'fp-ts/IO';
 import path from 'path';
 import * as TypeValidation from '@craigmiller160/ts-functions/TypeValidation';
+import { logger } from '../logger';
 
 const decodeData = TypeValidation.decode(dataV);
 
@@ -18,7 +19,8 @@ const getDataFilePath = (): IOT<string> =>
 
 export const getData = (): IOTryT<Data> =>
 	pipe(
-		getDataFilePath(),
+		logger.info('Loading data'),
+		IO.chain(getDataFilePath),
 		IOEither.rightIO,
 		IOEither.chain((filePath) => File.readFileSync(filePath)),
 		IOEither.chainEitherK(decodeData)
