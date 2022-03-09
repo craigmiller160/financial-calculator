@@ -2,5 +2,14 @@
   "name": "401k-calculator-v2",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "@craigmiller160/ts-functions": "^1.3.0",
+    "fp-ts": "^2.11.8",
+    "io-ts": "^2.2.16"
+  }
 }
