@@ -8,6 +8,7 @@ import * as IO from 'fp-ts/IO';
 import path from 'path';
 import * as TypeValidation from '@craigmiller160/ts-functions/TypeValidation';
 import { logger } from '../logger';
+import * as Json from '@craigmiller160/ts-functions/Json';
 
 const decodeData = TypeValidation.decode(dataV);
 
@@ -23,5 +24,6 @@ export const getData = (): IOTryT<Data> =>
 		IO.chain(getDataFilePath),
 		IOEither.rightIO,
 		IOEither.chain((filePath) => File.readFileSync(filePath)),
+		IOEither.chainEitherK(Json.parseE),
 		IOEither.chainEitherK(decodeData)
 	);
