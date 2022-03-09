@@ -1,5 +1,5 @@
 import { MonoidT } from '@craigmiller160/ts-functions/types';
-import { PerPaycheckBenefitsCost } from './CalculationTypes';
+import { PerPaycheckBenefitsCost, PerPaycheckIncome } from './CalculationTypes';
 
 export const totalBenefitsCostPerPaycheckMonoid: MonoidT<PerPaycheckBenefitsCost> =
 	{
@@ -18,3 +18,14 @@ export const totalBenefitsCostPerPaycheckMonoid: MonoidT<PerPaycheckBenefitsCost
 			numberOfChecks: 0
 		})
 	};
+
+export const totalPaycheckIncomeMonoid: MonoidT<PerPaycheckIncome> = {
+	empty: {
+		grossPay: 0,
+		numberOfChecks: 0
+	},
+	concat: (a, b): PerPaycheckIncome => ({
+		grossPay: a.grossPay + b.grossPay * b.numberOfChecks,
+		numberOfChecks: 0
+	})
+};

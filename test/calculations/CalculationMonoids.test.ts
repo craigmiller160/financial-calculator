@@ -1,5 +1,11 @@
-import { totalBenefitsCostPerPaycheckMonoid } from '../../src/calculations/CalculationMonoids';
-import { PerPaycheckBenefitsCost } from '../../src/calculations/CalculationTypes';
+import {
+	totalBenefitsCostPerPaycheckMonoid,
+	totalPaycheckIncomeMonoid
+} from '../../src/calculations/CalculationMonoids';
+import {
+	PerPaycheckBenefitsCost,
+	PerPaycheckIncome
+} from '../../src/calculations/CalculationTypes';
 import * as Monoid from 'fp-ts/Monoid';
 
 const benefitData: ReadonlyArray<PerPaycheckBenefitsCost> = [
@@ -19,6 +25,17 @@ const benefitData: ReadonlyArray<PerPaycheckBenefitsCost> = [
 	}
 ];
 
+const paycheckData: ReadonlyArray<PerPaycheckIncome> = [
+	{
+		grossPay: 100,
+		numberOfChecks: 3
+	},
+	{
+		grossPay: 150,
+		numberOfChecks: 2
+	}
+];
+
 describe('CalculationMonoids', () => {
 	it('totalBenefitsCostPerPaycheckMonoid', () => {
 		const result = Monoid.concatAll(totalBenefitsCostPerPaycheckMonoid)(
@@ -30,6 +47,16 @@ describe('CalculationMonoids', () => {
 			hsa: 171,
 			medical: 226,
 			vision: 281
+		});
+	});
+
+	it('totalPaycheckIncomeMonoid', () => {
+		const result = Monoid.concatAll(totalPaycheckIncomeMonoid)(
+			paycheckData
+		);
+		expect(result).toEqual({
+			grossPay: 600,
+			numberOfChecks: 0
 		});
 	});
 });
