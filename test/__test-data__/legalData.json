@@ -1,0 +1,50 @@
+{
+  "contributionLimit401k": 20500,
+  "payrollTaxRates": {
+    "socialSecurity": 0.062,
+    "medicare": 0.0145
+  },
+  "federalTaxBrackets": [
+    {
+      "rate": 0.1,
+      "minimumIncome": 0,
+      "maximumIncome": 10275,
+      "baseAmountOwed": 0
+    },
+    {
+      "rate": 0.12,
+      "minimumIncome": 10275,
+      "maximumIncome": 41775,
+      "baseAmountOwed": 1027.5
+    },
+    {
+      "rate": 0.22,
+      "minimumIncome": 41775,
+      "maximumIncome": 89075,
+      "baseAmountOwed": 4807.5
+    },
+    {
+      "rate": 0.24,
+      "minimumIncome": 89075,
+      "maximumIncome": 170050,
+      "baseAmountOwed": 15213.5
+    },
+    {
+      "rate": 0.32,
+      "minimumIncome": 170050,
+      "maximumIncome": 215950,
+      "baseAmountOwed": 34647.5
+    },
+    {
+      "rate": 0.35,
+      "minimumIncome": 215950,
+      "maximumIncome": 539900,
+      "baseAmountOwed": 49335.5
+    },
+    {
+      "rate": 0.37,
+      "minimumIncome": 539900,
+      "baseAmountOwed": 162718
+    }
+  ]
+}
