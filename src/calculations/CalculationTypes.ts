@@ -20,3 +20,5 @@ export interface FutureData {
 	readonly staticTaxesCost: Decimal;
 	readonly totalBenefitsCost: Decimal;
 }
+
+export type Future401kValues = [rate: Decimal, amount: Decimal];

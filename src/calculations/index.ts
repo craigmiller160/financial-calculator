@@ -3,16 +3,49 @@ import { calculatePastData } from './calculatePastData';
 import { calculateFutureData } from './calculateFutureData';
 import { calculateFuture401k } from './calculateFuture401k';
 import Decimal from 'decimal.js';
+import { IOT } from '@craigmiller160/ts-functions/types';
+import { Future401kValues, FutureData, PastData } from './CalculationTypes';
+import { pipe } from 'fp-ts/function';
+import { logger } from '../logger';
+import * as IO from 'fp-ts/IO';
 
-export const runCalculations = (data: Data): string => {
-	const pastData = calculatePastData(data);
-	const futureData = calculateFutureData(data);
-	const remainingAmount401k = new Decimal(
-		data.legalData.contributionLimit401k
-	).minus(pastData.total401kContribution);
-	const [futureRate401k, futureAmount401k] = calculateFuture401k(
-		remainingAmount401k,
-		futureData.totalIncome
+const runPastDataCalculation = (data: Data): IOT<PastData> =>
+	pipe(
+		logger.debug('Calculating past data'),
+		IO.map(() => calculatePastData(data))
 	);
-	return `${pastData} ${futureData} ${futureRate401k} ${futureAmount401k}`;
-};
+
+const runFutureDataCalculation = (data: Data): IOT<FutureData> =>
+	pipe(
+		logger.debug('Calculating future data'),
+		IO.map(() => calculateFutureData(data))
+	);
+
+const runFuture401kCalculation = (
+	data: Data,
+	pastData: PastData,
+	futureData: FutureData
+): IOT<Future401kValues> =>
+	pipe(
+		logger.debug('Calculating future 401k contribution'),
+		IO.map(() => {
+			const remainingAmount401k = new Decimal(
+				data.legalData.contributionLimit401k
+			).minus(pastData.total401kContribution);
+			return calculateFuture401k(
+				remainingAmount401k,
+				futureData.totalIncome
+			);
+		})
+	);
+
+export const runCalculations = (data: Data): IOT<string> =>
+	pipe(
+		runPastDataCalculation(data),
+		IO.bindTo('pastData'),
+		IO.bind('futureData', () => runFutureDataCalculation(data)),
+		IO.bind('future401k', ({ pastData, futureData }) =>
+			runFuture401kCalculation(data, pastData, futureData)
+		),
+		IO.map(() => '')
+	);
