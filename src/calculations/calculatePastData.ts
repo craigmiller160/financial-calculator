@@ -5,7 +5,7 @@ import * as Monoid from 'fp-ts/Monoid';
 import { PerPaycheckBenefitsCost } from './CalculationTypes';
 import { totalBenefitsCostPerPaycheckMonoid } from './CalculationMonoids';
 
-const getTotalBenefitsCostPerPaycheck = (
+const getTotalBenefitsCost = (
 	paychecks: ReadonlyArray<BasePaycheck>
 ): BenefitsCost =>
 	pipe(
@@ -20,7 +20,7 @@ const getTotalBenefitsCostPerPaycheck = (
 	);
 
 export const calculatePastData = (data: Data) => {
-	const totalBenefitsPerPaycheck = getTotalBenefitsCostPerPaycheck(
+	const totalBenefitsCost = getTotalBenefitsCost(
 		data.pastPaychecks
 	);
 };
