@@ -1,15 +1,17 @@
 import * as ioType from 'io-ts';
 import * as Codecs from '@craigmiller160/ts-functions/Codecs';
 
+const benefitsCostV = Codecs.readonlyType({
+	dental: ioType.number,
+	hsa: ioType.number,
+	medical: ioType.number,
+	vision: ioType.number
+});
+
 const basePaycheckV = Codecs.readonlyType({
 	startDate: ioType.string,
 	endDate: ioType.string,
-	benefitsCost: Codecs.readonlyType({
-		dental: ioType.number,
-		hsa: ioType.number,
-		medical: ioType.number,
-		vision: ioType.number
-	}),
+	benefitsCost: benefitsCostV,
 	numberOfChecks: ioType.number,
 	grossPay: ioType.number
 });
@@ -39,9 +41,12 @@ export const dataV = Codecs.readonlyType({
 	staticTaxRates: staticTaxRatesV
 });
 
+export type BasePaycheck = ioType.TypeOf<typeof basePaycheckV>;
 export type PastPaycheck = ioType.TypeOf<typeof pastPaycheckV>;
 export type FuturePaycheck = ioType.TypeOf<typeof basePaycheckV>;
+export type BenefitsCost = ioType.TypeOf<typeof benefitsCostV>;
 export type StaticTaxRates = ioType.TypeOf<typeof staticTaxRatesV>;
+export type BaseBonus = ioType.TypeOf<typeof baseBonusV>;
 export type PastBonus = ioType.TypeOf<typeof pastBonusesV>;
 export type FutureBonus = ioType.TypeOf<typeof baseBonusV>;
 export type Data = ioType.TypeOf<typeof dataV>;
