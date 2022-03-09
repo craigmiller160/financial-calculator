@@ -43,3 +43,6 @@ export const dataV = readonlyType({
 export type PastPaycheck = ioType.TypeOf<typeof pastPaycheckV>;
 export type FuturePaycheck = ioType.TypeOf<typeof basePaycheckV>;
 export type StaticTaxRates = ioType.TypeOf<typeof staticTaxRatesV>;
+export type PastBonus = ioType.TypeOf<typeof pastBonusesV>;
+export type FutureBonus = ioType.TypeOf<typeof baseBonusV>;
+export type Data = ioType.TypeOf<typeof dataV>;
