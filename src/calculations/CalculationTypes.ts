@@ -1,4 +1,5 @@
 import { BenefitsCost } from '../data/decoders';
+import Decimal from 'decimal.js';
 
 export interface PerPaycheckBenefitsCost extends BenefitsCost {
 	readonly numberOfChecks: number;
@@ -10,12 +11,12 @@ export interface PerPaycheckIncome {
 }
 
 export interface PastData {
-	readonly totalTaxableIncome: number;
-	readonly total401kContribution: number;
+	readonly totalTaxableIncome: Decimal;
+	readonly total401kContribution: Decimal;
 }
 
 export interface FutureData {
-	readonly totalIncome: number;
-	readonly staticTaxesCost: number;
-	readonly totalBenefitsCost: number;
+	readonly totalIncome: Decimal;
+	readonly staticTaxesCost: Decimal;
+	readonly totalBenefitsCost: Decimal;
 }

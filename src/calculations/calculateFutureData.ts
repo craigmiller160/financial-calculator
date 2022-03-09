@@ -5,10 +5,11 @@ import {
 	getTotalPaycheckIncome
 } from './CommonCalculations';
 import { FutureData } from './CalculationTypes';
+import Decimal from 'decimal.js';
 
 export const calculateFutureData = (data: Data): FutureData => {
-	const totalBenefitsCost = getTotalBenefitsCost(
-		data.personalData.futurePaychecks
+	const totalBenefitsCost = new Decimal(
+		getTotalBenefitsCost(data.personalData.futurePaychecks)
 	);
 	const totalPaycheckIncome = getTotalPaycheckIncome(
 		data.personalData.futurePaychecks
@@ -16,10 +17,14 @@ export const calculateFutureData = (data: Data): FutureData => {
 	const totalBonusIncome = getTotalBonusIncome(
 		data.personalData.futureBonuses
 	);
-	const totalIncome = totalPaycheckIncome + totalBonusIncome;
-	const ssnCost = totalIncome * data.legalData.payrollTaxRates.socialSecurity;
-	const medicareCost = totalIncome * data.legalData.payrollTaxRates.medicare;
-	const staticTaxesCost = ssnCost + medicareCost;
+	const totalIncome = new Decimal(totalPaycheckIncome + totalBonusIncome);
+	const ssnCost = totalIncome.times(
+		new Decimal(data.legalData.payrollTaxRates.socialSecurity)
+	);
+	const medicareCost = totalIncome.times(
+		new Decimal(data.legalData.payrollTaxRates.medicare)
+	);
+	const staticTaxesCost = ssnCost.plus(medicareCost);
 	return {
 		totalIncome,
 		totalBenefitsCost,
