@@ -19,8 +19,7 @@ const getTotalBenefitsCost = (
 		Monoid.concatAll(totalBenefitsCostPerPaycheckMonoid)
 	);
 
-export const calculatePastData = (data: Data) => {
-	const totalBenefitsCost = getTotalBenefitsCost(
-		data.pastPaychecks
-	);
+export const calculatePastData = (data: Data): unknown => {
+	const totalBenefitsCost = getTotalBenefitsCost(data.pastPaychecks);
+	return totalBenefitsCost;
 };
