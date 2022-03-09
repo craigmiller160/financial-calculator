@@ -24,6 +24,7 @@ export const getData = (): IOTryT<Data> =>
 		IO.chain(getDataFilePath),
 		IOEither.rightIO,
 		IOEither.chain((filePath) => File.readFileSync(filePath)),
+		IOEither.chainFirstIOK((content) => logger.debug(`Data: ${content}`)),
 		IOEither.chainEitherK(Json.parseE),
 		IOEither.chainEitherK(decodeData)
 	);
