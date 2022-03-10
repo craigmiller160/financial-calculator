@@ -50,7 +50,9 @@ export const addTotalsToData = (data: Data): DataWithTotals => {
 				futureGrossPay:
 					futurePaychecksTotal.grossPay + futureBonusesTotal.grossPay,
 				futureContribution401k: 0,
-				futureTaxablePay: 0
+				futureTaxablePay:
+					futurePaychecksTotal.taxablePay +
+					futureBonusesTotal.taxablePay
 			}
 		}
 	};
