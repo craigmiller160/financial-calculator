@@ -8,6 +8,7 @@ export interface BonusWithTotal {
 	readonly date: string;
 	readonly grossPay: number;
 	readonly bonus401k: The401k;
+	readonly payrollTaxCosts: PayrollTaxCosts;
 	readonly taxablePay: number;
 }
 
