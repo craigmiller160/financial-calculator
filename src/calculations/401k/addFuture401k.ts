@@ -115,6 +115,16 @@ export const addFuture401k = (data: DataWithTotals): DataWithTotals => {
 		data.personalData.futureBonuses,
 		RArray.map(add401kToBonus(rate))
 	);
+	const futureContribution401k = new Decimal(
+		data.personalData.totals.futureGrossPay
+	)
+		.times(rate)
+		.toNumber();
+	const futureTaxablePay = new Decimal(
+		data.personalData.totals.futureTaxablePay
+	)
+		.minus(futureContribution401k)
+		.toNumber();
 	return {
 		...data,
 		personalData: {
@@ -123,8 +133,8 @@ export const addFuture401k = (data: DataWithTotals): DataWithTotals => {
 			futureBonuses,
 			totals: {
 				...data.personalData.totals,
-				futureContribution401k: 0, // TODO add this
-				futureTaxablePay: 0 // TODO add this
+				futureContribution401k,
+				futureTaxablePay
 			}
 		}
 	};
