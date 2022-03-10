@@ -20,3 +20,9 @@ export interface FutureData {
 	readonly payrollTaxesCost: Decimal;
 	readonly totalBenefitsCost: Decimal;
 }
+
+export interface Calculations401k {
+	readonly pastData: PastData;
+	readonly futureData: FutureData;
+	readonly future401kRate: Decimal;
+}

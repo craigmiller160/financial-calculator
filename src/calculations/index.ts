@@ -4,7 +4,7 @@ import { calculateFutureData } from './calculateFutureData';
 import { calculateFuture401k } from './calculateFuture401k';
 import Decimal from 'decimal.js';
 import { IOT } from '@craigmiller160/ts-functions/types';
-import { FutureData, PastData } from './CalculationTypes';
+import { Calculations401k, FutureData, PastData } from './CalculationTypes';
 import { pipe } from 'fp-ts/function';
 import { logger } from '../logger';
 import * as IO from 'fp-ts/IO';
@@ -39,16 +39,18 @@ const runFuture401kCalculation = (
 		})
 	);
 
-export const runCalculations = (data: Data): IOT<string> =>
+const runCalculationsFor401k = (data: Data): IOT<Calculations401k> =>
 	pipe(
 		runPastDataCalculation(data),
 		IO.bindTo('pastData'),
 		IO.bind('futureData', () => runFutureDataCalculation(data)),
-		IO.bind('future401k', ({ pastData, futureData }) =>
+		IO.bind('future401kRate', ({ pastData, futureData }) =>
 			runFuture401kCalculation(data, pastData, futureData)
-		),
-		IO.bind('printableRate401k', ({ future401k }) =>
-			IO.of(`${future401k.times(100).toNumber().toFixed(2)}%`)
-		),
-		IO.map(({ printableRate401k }) => printableRate401k)
+		)
 	);
+
+export const runCalculations = (data: Data): IOT<string> => {
+	pipe(runCalculationsFor401k(data));
+
+	return IO.of('');
+};
