@@ -30,6 +30,7 @@ export interface PaycheckTotals {
 	readonly grossPay: number;
 	readonly benefitsCost: number;
 	readonly contribution401k: number;
+	readonly taxablePay: number;
 }
 
 export interface PaycheckWithTotal {
@@ -95,13 +96,14 @@ const addTotalsToPaycheck =
 		);
 
 		const [rate401k, amount401k] = getRateAndAmount401k(paycheck);
-		const totalAnnualizedPay = getTotalAnnualizedPay(paycheck);
+		const annualizedGrossPay = annualizePayPeriodValue(paycheck.grossPay);
 
 		const taxablePay =
 			paycheck.grossPay -
 			benefitsCost.total -
 			payrollTaxCost.total -
 			amount401k;
+		const annualizedTaxablePay = annualizePayPeriodValue(taxablePay);
 
 		return {
 			startDate: paycheck.startDate,
@@ -115,20 +117,34 @@ const addTotalsToPaycheck =
 			},
 			taxablePay,
 			totalsForAllChecks: {
-				contribution401k: 0,
-				benefitsCost: 0,
-				grossPay: 0
+				contribution401k: totalValueForChecks(
+					amount401k,
+					paycheck.numberOfChecks
+				),
+				benefitsCost: totalValueForChecks(
+					benefitsCost.total,
+					paycheck.numberOfChecks
+				),
+				grossPay: totalValueForChecks(
+					paycheck.grossPay,
+					paycheck.numberOfChecks
+				),
+				taxablePay: totalValueForChecks(
+					taxablePay,
+					paycheck.numberOfChecks
+				)
 			},
 			annualized: {
-				taxablePay: 0,
-				grossPay: 0
+				taxablePay: annualizedTaxablePay,
+				grossPay: annualizedGrossPay
 			},
 			payrollTaxCost
 		};
 	};
 
-const getTotalAnnualizedPay = (paycheck: BasePaycheck): number =>
-	paycheck.grossPay * 26;
+const annualizePayPeriodValue = (value: number): number => value * 26;
+const totalValueForChecks = (value: number, numChecks: number): number =>
+	new Decimal(value).times(new Decimal(numChecks)).toNumber();
 
 export const addTotalsToData = (data: Data) => {
 	pipe(
