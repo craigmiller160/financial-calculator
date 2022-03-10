@@ -31,6 +31,27 @@ describe('addTotalsToBonus', () => {
 	});
 
 	it('adds the totals for future bonus', () => {
-		throw new Error();
+		const result = pipe(
+			getTestData(),
+			IOEither.map((data) =>
+				addTotalsToBonus(data.legalData)(
+					data.personalData.futureBonuses[0]
+				)
+			)
+		)();
+		expect(result).toEqualRight({
+			date: '2022-08-01',
+			grossPay: 5000,
+			taxablePay: 4617.5,
+			bonus401k: {
+				rate: 0,
+				amount: 0
+			},
+			payrollTaxCosts: {
+				socialSecurity: 310,
+				medicare: 72.5,
+				total: 382.5
+			}
+		});
 	});
 });
