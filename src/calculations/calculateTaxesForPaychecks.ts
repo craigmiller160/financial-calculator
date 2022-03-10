@@ -17,6 +17,7 @@ const calculatePaycheckTaxableIncome = (
 	paycheck: PaycheckWith401k,
 	payrollTaxRates: PayrollTaxRates
 ): Decimal => {
+	// TODO need like all of these for the new PaycheckWithTakeHome
 	const grossPay = new Decimal(paycheck.grossPay);
 	const totalBenefitsCost = new Decimal(sumBenefits(paycheck.benefitsCost));
 	const socialSecurityTax = grossPay.times(
