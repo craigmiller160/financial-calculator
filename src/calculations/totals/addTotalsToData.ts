@@ -43,10 +43,9 @@ export const addTotalsToData = (data: Data): DataWithTotals => {
 					pastPaychecksTotal.grossPay + pastBonusesTotal.grossPay,
 				pastContribution401k:
 					pastPaychecksTotal.contribution401k +
-					pastPaychecksTotal.contribution401k,
+					pastBonusesTotal.contribution401k,
 				pastTaxablePay:
-					pastPaychecksTotal.taxablePay +
-					pastPaychecksTotal.taxablePay,
+					pastPaychecksTotal.taxablePay + pastBonusesTotal.taxablePay,
 				futureGrossPay:
 					futurePaychecksTotal.grossPay + futureBonusesTotal.grossPay,
 				futureContribution401k: 0,
