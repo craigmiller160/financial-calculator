@@ -138,7 +138,42 @@ describe('addFuture401k', () => {
 		expect(result).toEqualRight(
 			expect.objectContaining({
 				personalData: {
-					...personalData
+					...personalData,
+					futurePaychecks: [
+						{
+							...personalData.futurePaychecks[0],
+							paycheck401k: {
+								rate: 0.1,
+								amount: 576.923
+							},
+							annualized: {
+								...personalData.futurePaychecks[0].annualized,
+								taxablePay: 122005.02353
+							},
+							taxablePay: 4692.500905,
+							totalsForAllChecks: {
+								...personalData.futurePaychecks[0]
+									.totalsForAllChecks,
+								contribution401k: 12115.383,
+								taxablePay: 98542.519005
+							}
+						}
+					],
+					futureBonuses: [
+						{
+							...personalData.futureBonuses[0],
+							bonus401k: {
+								rate: 0.1,
+								amount: 500
+							},
+							taxablePay: 4117.5
+						}
+					],
+					totals: {
+						...personalData.totals,
+						futureContribution401k: 12615.383,
+						futureTaxablePay: 102660.019005
+					}
 				}
 			})
 		);
