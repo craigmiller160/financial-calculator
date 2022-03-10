@@ -42,8 +42,9 @@ const calculatePastTaxes = (
 	const grossPay = data.personalData.pastPaychecks[0].grossPay;
 	const taxableIncome1 = grossPay - 5.84 - 38.46 - 68.92 - 3.35;
 	const taxableIncome2 = taxableIncome1 - grossPay * 0.21;
+    const taxableIncome3 = taxableIncome2 - (grossPay * 0.062) - (grossPay * 0.0145);
 	// const bonus = 15088 - (15088 * 0.21);
-	const totalIncome = new Decimal(taxableIncome2 * 26);
+	const totalIncome = new Decimal(taxableIncome3 * 26);
 
 	return pipe(
 		data.legalData.federalTaxBrackets,
@@ -56,8 +57,8 @@ const calculatePastTaxes = (
 		Either.map(calculateTaxes(totalIncome)),
 		Either.map((taxes) => {
 			const taxRate = taxes.dividedBy(totalIncome);
-			const takeHomePay = new Decimal(taxableIncome2).sub(
-				new Decimal(taxableIncome2).times(taxRate)
+			const takeHomePay = new Decimal(taxableIncome3).sub(
+				new Decimal(taxableIncome3).times(taxRate)
 			);
 			return [taxes, totalIncome, taxRate, takeHomePay];
 		})
