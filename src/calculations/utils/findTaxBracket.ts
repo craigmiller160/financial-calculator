@@ -25,11 +25,13 @@ const currentTaxBracket = (income: Decimal): PredicateT<FederalTaxBracket> =>
 
 export const findTaxBracket = (
 	federalTaxBrackets: ReadonlyArray<FederalTaxBracket>,
-	totalTaxableIncomeForYear: Decimal
+	totalTaxableIncomeForYear: number
 ): TryT<FederalTaxBracket> =>
 	pipe(
 		federalTaxBrackets,
-		RArray.findFirst(currentTaxBracket(totalTaxableIncomeForYear)),
+		RArray.findFirst(
+			currentTaxBracket(new Decimal(totalTaxableIncomeForYear))
+		),
 		Either.fromOption(
 			() =>
 				new Error('Unable to find tax bracket. Check tax bracket data.')
