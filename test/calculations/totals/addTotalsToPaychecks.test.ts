@@ -17,6 +17,7 @@ describe('addTotalsToPaychecks', () => {
 		expect(result).toEqualRight({
 			startDate: '2022-01-01',
 			endDate: '2022-03-11',
+			takeHomePay: 0,
 			benefitsCost: {
 				dental: 5.84,
 				hsa: 38.46,
@@ -66,6 +67,7 @@ describe('addTotalsToPaychecks', () => {
 		expect(result).toEqualRight({
 			startDate: '2022-03-14',
 			endDate: '2022-12-31',
+			takeHomePay: 0,
 			federalTaxCost: {
 				amount: 0,
 				effectiveRate: 0

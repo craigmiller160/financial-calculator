@@ -40,6 +40,7 @@ export const addTotalsToPaycheck =
 				amount: amount401k
 			},
 			taxablePay,
+			takeHomePay: 0,
 			federalTaxCost: {
 				effectiveRate: 0,
 				amount: 0

@@ -35,6 +35,7 @@ describe('addTotalsToData', () => {
 						{
 							startDate: '2022-03-14',
 							endDate: '2022-12-31',
+							takeHomePay: 0,
 							benefitsCost: {
 								dental: 10,
 								hsa: 38.46,
@@ -96,6 +97,7 @@ describe('addTotalsToData', () => {
 						{
 							startDate: '2022-01-01',
 							endDate: '2022-03-11',
+							takeHomePay: 0,
 							annualized: {
 								grossPay: 96835.18,
 								taxablePay: 66061.08093

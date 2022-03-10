@@ -17,6 +17,7 @@ const pastPaycheck: PaycheckWithTotal = {
 		vision: 3.35,
 		total: 116.57
 	},
+	takeHomePay: 0,
 	numberOfChecks: 5,
 	grossPay: 3724.43,
 	paycheck401k: {
@@ -50,6 +51,7 @@ const pastPaychecks = [pastPaycheck, pastPaycheck];
 const futurePaycheck: PaycheckWithTotal = {
 	startDate: '2022-03-14',
 	endDate: '2022-12-31',
+	takeHomePay: 0,
 	benefitsCost: {
 		dental: 10,
 		hsa: 38.46,

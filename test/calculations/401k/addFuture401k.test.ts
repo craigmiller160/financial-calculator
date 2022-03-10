@@ -34,6 +34,7 @@ const personalData: TotalPersonalData = {
 		{
 			startDate: '2022-03-14',
 			endDate: '2022-12-31',
+			takeHomePay: 0,
 			federalTaxCost: {
 				effectiveRate: 0,
 				amount: 0
@@ -95,6 +96,7 @@ const personalData: TotalPersonalData = {
 		{
 			startDate: '2022-01-01',
 			endDate: '2022-03-11',
+			takeHomePay: 0,
 			annualized: {
 				grossPay: 96835.18,
 				taxablePay: 66061.08093

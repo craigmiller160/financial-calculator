@@ -45,7 +45,7 @@ export interface PaycheckWithTotal {
 	readonly grossPay: number;
 	readonly numberOfChecks: number;
 	readonly taxablePay: number;
-	// readonly takeHomePay: number;
+	readonly takeHomePay: number;
 	readonly payrollTaxCost: PayrollTaxCosts;
 	readonly totalsForAllChecks: PaycheckTotals;
 	readonly federalTaxCost: FederalTaxCosts;
