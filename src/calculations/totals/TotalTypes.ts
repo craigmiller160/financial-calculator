@@ -47,3 +47,10 @@ export interface PayrollTaxCosts {
 	readonly medicare: number;
 	readonly total: number;
 }
+
+export interface TotalPersonalData {
+	readonly pastPaychecks: ReadonlyArray<PaycheckWithTotal>;
+	readonly futurePaychecks: ReadonlyArray<PaycheckWithTotal>;
+	readonly pastBonuses: ReadonlyArray<BonusWithTotal>;
+	readonly futureBonuses: ReadonlyArray<BonusWithTotal>;
+}
