@@ -1,4 +1,4 @@
-import { BenefitsCost } from '../../data/decoders';
+import { BenefitsCost, LegalData } from '../../data/decoders';
 
 export interface BenefitsCostAndTotal extends BenefitsCost {
 	readonly total: number;
@@ -69,4 +69,9 @@ export interface CombinedTotals {
 	readonly grossPay: number;
 	readonly contribution401k: number;
 	readonly taxablePay: number;
+}
+
+export interface DataWithTotals {
+	readonly personalData: TotalPersonalData;
+	readonly legalData: LegalData;
 }
