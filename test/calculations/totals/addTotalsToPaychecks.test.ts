@@ -41,6 +41,10 @@ describe('addTotalsToPaychecks', () => {
 				socialSecurity: 230.91466,
 				medicare: 54.004235,
 				total: 284.918895
+			},
+			annualized: {
+				taxablePay: 66061.08093,
+				grossPay: 96835.18
 			}
 		});
 	});
@@ -81,6 +85,10 @@ describe('addTotalsToPaychecks', () => {
 				socialSecurity: 357.69226,
 				medicare: 83.653835,
 				total: 441.346095
+			},
+			annualized: {
+				taxablePay: 137286.08153,
+				grossPay: 149999.98
 			}
 		});
 	});
