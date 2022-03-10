@@ -3,20 +3,46 @@ import {
 	BenefitsCost,
 	Data,
 	LegalData,
-	PaycheckWith401k,
-	PayrollTaxRates,
-	Rate401k
+	PayrollTaxRates
 } from '../../data/decoders';
 import { sumBenefits } from '../CommonCalculations';
 import Decimal from 'decimal.js';
 import { pipe } from 'fp-ts/function';
 import * as RArray from 'fp-ts/ReadonlyArray';
 import { match, when } from 'ts-pattern';
-import { hasRate401k, isPaycheckWith401k } from '../utils/typeCheck';
-import { unknown } from 'io-ts';
+import { isPaycheckWith401k } from '../utils/typeCheck';
 
 export interface BenefitsCostAndTotal extends BenefitsCost {
 	readonly total: number;
+}
+
+export interface The401k {
+	readonly rate: number;
+	readonly amount: number;
+}
+
+export interface Annualized {
+	readonly grossPay: number;
+	readonly taxablePay: number;
+}
+
+export interface PaycheckTotals {
+	readonly grossPay: number;
+	readonly benefitsCost: number;
+	readonly contribution401k: number;
+}
+
+export interface PaycheckWithTotal {
+	readonly startDate: string;
+	readonly endDate: string;
+	readonly benefitsCost: BenefitsCostAndTotal;
+	readonly paycheck401k: The401k;
+	readonly grossPay: number;
+	readonly numberOfChecks: number;
+	readonly taxablePay: number;
+	readonly payrollTaxCost: PayrollTaxCosts;
+	readonly totalsForAllChecks: PaycheckTotals;
+	readonly annualized: Annualized;
 }
 
 export interface PayrollTaxCosts {
@@ -61,7 +87,7 @@ const getRateAndAmount401k = <T extends BasePaycheck>(
 
 const addTotalsToPaycheck =
 	(legalData: LegalData) =>
-	<T extends BasePaycheck>(paycheck: T): T => {
+	<T extends BasePaycheck>(paycheck: T): PaycheckWithTotal => {
 		const benefitsCost = addTotalToBenefits(paycheck.benefitsCost);
 		const payrollTaxCost = getPayrollTaxCosts(
 			paycheck,
@@ -69,7 +95,40 @@ const addTotalsToPaycheck =
 		);
 
 		const [rate401k, amount401k] = getRateAndAmount401k(paycheck);
+		const totalAnnualizedPay = getTotalAnnualizedPay(paycheck);
+
+		const taxablePay =
+			paycheck.grossPay -
+			benefitsCost.total -
+			payrollTaxCost.total -
+			amount401k;
+
+		return {
+			startDate: paycheck.startDate,
+			endDate: paycheck.endDate,
+			benefitsCost,
+			numberOfChecks: paycheck.numberOfChecks,
+			grossPay: paycheck.grossPay,
+			paycheck401k: {
+				rate: rate401k,
+				amount: amount401k
+			},
+			taxablePay,
+			totalsForAllChecks: {
+				contribution401k: 0,
+				benefitsCost: 0,
+				grossPay: 0
+			},
+			annualized: {
+				taxablePay: 0,
+				grossPay: 0
+			},
+			payrollTaxCost
+		};
 	};
+
+const getTotalAnnualizedPay = (paycheck: BasePaycheck): number =>
+	paycheck.grossPay * 26;
 
 export const addTotalsToData = (data: Data) => {
 	pipe(
