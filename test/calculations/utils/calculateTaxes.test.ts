@@ -1,6 +1,6 @@
 export {};
 
-describe('addTaxes', () => {
+describe('calculateTaxes', () => {
 	it('does the calculation', () => {
 		throw new Error();
 	});
