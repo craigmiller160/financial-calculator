@@ -62,11 +62,11 @@ describe('addTotalsToPaychecks', () => {
 			startDate: '2022-03-14',
 			endDate: '2022-12-31',
 			benefitsCost: {
-				dental: 5.84,
+				dental: 10,
 				hsa: 38.46,
 				medical: 0,
-				vision: 3.35,
-				total: 47.65
+				vision: 10,
+				total: 58.46
 			},
 			numberOfChecks: 21,
 			grossPay: 5769.23,
@@ -74,12 +74,12 @@ describe('addTotalsToPaychecks', () => {
 				rate: 0,
 				amount: 0
 			},
-			taxablePay: 5280.233905,
+			taxablePay: 5269.423905,
 			totalsForAllChecks: {
 				contribution401k: 0,
-				benefitsCost: 1000.65,
+				benefitsCost: 1227.66,
 				grossPay: 121153.83,
-				taxablePay: 110884.912005
+				taxablePay: 110657.902005
 			},
 			payrollTaxCost: {
 				socialSecurity: 357.69226,
@@ -87,7 +87,7 @@ describe('addTotalsToPaychecks', () => {
 				total: 441.346095
 			},
 			annualized: {
-				taxablePay: 137286.08153,
+				taxablePay: 137005.02153,
 				grossPay: 149999.98
 			}
 		});

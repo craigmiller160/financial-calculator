@@ -66,6 +66,7 @@ export const addTotalsToPaycheck =
 		};
 	};
 
-const annualizePayPeriodValue = (value: number): number => value * 26;
+const annualizePayPeriodValue = (value: number): number =>
+	new Decimal(value).times(new Decimal(26)).toNumber();
 const totalValueForChecks = (value: number, numChecks: number): number =>
 	new Decimal(value).times(new Decimal(numChecks)).toNumber();
