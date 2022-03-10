@@ -6,11 +6,7 @@ const TOTAL_FUTURE_INCOME = new Decimal(10_000);
 
 describe('calculateFuture401k', () => {
 	it('accurately does calculation', () => {
-		const [rate, amount] = calculateFuture401k(
-			REMAINING_AMOUNT,
-			TOTAL_FUTURE_INCOME
-		);
+		const rate = calculateFuture401k(REMAINING_AMOUNT, TOTAL_FUTURE_INCOME);
 		expect(rate).toEqual(new Decimal(0.1));
-		expect(amount).toEqual(new Decimal(1000));
 	});
 });
