@@ -118,7 +118,8 @@ const personalData: TotalPersonalData = {
 		pastContribution401k: 7821.303,
 		pastGrossPay: 33710.15,
 		pastTaxablePay: 25408.10805
-	}
+	},
+	futureRate401k: 0
 };
 
 describe('addFuture401k', () => {
@@ -173,7 +174,8 @@ describe('addFuture401k', () => {
 						...personalData.totals,
 						futureContribution401k: 12615.383,
 						futureTaxablePay: 102660.019005
-					}
+					},
+					futureRate401k: 0.1
 				}
 			})
 		);
