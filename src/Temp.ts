@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { getData } from './data';
 import { pipe } from 'fp-ts/function';
 import * as IOEither from 'fp-ts/IOEither';
@@ -8,6 +9,8 @@ import * as Option from 'fp-ts/Option';
 import * as Pred from 'fp-ts/Predicate';
 import * as RArray from 'fp-ts/ReadonlyArray';
 import * as Either from 'fp-ts/Either';
+
+// TODO delete this
 
 const isOverMin =
 	(income: Decimal): PredicateT<FederalTaxBracket> =>
