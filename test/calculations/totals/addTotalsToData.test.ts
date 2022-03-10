@@ -61,6 +61,57 @@ describe('addTotalsToData', () => {
 							}
 						}
 					],
+					pastBonuses: [
+						{
+							bonus401k: {
+								amount: 3168.48,
+								rate: 0.21
+							},
+							date: '2022-03-11',
+							grossPay: 15088,
+							payrollTaxCosts: {
+								medicare: 218.776,
+								socialSecurity: 935.456,
+								total: 1154.232
+							},
+							taxablePay: 10765.288
+						}
+					],
+					pastPaychecks: [
+						{
+							startDate: '2022-01-01',
+							endDate: '2022-03-11',
+							annualized: {
+								grossPay: 96835.18,
+								taxablePay: 66061.08093
+							},
+							benefitsCost: {
+								dental: 5.84,
+								hsa: 38.46,
+								medical: 68.92,
+								total: 116.57,
+								vision: 3.35
+							},
+							grossPay: 3724.43,
+							numberOfChecks: 5,
+							paycheck401k: {
+								amount: 782.1303,
+								rate: 0.21
+							},
+							payrollTaxCost: {
+								medicare: 54.004235,
+								socialSecurity: 230.91466,
+								total: 284.918895
+							},
+							taxablePay: 2540.810805,
+							totalsForAllChecks: {
+								benefitsCost: 582.85,
+								contribution401k: 3910.6515,
+								grossPay: 18622.15,
+								taxablePay: 12704.054025
+							}
+						}
+					],
 					totals: {
 						futureContribution401k: 0,
 						futureGrossPay: 126153.83,
