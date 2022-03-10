@@ -3,7 +3,6 @@ import Decimal from 'decimal.js';
 import { PredicateT } from '@craigmiller160/ts-functions/types';
 import * as Pred from 'fp-ts/Predicate';
 import { pipe } from 'fp-ts/function';
-import { Future401kValues } from './CalculationTypes';
 
 interface Context {
 	readonly remainingAmount401k: Decimal;
@@ -23,7 +22,7 @@ const tooHighAmount401k: PredicateT<Context> = (ctx) =>
 export const calculateFuture401k = (
 	remainingAmount401k: Decimal,
 	totalFutureIncome: Decimal
-): Future401kValues => {
+): Decimal => {
 	const initContext: Context = {
 		remainingAmount401k,
 		totalFutureIncome,
@@ -41,7 +40,5 @@ export const calculateFuture401k = (
 			amount401k: newAmount
 		};
 	})(initContext);
-	const finalRate = resultContext.rate401k.minus(INTERVAL);
-	const finalAmount = new Decimal(totalFutureIncome).times(finalRate);
-	return [finalRate, finalAmount];
+	return resultContext.rate401k.minus(INTERVAL);
 };

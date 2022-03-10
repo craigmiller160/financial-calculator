@@ -4,7 +4,7 @@ import { calculateFutureData } from './calculateFutureData';
 import { calculateFuture401k } from './calculateFuture401k';
 import Decimal from 'decimal.js';
 import { IOT } from '@craigmiller160/ts-functions/types';
-import { Future401kValues, FutureData, PastData } from './CalculationTypes';
+import { FutureData, PastData } from './CalculationTypes';
 import { pipe } from 'fp-ts/function';
 import { logger } from '../logger';
 import * as IO from 'fp-ts/IO';
@@ -25,7 +25,7 @@ const runFuture401kCalculation = (
 	data: Data,
 	pastData: PastData,
 	futureData: FutureData
-): IOT<Future401kValues> =>
+): IOT<Decimal> =>
 	pipe(
 		logger.debug('Calculating future 401k contribution'),
 		IO.map(() => {
@@ -47,8 +47,8 @@ export const runCalculations = (data: Data): IOT<string> =>
 		IO.bind('future401k', ({ pastData, futureData }) =>
 			runFuture401kCalculation(data, pastData, futureData)
 		),
-		IO.bind('printableRate401k', ({ future401k: [rate401k] }) =>
-			IO.of(`${rate401k.times(100).toNumber().toFixed(2)}%`)
+		IO.bind('printableRate401k', ({ future401k }) =>
+			IO.of(`${future401k.times(100).toNumber().toFixed(2)}%`)
 		),
 		IO.map(({ printableRate401k }) => printableRate401k)
 	);
