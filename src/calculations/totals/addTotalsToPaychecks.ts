@@ -11,8 +11,7 @@ import {
 } from './TotalTypes';
 import { sumBenefits } from '../CommonCalculations';
 import Decimal from 'decimal.js';
-import { match, when } from 'ts-pattern';
-import { isPaycheckWith401k } from '../utils/typeCheck';
+import { getAmount401k, getRate401k } from './common';
 
 const addTotalToBenefits = (benefits: BenefitsCost): BenefitsCostAndTotal => ({
 	...benefits,
@@ -36,18 +35,6 @@ const getPayrollTaxCosts = (
 	};
 };
 
-const getRateAndAmount401k = <T extends BasePaycheck>(
-	paycheck: T
-): [rate: number, amount: number] => {
-	const rate401k = match(paycheck as BasePaycheck)
-		.with(when(isPaycheckWith401k), (value) => value.rate401k)
-		.otherwise(() => 0);
-	const amount401k = new Decimal(paycheck.grossPay).times(
-		new Decimal(rate401k)
-	);
-	return [rate401k, amount401k.toNumber()];
-};
-
 export const addTotalsToPaycheck =
 	(legalData: LegalData) =>
 	<T extends BasePaycheck>(paycheck: T): PaycheckWithTotal => {
@@ -57,7 +44,8 @@ export const addTotalsToPaycheck =
 			legalData.payrollTaxRates
 		);
 
-		const [rate401k, amount401k] = getRateAndAmount401k(paycheck);
+		const rate401k = getRate401k(paycheck);
+		const amount401k = getAmount401k(paycheck.grossPay, rate401k);
 		const annualizedGrossPay = annualizePayPeriodValue(paycheck.grossPay);
 
 		const taxablePay =

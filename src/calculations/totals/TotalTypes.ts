@@ -4,6 +4,13 @@ export interface BenefitsCostAndTotal extends BenefitsCost {
 	readonly total: number;
 }
 
+export interface BonusWithTotal {
+	readonly date: string;
+	readonly grossPay: number;
+	readonly bonus401k: The401k;
+	readonly taxablePay: number;
+}
+
 export interface The401k {
 	readonly rate: number;
 	readonly amount: number;
