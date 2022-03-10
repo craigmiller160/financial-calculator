@@ -8,6 +8,8 @@ import { Calculations401k, FutureData, PastData } from './CalculationTypes';
 import { pipe } from 'fp-ts/function';
 import { logger } from '../logger';
 import * as IO from 'fp-ts/IO';
+import { addTotalsToData } from './totals/addTotalsToData';
+import { DataWithTotals } from './totals/TotalTypes';
 
 const runPastDataCalculation = (data: Data): IOT<PastData> =>
 	pipe(
@@ -49,8 +51,16 @@ const runCalculationsFor401k = (data: Data): IOT<Calculations401k> =>
 		)
 	);
 
-export const runCalculations = (data: Data): IOT<string> => {
-	pipe(runCalculationsFor401k(data));
+// TODO delete a lot of old calculations above
 
+const runCalculationsForTotals = (data: Data): IOT<DataWithTotals> =>
+	pipe(
+		logger.debug('Calculating total values for data'),
+		IO.map(() => addTotalsToData(data)),
+		IO.chainFirst((data) => logger.debugWithJson('Data With Totals', data))
+	);
+
+export const runCalculations = (data: Data): IOT<string> => {
+	pipe(runCalculationsForTotals(data));
 	return IO.of('');
 };
