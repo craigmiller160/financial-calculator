@@ -1,4 +1,4 @@
-import { BenefitsCost, PaycheckWith401k } from '../data/decoders';
+import { BenefitsCost } from '../data/decoders';
 import Decimal from 'decimal.js';
 
 export interface PerPaycheckBenefitsCost extends BenefitsCost {
@@ -25,14 +25,4 @@ export interface Calculations401k {
 	readonly pastData: PastData;
 	readonly futureData: FutureData;
 	readonly future401kRate: Decimal;
-}
-
-export interface PaycheckWithTakeHome extends PaycheckWith401k{
-	readonly taxableIncome: number;
-	readonly contribution401k: number;
-	readonly effectiveFederalTaxRate: number;
-	readonly federalTaxes: number;
-	readonly totalBenefitsCost: number;
-	readonly payrollTaxes: number;
-	readonly takeHomePay: number;
 }
