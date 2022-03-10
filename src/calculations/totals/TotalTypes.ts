@@ -64,3 +64,9 @@ export interface TotalPersonalData {
 	readonly futureBonuses: ReadonlyArray<BonusWithTotal>;
 	readonly totals: PersonalTotals;
 }
+
+export interface CombinedTotals {
+	readonly grossPay: number;
+	readonly contribution401k: number;
+	readonly taxablePay: number;
+}

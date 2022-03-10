@@ -1,6 +1,8 @@
 import { MonoidT } from '@craigmiller160/ts-functions/types';
 import { PerPaycheckBenefitsCost, PerPaycheckIncome } from './CalculationTypes';
 
+// TODO delete these if unused
+
 export const totalBenefitsCostPerPaycheckMonoid: MonoidT<PerPaycheckBenefitsCost> =
 	{
 		empty: {
