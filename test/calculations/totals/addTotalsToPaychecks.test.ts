@@ -30,12 +30,17 @@ describe('addTotalsToPaychecks', () => {
 				rate: 0.21,
 				amount: 782.1303
 			},
-			taxablePay: 2825.7297,
+			taxablePay: 2540.810805,
 			totalsForAllChecks: {
 				contribution401k: 3910.6515,
 				benefitsCost: 582.85,
 				grossPay: 18622.15,
-				taxablePay: 14128.6485
+				taxablePay: 12704.054025
+			},
+			payrollTaxCost: {
+				socialSecurity: 230.91466,
+				medicare: 54.004235,
+				total: 284.918895
 			}
 		});
 	});
@@ -65,12 +70,17 @@ describe('addTotalsToPaychecks', () => {
 				rate: 0,
 				amount: 0
 			},
-			taxablePay: 5721.58,
+			taxablePay: 5280.233905,
 			totalsForAllChecks: {
 				contribution401k: 0,
 				benefitsCost: 1000.65,
 				grossPay: 121153.83,
-				taxablePay: 120153.18
+				taxablePay: 110884.912005
+			},
+			payrollTaxCost: {
+				socialSecurity: 357.69226,
+				medicare: 83.653835,
+				total: 441.346095
 			}
 		});
 	});
