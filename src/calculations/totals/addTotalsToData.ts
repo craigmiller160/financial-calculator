@@ -52,7 +52,8 @@ export const addTotalsToData = (data: Data): DataWithTotals => {
 				futureTaxablePay:
 					futurePaychecksTotal.taxablePay +
 					futureBonusesTotal.taxablePay
-			}
+			},
+			futureRate401k: 0
 		}
 	};
 };

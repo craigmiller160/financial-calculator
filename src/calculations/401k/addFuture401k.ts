@@ -135,7 +135,8 @@ export const addFuture401k = (data: DataWithTotals): DataWithTotals => {
 				...data.personalData.totals,
 				futureContribution401k,
 				futureTaxablePay
-			}
+			},
+			futureRate401k: rate.toNumber()
 		}
 	};
 };

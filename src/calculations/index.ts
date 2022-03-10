@@ -29,9 +29,5 @@ export const runCalculations = (data: Data): IOT<string> =>
 	pipe(
 		runCalculationsForTotals(data),
 		IO.chain(runCalculationsForFuture401k),
-		// TODO need to expose future 401k rate separately
-		IO.map(
-			(data) => data.personalData.futurePaychecks[0].paycheck401k.rate
-		),
-		IO.map((value) => `${value}`)
+		IO.map((data) => `${data.personalData.futureRate401k}`)
 	);

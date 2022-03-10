@@ -63,6 +63,7 @@ export interface TotalPersonalData {
 	readonly pastBonuses: ReadonlyArray<BonusWithTotal>;
 	readonly futureBonuses: ReadonlyArray<BonusWithTotal>;
 	readonly totals: PersonalTotals;
+	readonly futureRate401k: number;
 }
 
 export interface CombinedTotals {
