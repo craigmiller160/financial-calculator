@@ -10,6 +10,7 @@ import { logger } from '../logger';
 import * as IO from 'fp-ts/IO';
 import { addTotalsToData } from './totals/addTotalsToData';
 import { DataWithTotals } from './totals/TotalTypes';
+import { addFuture401k } from './401k/addFuture401k';
 
 const runPastDataCalculation = (data: Data): IOT<PastData> =>
 	pipe(
@@ -60,7 +61,21 @@ const runCalculationsForTotals = (data: Data): IOT<DataWithTotals> =>
 		IO.chainFirst((data) => logger.debugWithJson('Data With Totals', data))
 	);
 
+const runCalculationsForFuture401k = (
+	data: DataWithTotals
+): IOT<DataWithTotals> =>
+	pipe(
+		logger.debug('Calculating future 401k rates and amounts'),
+		IO.map(() => addFuture401k(data)),
+		IO.chainFirst((data) =>
+			logger.debugWithJson('Data with Future 401k', data)
+		)
+	);
+
 export const runCalculations = (data: Data): IOT<string> => {
-	pipe(runCalculationsForTotals(data));
+	pipe(
+		runCalculationsForTotals(data),
+		IO.chain(runCalculationsForFuture401k)
+	);
 	return IO.of('');
 };
