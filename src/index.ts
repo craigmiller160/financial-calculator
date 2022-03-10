@@ -7,7 +7,7 @@ import { runCalculations } from './calculations';
 
 pipe(
 	getData(),
-	IOEither.chainIOK(runCalculations),
+	IOEither.chain(runCalculations),
 	IOEither.fold(
 		(ex) => logger.errorWithStack('Error calculating 401k', ex),
 		(output) =>

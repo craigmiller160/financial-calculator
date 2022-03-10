@@ -1,11 +1,13 @@
 import { Data } from '../data/decoders';
-import { IOT } from '@craigmiller160/ts-functions/types';
+import { IOT, IOTryT } from '@craigmiller160/ts-functions/types';
 import { pipe } from 'fp-ts/function';
 import { logger } from '../logger';
 import * as IO from 'fp-ts/IO';
 import { addTotalsToData } from './totals/addTotalsToData';
 import { DataWithTotals } from './totals/TotalTypes';
 import { addFuture401k } from './401k/addFuture401k';
+import * as IOEither from 'fp-ts/IOEither';
+import { addTaxes } from './taxes/addTaxes';
 
 const runCalculationsForTotals = (data: Data): IOT<DataWithTotals> =>
 	pipe(
@@ -25,9 +27,20 @@ const runCalculationsForFuture401k = (
 		)
 	);
 
-export const runCalculations = (data: Data): IOT<string> =>
+const runCalculationsForTaxes = (
+	data: DataWithTotals
+): IOTryT<DataWithTotals> =>
+	pipe(
+		logger.debug('Calculating taxes'),
+		IOEither.rightIO,
+		IOEither.chainEitherK(() => addTaxes(data))
+	);
+
+export const runCalculations = (data: Data): IOTryT<string> =>
 	pipe(
 		runCalculationsForTotals(data),
 		IO.chain(runCalculationsForFuture401k),
-		IO.map((data) => `${data.personalData.futureRate401k}`)
+		IOEither.rightIO,
+		IOEither.chain(runCalculationsForTaxes),
+		IOEither.map((data) => `${data.personalData.futureRate401k}`)
 	);
