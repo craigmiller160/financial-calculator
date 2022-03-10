@@ -26,7 +26,10 @@ const getTotalPaycheck401k = (
 const getTotalBonus401k = (bonuses: ReadonlyArray<BonusWith401k>): number =>
 	pipe(
 		bonuses,
-		RArray.map((_) => _.grossPay * _.rate401k),
+		RArray.map((_) =>
+			new Decimal(_.grossPay).times(new Decimal(_.rate401k))
+		),
+		RArray.map((_) => _.toNumber()),
 		Monoid.concatAll(Num.MonoidSum)
 	);
 

@@ -48,9 +48,19 @@ export interface PayrollTaxCosts {
 	readonly total: number;
 }
 
+export interface PersonalTotals {
+	readonly pastGrossPay: number;
+	readonly pastContribution401k: number;
+	readonly pastTaxablePay: number;
+	readonly futureGrossPay: number;
+	readonly futureContribution401k: number;
+	readonly futureTaxablePay: number;
+}
+
 export interface TotalPersonalData {
 	readonly pastPaychecks: ReadonlyArray<PaycheckWithTotal>;
 	readonly futurePaychecks: ReadonlyArray<PaycheckWithTotal>;
 	readonly pastBonuses: ReadonlyArray<BonusWithTotal>;
 	readonly futureBonuses: ReadonlyArray<BonusWithTotal>;
+	readonly totals: PersonalTotals;
 }
