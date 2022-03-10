@@ -1,4 +1,4 @@
-import { PastBonus, PastPaycheck, Data } from '../data/decoders';
+import { BonusWith401k, PaycheckWith401k, Data } from '../data/decoders';
 import { pipe } from 'fp-ts/function';
 import * as RArray from 'fp-ts/ReadonlyArray';
 import * as Monoid from 'fp-ts/Monoid';
@@ -11,7 +11,9 @@ import {
 } from './CommonCalculations';
 import Decimal from 'decimal.js';
 
-const getTotalPaycheck401k = (paychecks: ReadonlyArray<PastPaycheck>): number =>
+const getTotalPaycheck401k = (
+	paychecks: ReadonlyArray<PaycheckWith401k>
+): number =>
 	pipe(
 		paychecks,
 		RArray.map((_) =>
@@ -21,7 +23,7 @@ const getTotalPaycheck401k = (paychecks: ReadonlyArray<PastPaycheck>): number =>
 		Monoid.concatAll(Num.MonoidSum)
 	);
 
-const getTotalBonus401k = (bonuses: ReadonlyArray<PastBonus>): number =>
+const getTotalBonus401k = (bonuses: ReadonlyArray<BonusWith401k>): number =>
 	pipe(
 		bonuses,
 		RArray.map((_) => _.grossPay * _.rate401k),
