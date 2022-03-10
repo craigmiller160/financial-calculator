@@ -140,9 +140,9 @@ describe('getCombinedTotals', () => {
 	it('gets totals for future bonuses', () => {
 		const result = getCombinedTotalsForBonuses(futureBonuses);
 		expect(result).toEqual({
-			grossPay: 0,
+			grossPay: 10000,
 			contribution401k: 0,
-			taxablePay: 0
+			taxablePay: 9235
 		});
 	});
 });
