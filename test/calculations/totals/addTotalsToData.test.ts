@@ -23,7 +23,12 @@ describe('addTotalsToData', () => {
 								socialSecurity: 310,
 								total: 382.5
 							},
-							taxablePay: 4617.5
+							taxablePay: 4617.5,
+							federalTaxCosts: {
+								effectiveRate: 0,
+								amount: 0
+							},
+							takeHomePay: 0
 						}
 					],
 					futurePaychecks: [
@@ -36,6 +41,10 @@ describe('addTotalsToData', () => {
 								medical: 0,
 								total: 58.46,
 								vision: 10
+							},
+							federalTaxCost: {
+								effectiveRate: 0,
+								amount: 0
 							},
 							grossPay: 5769.23,
 							annualized: {
@@ -57,7 +66,8 @@ describe('addTotalsToData', () => {
 								benefitsCost: 1227.66,
 								contribution401k: 0,
 								grossPay: 121153.83,
-								taxablePay: 110657.902005
+								taxablePay: 110657.902005,
+								takeHomePay: 0
 							}
 						}
 					],
@@ -74,7 +84,12 @@ describe('addTotalsToData', () => {
 								socialSecurity: 935.456,
 								total: 1154.232
 							},
-							taxablePay: 10765.288
+							taxablePay: 10765.288,
+							federalTaxCosts: {
+								amount: 0,
+								effectiveRate: 0
+							},
+							takeHomePay: 0
 						}
 					],
 					pastPaychecks: [
@@ -92,6 +107,10 @@ describe('addTotalsToData', () => {
 								total: 116.57,
 								vision: 3.35
 							},
+							federalTaxCost: {
+								amount: 0,
+								effectiveRate: 0
+							},
 							grossPay: 3724.43,
 							numberOfChecks: 5,
 							paycheck401k: {
@@ -108,7 +127,8 @@ describe('addTotalsToData', () => {
 								benefitsCost: 582.85,
 								contribution401k: 3910.6515,
 								grossPay: 18622.15,
-								taxablePay: 12704.054025
+								taxablePay: 12704.054025,
+								takeHomePay: 0
 							}
 						}
 					],
@@ -118,7 +138,9 @@ describe('addTotalsToData', () => {
 						futureTaxablePay: 115275.402005,
 						pastContribution401k: 7079.1314999999995,
 						pastGrossPay: 33710.15,
-						pastTaxablePay: 23469.342024999998
+						pastTaxablePay: 23469.342024999998,
+						pastTakeHomePay: 0,
+						futureTakeHomePay: 0
 					},
 					futureRate401k: 0
 				}

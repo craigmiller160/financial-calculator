@@ -22,13 +22,22 @@ const personalData: TotalPersonalData = {
 				socialSecurity: 310,
 				total: 382.5
 			},
-			taxablePay: 4617.5
+			taxablePay: 4617.5,
+			takeHomePay: 0,
+			federalTaxCosts: {
+				effectiveRate: 0,
+				amount: 0
+			}
 		}
 	],
 	futurePaychecks: [
 		{
 			startDate: '2022-03-14',
 			endDate: '2022-12-31',
+			federalTaxCost: {
+				effectiveRate: 0,
+				amount: 0
+			},
 			benefitsCost: {
 				dental: 10,
 				hsa: 38.46,
@@ -56,7 +65,8 @@ const personalData: TotalPersonalData = {
 				benefitsCost: 1227.66,
 				contribution401k: 0,
 				grossPay: 121153.83,
-				taxablePay: 110657.902005
+				taxablePay: 110657.902005,
+				takeHomePay: 0
 			}
 		}
 	],
@@ -73,7 +83,12 @@ const personalData: TotalPersonalData = {
 				socialSecurity: 935.456,
 				total: 1154.232
 			},
-			taxablePay: 10765.288
+			taxablePay: 10765.288,
+			takeHomePay: 0,
+			federalTaxCosts: {
+				effectiveRate: 0,
+				amount: 0
+			}
 		}
 	],
 	pastPaychecks: [
@@ -107,7 +122,12 @@ const personalData: TotalPersonalData = {
 				benefitsCost: 582.85,
 				contribution401k: 3910.6515,
 				grossPay: 18622.15,
-				taxablePay: 12704.054025
+				taxablePay: 12704.054025,
+				takeHomePay: 0
+			},
+			federalTaxCost: {
+				effectiveRate: 0,
+				amount: 0
 			}
 		}
 	],
@@ -117,7 +137,9 @@ const personalData: TotalPersonalData = {
 		futureTaxablePay: 115275.402005,
 		pastContribution401k: 7821.303,
 		pastGrossPay: 33710.15,
-		pastTaxablePay: 25408.10805
+		pastTaxablePay: 25408.10805,
+		futureTakeHomePay: 0,
+		pastTakeHomePay: 0
 	},
 	futureRate401k: 0
 };

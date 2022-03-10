@@ -24,11 +24,16 @@ const pastPaycheck: PaycheckWithTotal = {
 		amount: 782.1303
 	},
 	taxablePay: 2540.810805,
+	federalTaxCost: {
+		effectiveRate: 0,
+		amount: 0
+	},
 	totalsForAllChecks: {
 		contribution401k: 3910.6515,
 		benefitsCost: 582.85,
 		grossPay: 18622.15,
-		taxablePay: 12704.054025
+		taxablePay: 12704.054025,
+		takeHomePay: 0
 	},
 	payrollTaxCost: {
 		socialSecurity: 230.91466,
@@ -58,12 +63,17 @@ const futurePaycheck: PaycheckWithTotal = {
 		rate: 0,
 		amount: 0
 	},
+	federalTaxCost: {
+		effectiveRate: 0,
+		amount: 0
+	},
 	taxablePay: 5269.423905,
 	totalsForAllChecks: {
 		contribution401k: 0,
 		benefitsCost: 1227.66,
 		grossPay: 121153.83,
-		taxablePay: 110657.902005
+		taxablePay: 110657.902005,
+		takeHomePay: 0
 	},
 	payrollTaxCost: {
 		socialSecurity: 357.69226,
@@ -89,6 +99,11 @@ const pastBonus: BonusWithTotal = {
 		socialSecurity: 935.456,
 		medicare: 218.776,
 		total: 1154.232
+	},
+	takeHomePay: 0,
+	federalTaxCosts: {
+		effectiveRate: 0,
+		amount: 0
 	}
 };
 const pastBonuses = [pastBonus, pastBonus];
@@ -101,11 +116,16 @@ const futureBonus: BonusWithTotal = {
 		rate: 0,
 		amount: 0
 	},
+	federalTaxCosts: {
+		effectiveRate: 0,
+		amount: 0
+	},
 	payrollTaxCosts: {
 		socialSecurity: 310,
 		medicare: 72.5,
 		total: 382.5
-	}
+	},
+	takeHomePay: 0
 };
 const futureBonuses = [futureBonus, futureBonus];
 

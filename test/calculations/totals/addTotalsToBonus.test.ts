@@ -26,7 +26,12 @@ describe('addTotalsToBonus', () => {
 				socialSecurity: 935.456,
 				medicare: 218.776,
 				total: 1154.232
-			}
+			},
+			federalTaxCosts: {
+				effectiveRate: 0,
+				amount: 0
+			},
+			takeHomePay: 0
 		});
 	});
 
@@ -51,7 +56,12 @@ describe('addTotalsToBonus', () => {
 				socialSecurity: 310,
 				medicare: 72.5,
 				total: 382.5
-			}
+			},
+			federalTaxCosts: {
+				effectiveRate: 0,
+				amount: 0
+			},
+			takeHomePay: 0
 		});
 	});
 });
