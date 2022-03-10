@@ -30,12 +30,17 @@ describe('addTotalsToPaychecks', () => {
 				rate: 0.21,
 				amount: 782.1303
 			},
+			federalTaxCost: {
+				amount: 0,
+				effectiveRate: 0
+			},
 			taxablePay: 2540.810805,
 			totalsForAllChecks: {
 				contribution401k: 3910.6515,
 				benefitsCost: 582.85,
 				grossPay: 18622.15,
-				taxablePay: 12704.054025
+				taxablePay: 12704.054025,
+				takeHomePay: 0
 			},
 			payrollTaxCost: {
 				socialSecurity: 230.91466,
@@ -61,6 +66,10 @@ describe('addTotalsToPaychecks', () => {
 		expect(result).toEqualRight({
 			startDate: '2022-03-14',
 			endDate: '2022-12-31',
+			federalTaxCost: {
+				amount: 0,
+				effectiveRate: 0
+			},
 			benefitsCost: {
 				dental: 10,
 				hsa: 38.46,
@@ -79,7 +88,8 @@ describe('addTotalsToPaychecks', () => {
 				contribution401k: 0,
 				benefitsCost: 1227.66,
 				grossPay: 121153.83,
-				taxablePay: 110657.902005
+				taxablePay: 110657.902005,
+				takeHomePay: 0
 			},
 			payrollTaxCost: {
 				socialSecurity: 357.69226,
