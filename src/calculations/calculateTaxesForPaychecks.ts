@@ -10,6 +10,8 @@ import * as RArray from 'fp-ts/ReadonlyArray';
 import { sumBenefits } from './CommonCalculations';
 import Decimal from 'decimal.js';
 import { findTaxBracket } from './utils/findTaxBracket';
+import * as Either from 'fp-ts/Either';
+import { calculateTaxes } from './utils/calculateTaxes';
 
 const calculatePaycheckTaxableIncome = (
 	paycheck: PaycheckWith401k,
@@ -29,7 +31,12 @@ const calculatePaycheckTaxableIncome = (
 		.minus(contribution401k);
 };
 
-const calculateTaxesForPaycheck =
+const calculateTaxRate =
+	(totalYearlyIncome: Decimal) =>
+	(totalYearlyTax: Decimal): Decimal =>
+		totalYearlyTax.dividedBy(totalYearlyIncome);
+
+const calculateTaxRateForPaycheck =
 	(legalData: LegalData) => (paycheck: PaycheckWith401k) => {
 		const paycheckTaxableIncome = calculatePaycheckTaxableIncome(
 			paycheck,
@@ -42,7 +49,9 @@ const calculateTaxesForPaycheck =
 			findTaxBracket(
 				legalData.federalTaxBrackets,
 				totalYearlyTaxableIncome
-			)
+			),
+			Either.map(calculateTaxes(totalYearlyTaxableIncome)),
+			Either.map(calculateTaxRate(totalYearlyTaxableIncome))
 		);
 	};
 
@@ -52,7 +61,7 @@ export const calculateTaxesForPaychecks = (
 ) => {
 	pipe(
 		data.personalData.pastPaychecks,
-		RArray.map(calculateTaxesForPaycheck(data.legalData))
+		RArray.map(calculateTaxRateForPaycheck(data.legalData))
 	);
 
 	throw new Error();
