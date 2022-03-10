@@ -1,4 +1,8 @@
-import { DataWithTotals, PaycheckWithTotal } from '../totals/TotalTypes';
+import {
+	BonusWithTotal,
+	DataWithTotals,
+	PaycheckWithTotal
+} from '../totals/TotalTypes';
 import Decimal from 'decimal.js';
 import { PredicateT } from '@craigmiller160/ts-functions/types';
 import { pipe } from 'fp-ts/function';
@@ -71,6 +75,23 @@ const add401kToPaycheck =
 		};
 	};
 
+const add401kToBonus =
+	(rate: Decimal) =>
+	(bonus: BonusWithTotal): BonusWithTotal => {
+		const amount401k = new Decimal(bonus.grossPay).times(rate).toNumber();
+		const taxablePay = new Decimal(bonus.taxablePay)
+			.minus(amount401k)
+			.toNumber();
+		return {
+			...bonus,
+			bonus401k: {
+				rate: rate.toNumber(),
+				amount: amount401k
+			},
+			taxablePay
+		};
+	};
+
 export const addFuture401k = (data: DataWithTotals): DataWithTotals => {
 	const remainingAmount401k = new Decimal(
 		data.legalData.contributionLimit401k -
@@ -90,4 +111,21 @@ export const addFuture401k = (data: DataWithTotals): DataWithTotals => {
 		data.personalData.futurePaychecks,
 		RArray.map(add401kToPaycheck(rate))
 	);
+	const futureBonuses = pipe(
+		data.personalData.futureBonuses,
+		RArray.map(add401kToBonus(rate))
+	);
+	return {
+		...data,
+		personalData: {
+			...data.personalData,
+			futurePaychecks,
+			futureBonuses,
+			totals: {
+				...data.personalData.totals,
+				futureContribution401k: 0, // TODO add this
+				futureTaxablePay: 0 // TODO add this
+			}
+		}
+	};
 };
