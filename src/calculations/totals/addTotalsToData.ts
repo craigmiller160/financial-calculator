@@ -147,12 +147,12 @@ const totalValueForChecks = (value: number, numChecks: number): number =>
 	new Decimal(value).times(new Decimal(numChecks)).toNumber();
 
 export const addTotalsToData = (data: Data) => {
-	pipe(
+	const pastPaychecks = pipe(
 		data.personalData.pastPaychecks,
 		RArray.map(addTotalsToPaycheck(data.legalData))
 	);
 
-	pipe(
+	const futurePaychecks = pipe(
 		data.personalData.futurePaychecks,
 		RArray.map(addTotalsToPaycheck(data.legalData))
 	);
