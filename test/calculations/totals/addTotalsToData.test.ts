@@ -116,9 +116,9 @@ describe('addTotalsToData', () => {
 						futureContribution401k: 0,
 						futureGrossPay: 126153.83,
 						futureTaxablePay: 115275.402005,
-						pastContribution401k: 7821.303,
+						pastContribution401k: 7079.1314999999995,
 						pastGrossPay: 33710.15,
-						pastTaxablePay: 25408.10805
+						pastTaxablePay: 23469.342024999998
 					}
 				}
 			})
