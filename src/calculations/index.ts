@@ -72,10 +72,12 @@ const runCalculationsForFuture401k = (
 		)
 	);
 
-export const runCalculations = (data: Data): IOT<string> => {
+export const runCalculations = (data: Data): IOT<string> =>
 	pipe(
 		runCalculationsForTotals(data),
-		IO.chain(runCalculationsForFuture401k)
+		IO.chain(runCalculationsForFuture401k),
+		IO.map(
+			(data) => data.personalData.futurePaychecks[0].paycheck401k.rate
+		),
+		IO.map((value) => `${value}`)
 	);
-	return IO.of('');
-};
