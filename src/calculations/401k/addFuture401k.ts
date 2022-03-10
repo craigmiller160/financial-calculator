@@ -32,10 +32,10 @@ const isOver401kLimit: PredicateT<Context> = pipe(
 const findRate401k = (context: Context): Decimal => {
 	const newRate = context.rate401k.plus(INTERVAL);
 	const newAmount = context.totalFutureIncome.times(newRate);
-	const newContext = {
+	const newContext: Context = {
 		...context,
-		newAmount,
-		newRate
+		amount401k: newAmount,
+		rate401k: newRate
 	};
 	if (isOver401kLimit(newContext)) {
 		return newRate.minus(INTERVAL);
@@ -103,7 +103,7 @@ export const addFuture401k = (data: DataWithTotals): DataWithTotals => {
 	const initContext: Context = {
 		remainingAmount401k,
 		totalFutureIncome,
-		rate401k: new Decimal(0),
+		rate401k: new Decimal(INTERVAL),
 		amount401k: new Decimal(0)
 	};
 	const rate = findRate401k(initContext);
