@@ -9,6 +9,8 @@ import {
 } from './CalculationMonoids';
 import * as Num from 'fp-ts/number';
 
+// TODO write tests for these, or deleete if not used
+
 export const sumBenefits = (benefits: BenefitsCost): number =>
 	benefits.dental + benefits.hsa + benefits.medical + benefits.vision;
 
