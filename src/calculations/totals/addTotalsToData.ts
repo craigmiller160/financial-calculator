@@ -12,7 +12,7 @@ import Decimal from 'decimal.js';
 import { pipe } from 'fp-ts/function';
 import * as RArray from 'fp-ts/ReadonlyArray';
 import { match, when } from 'ts-pattern';
-import { hasRate401k } from '../utils/typeCheck';
+import { hasRate401k, isPaycheckWith401k } from '../utils/typeCheck';
 import { unknown } from 'io-ts';
 
 export interface BenefitsCostAndTotal extends BenefitsCost {
@@ -47,9 +47,17 @@ const getPayrollTaxCosts = (
 	};
 };
 
-const isPaycheckWith401k = (
-	paycheck: BasePaycheck
-): paycheck is PaycheckWith401k => (paycheck as any).rate401k !== undefined;
+const getRateAndAmount401k = <T extends BasePaycheck>(
+	paycheck: T
+): [rate: number, amount: number] => {
+	const rate401k = match(paycheck as BasePaycheck)
+		.with(when(isPaycheckWith401k), (value) => value.rate401k)
+		.otherwise(() => 0);
+	const amount401k = new Decimal(paycheck.grossPay).times(
+		new Decimal(rate401k)
+	);
+	return [rate401k, amount401k.toNumber()];
+};
 
 const addTotalsToPaycheck =
 	(legalData: LegalData) =>
@@ -60,17 +68,17 @@ const addTotalsToPaycheck =
 			legalData.payrollTaxRates
 		);
 
-		const rate401k = match(paycheck as BasePaycheck)
-			.with(when(isPaycheckWith401k), (value) => value.rate401k)
-			.otherwise(() => 0);
-		const amount401k = new Decimal(paycheck.grossPay).times(
-			new Decimal(rate401k)
-		);
+		const [rate401k, amount401k] = getRateAndAmount401k(paycheck);
 	};
 
 export const addTotalsToData = (data: Data) => {
 	pipe(
 		data.personalData.pastPaychecks,
+		RArray.map(addTotalsToPaycheck(data.legalData))
+	);
+
+	pipe(
+		data.personalData.futurePaychecks,
 		RArray.map(addTotalsToPaycheck(data.legalData))
 	);
 };
