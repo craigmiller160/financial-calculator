@@ -1,46 +1,20 @@
-import {
-	BasePaycheck,
-	BenefitsCost,
-	LegalData,
-	PayrollTaxRates
-} from '../../data/decoders';
-import {
-	BenefitsCostAndTotal,
-	PaycheckWithTotal,
-	PayrollTaxCosts
-} from './TotalTypes';
+import { BasePaycheck, BenefitsCost, LegalData } from '../../data/decoders';
+import { BenefitsCostAndTotal, PaycheckWithTotal } from './TotalTypes';
 import { sumBenefits } from '../CommonCalculations';
 import Decimal from 'decimal.js';
-import { getAmount401k, getRate401k } from './common';
+import { getAmount401k, getPayrollTaxCosts, getRate401k } from './common';
 
 const addTotalToBenefits = (benefits: BenefitsCost): BenefitsCostAndTotal => ({
 	...benefits,
 	total: sumBenefits(benefits)
 });
 
-const getPayrollTaxCosts = (
-	paycheck: BasePaycheck,
-	payrollTaxRates: PayrollTaxRates
-): PayrollTaxCosts => {
-	const grossPay = new Decimal(paycheck.grossPay);
-	const socialSecurity = grossPay.times(
-		new Decimal(payrollTaxRates.socialSecurity)
-	);
-	const medicare = grossPay.times(new Decimal(payrollTaxRates.medicare));
-	const total = socialSecurity.plus(medicare);
-	return {
-		socialSecurity: socialSecurity.toNumber(),
-		medicare: medicare.toNumber(),
-		total: total.toNumber()
-	};
-};
-
 export const addTotalsToPaycheck =
 	(legalData: LegalData) =>
 	<T extends BasePaycheck>(paycheck: T): PaycheckWithTotal => {
 		const benefitsCost = addTotalToBenefits(paycheck.benefitsCost);
 		const payrollTaxCost = getPayrollTaxCosts(
-			paycheck,
+			paycheck.grossPay,
 			legalData.payrollTaxRates
 		);
 
