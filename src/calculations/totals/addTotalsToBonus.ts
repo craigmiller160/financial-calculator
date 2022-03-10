@@ -16,10 +16,15 @@ export const addTotalsToBonus =
 			date: bonus.date,
 			grossPay: bonus.grossPay,
 			taxablePay: taxablePay,
+			federalTaxCosts: {
+				effectiveRate: 0,
+				amount: 0
+			},
 			bonus401k: {
 				rate: rate401k,
 				amount: amount401k
 			},
-			payrollTaxCosts
+			payrollTaxCosts,
+			takeHomePay: 0
 		};
 	};

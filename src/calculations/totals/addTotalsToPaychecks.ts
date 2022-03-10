@@ -40,6 +40,10 @@ export const addTotalsToPaycheck =
 				amount: amount401k
 			},
 			taxablePay,
+			federalTaxCost: {
+				effectiveRate: 0,
+				amount: 0
+			},
 			totalsForAllChecks: {
 				contribution401k: totalValueForChecks(
 					amount401k,
@@ -56,7 +60,8 @@ export const addTotalsToPaycheck =
 				taxablePay: totalValueForChecks(
 					taxablePay,
 					paycheck.numberOfChecks
-				)
+				),
+				takeHomePay: 0
 			},
 			annualized: {
 				taxablePay: annualizedTaxablePay,
