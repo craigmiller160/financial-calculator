@@ -62,6 +62,7 @@ export type PersonalData = ioType.TypeOf<typeof personalDataV>;
 export type PayrollTaxRates = ioType.TypeOf<typeof payrollTaxRatesV>;
 export type FederalTaxBracket = ioType.TypeOf<typeof federalTaxBracketV>;
 export type LegalData = ioType.TypeOf<typeof legalDataV>;
+export type Rate401k = ioType.TypeOf<typeof rate401kV>;
 export interface Data {
 	readonly personalData: PersonalData;
 	readonly legalData: LegalData;

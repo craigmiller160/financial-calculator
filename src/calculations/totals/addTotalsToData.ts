@@ -1,10 +1,19 @@
 import {
 	BasePaycheck,
 	BenefitsCost,
-	PayrollTaxRates
+	Data,
+	LegalData,
+	PaycheckWith401k,
+	PayrollTaxRates,
+	Rate401k
 } from '../../data/decoders';
 import { sumBenefits } from '../CommonCalculations';
 import Decimal from 'decimal.js';
+import { pipe } from 'fp-ts/function';
+import * as RArray from 'fp-ts/ReadonlyArray';
+import { match, when } from 'ts-pattern';
+import { hasRate401k } from '../utils/typeCheck';
+import { unknown } from 'io-ts';
 
 export interface BenefitsCostAndTotal extends BenefitsCost {
 	readonly total: number;
@@ -38,4 +47,30 @@ const getPayrollTaxCosts = (
 	};
 };
 
-export const addTotalsToData = () => {};
+const isPaycheckWith401k = (
+	paycheck: BasePaycheck
+): paycheck is PaycheckWith401k => (paycheck as any).rate401k !== undefined;
+
+const addTotalsToPaycheck =
+	(legalData: LegalData) =>
+	<T extends BasePaycheck>(paycheck: T): T => {
+		const benefitsCost = addTotalToBenefits(paycheck.benefitsCost);
+		const payrollTaxCost = getPayrollTaxCosts(
+			paycheck,
+			legalData.payrollTaxRates
+		);
+
+		const rate401k = match(paycheck as BasePaycheck)
+			.with(when(isPaycheckWith401k), (value) => value.rate401k)
+			.otherwise(() => 0);
+		const amount401k = new Decimal(paycheck.grossPay).times(
+			new Decimal(rate401k)
+		);
+	};
+
+export const addTotalsToData = (data: Data) => {
+	pipe(
+		data.personalData.pastPaychecks,
+		RArray.map(addTotalsToPaycheck(data.legalData))
+	);
+};
