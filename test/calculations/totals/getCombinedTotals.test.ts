@@ -137,7 +137,7 @@ describe('getCombinedTotals', () => {
 		expect(result).toEqual({
 			grossPay: 37244.3,
 			contribution401k: 7821.303,
-			taxablePay: 25408.10805
+			estimatedAGI: 25408.10805
 		});
 	});
 
@@ -146,7 +146,7 @@ describe('getCombinedTotals', () => {
 		expect(result).toEqual({
 			grossPay: 242307.66,
 			contribution401k: 0,
-			taxablePay: 221315.80401
+			estimatedAGI: 221315.80401
 		});
 	});
 
@@ -155,7 +155,7 @@ describe('getCombinedTotals', () => {
 		expect(result).toEqual({
 			grossPay: 30176,
 			contribution401k: 6336.96,
-			taxablePay: 21530.576
+			estimatedAGI: 21530.576
 		});
 	});
 
@@ -164,7 +164,7 @@ describe('getCombinedTotals', () => {
 		expect(result).toEqual({
 			grossPay: 10000,
 			contribution401k: 0,
-			taxablePay: 9235
+			estimatedAGI: 9235
 		});
 	});
 });
