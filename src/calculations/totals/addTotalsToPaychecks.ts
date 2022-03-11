@@ -35,7 +35,7 @@ export const addTotalsToPaycheck =
 			},
 			estimatedAGI: 0,
 			estimatedMAGI: 0,
-			takeHomePay: 0,
+			estimatedTakeHomePay: 0,
 			federalTaxCost: {
 				effectiveRate: 0,
 				amount: 0
@@ -55,7 +55,7 @@ export const addTotalsToPaycheck =
 				),
 				estimatedAGI: 0,
 				estimatedMAGI: 0,
-				takeHomePay: 0
+				estimatedTakeHomePay: 0
 			},
 			annualized: {
 				estimatedAGI: 0,
