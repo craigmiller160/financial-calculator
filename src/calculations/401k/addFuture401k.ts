@@ -51,28 +51,17 @@ const add401kToPaycheck =
 		const amount401k = new Decimal(paycheck.grossPay)
 			.times(rate)
 			.toNumber();
-		const taxablePay = new Decimal(paycheck.estimatedAGI)
-			.minus(new Decimal(amount401k))
-			.toNumber();
 		return {
 			...paycheck,
 			paycheck401k: {
 				rate: rate.toNumber(),
 				amount: amount401k
 			},
-			estimatedAGI: taxablePay,
 			totalsForAllChecks: {
 				...paycheck.totalsForAllChecks,
-				estimatedAGI: new Decimal(taxablePay)
-					.times(paycheck.numberOfChecks)
-					.toNumber(),
 				contribution401k: new Decimal(amount401k)
 					.times(paycheck.numberOfChecks)
 					.toNumber()
-			},
-			annualized: {
-				...paycheck.annualized,
-				estimatedAGI: new Decimal(taxablePay).times(26).toNumber()
 			}
 		};
 	};
@@ -81,16 +70,12 @@ const add401kToBonus =
 	(rate: Decimal) =>
 	(bonus: BonusWithTotal): BonusWithTotal => {
 		const amount401k = new Decimal(bonus.grossPay).times(rate).toNumber();
-		const taxablePay = new Decimal(bonus.estimatedAGI)
-			.minus(amount401k)
-			.toNumber();
 		return {
 			...bonus,
 			bonus401k: {
 				rate: rate.toNumber(),
 				amount: amount401k
-			},
-			estimatedAGI: taxablePay
+			}
 		};
 	};
 
@@ -122,16 +107,10 @@ export const addFuture401k = (data: DataWithTotals): PersonalDataWithTotals => {
 	)
 		.times(rate)
 		.toNumber();
-	const futureEstimatedAGI = new Decimal(
-		data.personalData.totals.futureEstimatedAGI
-	)
-		.minus(futureContribution401k)
-		.toNumber();
 	return produce(data.personalData, (draft) => {
 		draft.futurePaychecks = castDraft(futurePaychecks);
 		draft.futureBonuses = castDraft(futureBonuses);
 		draft.totals.futureContribution401k = futureContribution401k;
-		draft.totals.futureEstimatedAGI = futureEstimatedAGI;
 		draft.futureRate401k = rate.toNumber();
 	});
 };

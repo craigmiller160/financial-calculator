@@ -22,7 +22,8 @@ const personalData: PersonalDataWithTotals = {
 				socialSecurity: 310,
 				total: 382.5
 			},
-			estimatedAGI: 4617.5,
+			estimatedAGI: 0,
+			estimatedMAGI: 0,
 			takeHomePay: 0,
 			federalTaxCosts: {
 				effectiveRate: 0,
@@ -49,7 +50,8 @@ const personalData: PersonalDataWithTotals = {
 			grossPay: 5769.23,
 			annualized: {
 				grossPay: 149999.98,
-				estimatedAGI: 137005.02153
+				estimatedAGI: 0,
+				estimatedMAGI: 0
 			},
 			numberOfChecks: 21,
 			paycheck401k: {
@@ -61,12 +63,14 @@ const personalData: PersonalDataWithTotals = {
 				socialSecurity: 357.69226,
 				total: 441.346095
 			},
-			estimatedAGI: 5269.423905,
+			estimatedAGI: 0,
+			estimatedMAGI: 0,
 			totalsForAllChecks: {
 				benefitsCost: 1227.66,
 				contribution401k: 0,
 				grossPay: 121153.83,
-				estimatedAGI: 110657.902005,
+				estimatedAGI: 0,
+				estimatedMAGI: 0,
 				takeHomePay: 0
 			}
 		}
@@ -84,7 +88,8 @@ const personalData: PersonalDataWithTotals = {
 				socialSecurity: 935.456,
 				total: 1154.232
 			},
-			estimatedAGI: 10765.288,
+			estimatedAGI: 0,
+			estimatedMAGI: 0,
 			takeHomePay: 0,
 			federalTaxCosts: {
 				effectiveRate: 0,
@@ -99,7 +104,8 @@ const personalData: PersonalDataWithTotals = {
 			takeHomePay: 0,
 			annualized: {
 				grossPay: 96835.18,
-				estimatedAGI: 66061.08093
+				estimatedAGI: 0,
+				estimatedMAGI: 0
 			},
 			benefitsCost: {
 				dental: 5.84,
@@ -119,12 +125,14 @@ const personalData: PersonalDataWithTotals = {
 				socialSecurity: 230.91466,
 				total: 284.918895
 			},
-			estimatedAGI: 2540.810805,
+			estimatedAGI: 0,
+			estimatedMAGI: 0,
 			totalsForAllChecks: {
 				benefitsCost: 582.85,
 				contribution401k: 3910.6515,
 				grossPay: 18622.15,
-				estimatedAGI: 12704.054025,
+				estimatedAGI: 0,
+				estimatedMAGI: 0,
 				takeHomePay: 0
 			},
 			federalTaxCost: {
@@ -136,10 +144,12 @@ const personalData: PersonalDataWithTotals = {
 	totals: {
 		futureContribution401k: 0,
 		futureGrossPay: 126153.83,
-		futureEstimatedAGI: 115275.402005,
+		futureEstimatedAGI: 0,
+		futureEstimatedMAGI: 0,
 		pastContribution401k: 7821.303,
 		pastGrossPay: 33710.15,
-		pastEstimatedAGI: 25408.10805,
+		pastEstimatedAGI: 0,
+		pastEstimatedMAGI: 0,
 		futureTakeHomePay: 0,
 		pastTakeHomePay: 0
 	},
@@ -169,15 +179,9 @@ describe('addFuture401k', () => {
 						rate: 0.1,
 						amount: 576.923
 					},
-					annualized: {
-						...personalData.futurePaychecks[0].annualized,
-						estimatedAGI: 122005.02353
-					},
-					estimatedAGI: 4692.500905,
 					totalsForAllChecks: {
 						...personalData.futurePaychecks[0].totalsForAllChecks,
-						contribution401k: 12115.383,
-						estimatedAGI: 98542.519005
+						contribution401k: 12115.383
 					}
 				}
 			],
@@ -187,14 +191,12 @@ describe('addFuture401k', () => {
 					bonus401k: {
 						rate: 0.1,
 						amount: 500
-					},
-					estimatedAGI: 4117.5
+					}
 				}
 			],
 			totals: {
 				...personalData.totals,
-				futureContribution401k: 12615.383,
-				futureEstimatedAGI: 102660.019005
+				futureContribution401k: 12615.383
 			},
 			futureRate401k: 0.1
 		});
