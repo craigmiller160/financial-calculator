@@ -10,7 +10,8 @@ export interface BonusWithTotal {
 	readonly bonus401k: The401k;
 	readonly payrollTaxCosts: PayrollTaxCosts;
 	readonly federalTaxCosts: FederalTaxCosts;
-	readonly estimatedAGI: number; // TODO update this with fed
+	readonly estimatedAGI: number;
+	readonly estimatedMAGI: number;
 	readonly takeHomePay: number; // TODO update with fed
 }
 
@@ -22,13 +23,15 @@ export interface The401k {
 export interface Annualized {
 	readonly grossPay: number;
 	readonly estimatedAGI: number;
+	readonly estimatedMAGI: number;
 }
 
 export interface PaycheckTotals {
 	readonly grossPay: number;
 	readonly benefitsCost: number;
 	readonly contribution401k: number;
-	readonly estimatedAGI: number; // TODO update this with fed
+	readonly estimatedAGI: number;
+	readonly estimatedMAGI: number;
 	readonly takeHomePay: number; // TODO update with fed
 }
 
@@ -45,6 +48,7 @@ export interface PaycheckWithTotal {
 	readonly grossPay: number;
 	readonly numberOfChecks: number;
 	readonly estimatedAGI: number;
+	readonly estimatedMAGI: number;
 	readonly takeHomePay: number; // TODO update with fed
 	readonly payrollTaxCost: PayrollTaxCosts;
 	readonly totalsForAllChecks: PaycheckTotals;
@@ -62,11 +66,13 @@ export interface PayrollTaxCosts {
 export interface PersonalTotals {
 	readonly pastGrossPay: number;
 	readonly pastContribution401k: number;
-	readonly pastEstimatedAGI: number; // TODO update with fed
+	readonly pastEstimatedAGI: number;
+	readonly pastEstimatedMAGI: number;
 	readonly pastTakeHomePay: number; // TODO update with fed
 	readonly futureGrossPay: number;
 	readonly futureContribution401k: number;
-	readonly futureEstimatedAGI: number; // TODO update with fed
+	readonly futureEstimatedAGI: number;
+	readonly futureEstimatedMAGI: number;
 	readonly futureTakeHomePay: number; // TODO update with fed
 }
 
@@ -83,6 +89,7 @@ export interface CombinedTotals {
 	readonly grossPay: number;
 	readonly contribution401k: number;
 	readonly estimatedAGI: number;
+	readonly estimatedMAGI: number;
 }
 
 export interface DataWithTotals {
