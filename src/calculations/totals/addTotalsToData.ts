@@ -6,7 +6,7 @@ import { addTotalsToBonus } from './addTotalsToBonus';
 import {
 	getCombinedTotalsForBonuses,
 	getCombinedTotalsForPaychecks
-} from './getCombinedTotals';
+} from '../combinedTotals/getCombinedTotals';
 import { PersonalDataWithTotals } from './TotalTypes';
 
 export const addTotalsToData = (data: Data): PersonalDataWithTotals => {
@@ -14,12 +14,10 @@ export const addTotalsToData = (data: Data): PersonalDataWithTotals => {
 		data.personalData.pastPaychecks,
 		RArray.map(addTotalsToPaycheck(data.legalData))
 	);
-	const pastPaychecksTotal = getCombinedTotalsForPaychecks(pastPaychecks);
 	const pastBonuses = pipe(
 		data.personalData.pastBonuses,
 		RArray.map(addTotalsToBonus(data.legalData))
 	);
-	const pastBonusesTotal = getCombinedTotalsForBonuses(pastBonuses);
 
 	const futurePaychecks = pipe(
 		data.personalData.futurePaychecks,

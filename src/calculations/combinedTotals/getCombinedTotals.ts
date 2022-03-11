@@ -2,7 +2,7 @@ import {
 	BonusWithTotal,
 	CombinedTotals,
 	PaycheckWithTotal
-} from './TotalTypes';
+} from '../totals/TotalTypes';
 import { MonoidT } from '@craigmiller160/ts-functions/types';
 import * as Monoid from 'fp-ts/Monoid';
 import * as RArray from 'fp-ts/ReadonlyArray';

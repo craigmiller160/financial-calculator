@@ -5,7 +5,7 @@ import {
 import {
 	getCombinedTotalsForBonuses,
 	getCombinedTotalsForPaychecks
-} from '../../../src/calculations/totals/getCombinedTotals';
+} from '../../../src/calculations/combinedTotals/getCombinedTotals';
 
 const pastPaycheck: PaycheckWithTotal = {
 	startDate: '2022-01-01',
