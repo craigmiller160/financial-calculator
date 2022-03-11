@@ -7,7 +7,6 @@ import { addTotalsToData } from './totals/addTotalsToData';
 import { DataWithTotals } from './totals/TotalTypes';
 import { addFuture401k } from './401k/addFuture401k';
 import * as IOEither from 'fp-ts/IOEither';
-import { addTaxes } from './taxes/addTaxes';
 
 const runCalculationsForTotals = (data: Data): IOT<DataWithTotals> =>
 	pipe(
@@ -27,20 +26,10 @@ const runCalculationsForFuture401k = (
 		)
 	);
 
-const runCalculationsForTaxes = (
-	data: DataWithTotals
-): IOTryT<DataWithTotals> =>
-	pipe(
-		logger.debug('Calculating taxes'),
-		IOEither.rightIO,
-		IOEither.chainEitherK(() => addTaxes(data))
-	);
-
 export const runCalculations = (data: Data): IOTryT<string> =>
 	pipe(
 		runCalculationsForTotals(data),
 		IO.chain(runCalculationsForFuture401k),
 		IOEither.rightIO,
-		IOEither.chain(runCalculationsForTaxes),
 		IOEither.map((data) => `${data.personalData.futureRate401k}`)
 	);
