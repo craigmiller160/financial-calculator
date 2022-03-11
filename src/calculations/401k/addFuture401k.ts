@@ -1,13 +1,15 @@
 import {
 	BonusWithTotal,
 	DataWithTotals,
-	PaycheckWithTotal
+	PaycheckWithTotal,
+	PersonalDataWithTotals
 } from '../totals/TotalTypes';
 import Decimal from 'decimal.js';
 import { PredicateT } from '@craigmiller160/ts-functions/types';
 import { pipe } from 'fp-ts/function';
 import * as Pred from 'fp-ts/Predicate';
 import * as RArray from 'fp-ts/ReadonlyArray';
+import produce, { castDraft } from 'immer';
 
 interface Context {
 	readonly remainingAmount401k: Decimal;
@@ -92,7 +94,7 @@ const add401kToBonus =
 		};
 	};
 
-export const addFuture401k = (data: DataWithTotals): DataWithTotals => {
+export const addFuture401k = (data: DataWithTotals): PersonalDataWithTotals => {
 	const remainingAmount401k = new Decimal(
 		data.legalData.contributionLimit401k -
 			data.personalData.totals.pastContribution401k
@@ -125,18 +127,11 @@ export const addFuture401k = (data: DataWithTotals): DataWithTotals => {
 	)
 		.minus(futureContribution401k)
 		.toNumber();
-	return {
-		...data,
-		personalData: {
-			...data.personalData,
-			futurePaychecks,
-			futureBonuses,
-			totals: {
-				...data.personalData.totals,
-				futureContribution401k,
-				futureTaxablePay
-			},
-			futureRate401k: rate.toNumber()
-		}
-	};
+	return produce(data.personalData, (draft) => {
+		draft.futurePaychecks = castDraft(futurePaychecks);
+		draft.futureBonuses = castDraft(futureBonuses);
+		draft.totals.futureContribution401k = futureContribution401k;
+		draft.totals.futureTaxablePay = futureTaxablePay;
+		draft.futureRate401k = rate.toNumber();
+	});
 };

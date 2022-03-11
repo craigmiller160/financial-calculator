@@ -3,12 +3,12 @@ import { getTestData } from '../../testutils/TestData';
 import * as IOEither from 'fp-ts/IOEither';
 import {
 	DataWithTotals,
-	TotalPersonalData
+	PersonalDataWithTotals
 } from '../../../src/calculations/totals/TotalTypes';
 import { addFuture401k } from '../../../src/calculations/401k/addFuture401k';
 import '@relmify/jest-fp-ts';
 
-const personalData: TotalPersonalData = {
+const personalData: PersonalDataWithTotals = {
 	futureBonuses: [
 		{
 			date: '2022-08-01',

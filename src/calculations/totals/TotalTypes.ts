@@ -69,7 +69,7 @@ export interface PersonalTotals {
 	readonly futureTakeHomePay: number; // TODO update with fed
 }
 
-export interface TotalPersonalData {
+export interface PersonalDataWithTotals {
 	readonly pastPaychecks: ReadonlyArray<PaycheckWithTotal>;
 	readonly futurePaychecks: ReadonlyArray<PaycheckWithTotal>;
 	readonly pastBonuses: ReadonlyArray<BonusWithTotal>;
@@ -85,6 +85,6 @@ export interface CombinedTotals {
 }
 
 export interface DataWithTotals {
-	readonly personalData: TotalPersonalData;
+	readonly personalData: PersonalDataWithTotals;
 	readonly legalData: LegalData;
 }

@@ -7,9 +7,9 @@ import {
 	getCombinedTotalsForBonuses,
 	getCombinedTotalsForPaychecks
 } from './getCombinedTotals';
-import { DataWithTotals } from './TotalTypes';
+import { PersonalDataWithTotals } from './TotalTypes';
 
-export const addTotalsToData = (data: Data): DataWithTotals => {
+export const addTotalsToData = (data: Data): PersonalDataWithTotals => {
 	const pastPaychecks = pipe(
 		data.personalData.pastPaychecks,
 		RArray.map(addTotalsToPaycheck(data.legalData))
@@ -32,30 +32,26 @@ export const addTotalsToData = (data: Data): DataWithTotals => {
 	);
 	const futureBonusesTotal = getCombinedTotalsForBonuses(futureBonuses);
 	return {
-		legalData: data.legalData,
-		personalData: {
-			pastPaychecks,
-			pastBonuses,
-			futurePaychecks,
-			futureBonuses,
-			totals: {
-				pastGrossPay:
-					pastPaychecksTotal.grossPay + pastBonusesTotal.grossPay,
-				pastContribution401k:
-					pastPaychecksTotal.contribution401k +
-					pastBonusesTotal.contribution401k,
-				pastTaxablePay:
-					pastPaychecksTotal.taxablePay + pastBonusesTotal.taxablePay,
-				futureGrossPay:
-					futurePaychecksTotal.grossPay + futureBonusesTotal.grossPay,
-				futureContribution401k: 0,
-				futureTaxablePay:
-					futurePaychecksTotal.taxablePay +
-					futureBonusesTotal.taxablePay,
-				pastTakeHomePay: 0,
-				futureTakeHomePay: 0
-			},
-			futureRate401k: 0
-		}
+		pastPaychecks,
+		pastBonuses,
+		futurePaychecks,
+		futureBonuses,
+		totals: {
+			pastGrossPay:
+				pastPaychecksTotal.grossPay + pastBonusesTotal.grossPay,
+			pastContribution401k:
+				pastPaychecksTotal.contribution401k +
+				pastBonusesTotal.contribution401k,
+			pastTaxablePay:
+				pastPaychecksTotal.taxablePay + pastBonusesTotal.taxablePay,
+			futureGrossPay:
+				futurePaychecksTotal.grossPay + futureBonusesTotal.grossPay,
+			futureContribution401k: 0,
+			futureTaxablePay:
+				futurePaychecksTotal.taxablePay + futureBonusesTotal.taxablePay,
+			pastTakeHomePay: 0,
+			futureTakeHomePay: 0
+		},
+		futureRate401k: 0
 	};
 };

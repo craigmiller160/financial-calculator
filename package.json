@@ -29,6 +29,7 @@
     "@craigmiller160/ts-functions": "^1.4.0-beta",
     "decimal.js": "^10.3.1",
     "fp-ts": "^2.11.8",
+    "immer": "^9.0.12",
     "io-ts": "^2.2.16",
     "nanoid": "^3.3.1",
     "ts-pattern": "^3.3.5",
