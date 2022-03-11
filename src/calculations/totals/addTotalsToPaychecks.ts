@@ -34,6 +34,7 @@ export const addTotalsToPaycheck =
 				amount: amount401k
 			},
 			estimatedAGI: 0,
+			estimatedMAGI: 0,
 			takeHomePay: 0,
 			federalTaxCost: {
 				effectiveRate: 0,
