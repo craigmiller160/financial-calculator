@@ -49,7 +49,9 @@ const runCalculationsForCombinedTotals = (
 export const runCalculations = (data: Data): IOTryT<string> =>
 	pipe(
 		runCalculationsForTotals(data),
+		IO.chain(runCalculationsForCombinedTotals),
 		IO.chain(runCalculationsForFuture401k(data.legalData)),
+		IO.chain(runCalculationsForCombinedTotals),
 		IO.chain(runCalculationsForAgi),
 		IO.chain(runCalculationsForCombinedTotals),
 		IOEither.rightIO,

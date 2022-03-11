@@ -35,8 +35,8 @@ export const addCombinedTotals = (
 			futureEstimatedAGI:
 				futurePaychecksTotal.estimatedAGI +
 				futureBonusesTotal.estimatedAGI,
-			pastTakeHomePay: 0,
-			futureTakeHomePay: 0
+			pastTakeHomePay: 0, // TODO just add this here
+			futureTakeHomePay: 0 // TODO just add this here
 		};
 	});
 };
