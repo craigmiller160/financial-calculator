@@ -1,4 +1,5 @@
 import {
+	BonusWithTotal,
 	PaycheckWithTotal,
 	PersonalDataWithTotals
 } from '../totals/TotalTypes';
@@ -7,9 +8,12 @@ import { LegalData } from '../../data/decoders';
 import { pipe } from 'fp-ts/function';
 import * as Either from 'fp-ts/Either';
 import { calculateTaxes } from '../utils/calculateTaxes';
-import produce from 'immer';
+import produce, { castDraft } from 'immer';
 import { TryT } from '@craigmiller160/ts-functions/types';
 import * as RArray from 'fp-ts/ReadonlyArray';
+import Decimal from 'decimal.js';
+
+const BONUS_WITHHOLDING = 0.22;
 
 const addFederalTaxesToPaycheck =
 	(legalData: LegalData) =>
@@ -30,9 +34,17 @@ const addFederalTaxesToPaycheck =
 			)
 		);
 
+const addFederalTaxesToBonus = (bonus: BonusWithTotal): BonusWithTotal =>
+	produce(bonus, (draft) => {
+		draft.federalTaxCosts.effectiveRate = BONUS_WITHHOLDING;
+		draft.federalTaxCosts.amount = new Decimal(draft.estimatedAGI)
+			.times(new Decimal(BONUS_WITHHOLDING))
+			.toNumber();
+	});
+
 export const addFederalTaxes =
 	(legalData: LegalData) =>
-	(data: PersonalDataWithTotals): PersonalDataWithTotals => {
+	(data: PersonalDataWithTotals): TryT<PersonalDataWithTotals> => {
 		const pastPaychecksEither = pipe(
 			data.pastPaychecks,
 			RArray.map(addFederalTaxesToPaycheck(legalData)),
@@ -43,12 +55,26 @@ export const addFederalTaxes =
 			RArray.map(addFederalTaxesToPaycheck(legalData)),
 			Either.sequenceArray
 		);
-
-		pipe(
-			pastPaychecksEither,
-			Either.bindTo('pastPaychecks'),
-			Either.bind('futurePaychecks', () => futurePaychecksEither)
+		const pastBonuses = pipe(
+			data.pastBonuses,
+			RArray.map(addFederalTaxesToBonus)
+		);
+		const futureBonuses = pipe(
+			data.futureBonuses,
+			RArray.map(addFederalTaxesToBonus)
 		);
 
-		throw new Error();
+		return pipe(
+			pastPaychecksEither,
+			Either.bindTo('pastPaychecks'),
+			Either.bind('futurePaychecks', () => futurePaychecksEither),
+			Either.map(({ pastPaychecks, futurePaychecks }) =>
+				produce(data, (draft) => {
+					draft.pastPaychecks = castDraft(pastPaychecks);
+					draft.futurePaychecks = castDraft(futurePaychecks);
+					draft.pastBonuses = castDraft(pastBonuses);
+					draft.futureBonuses = castDraft(futureBonuses);
+				})
+			)
+		);
 	};
