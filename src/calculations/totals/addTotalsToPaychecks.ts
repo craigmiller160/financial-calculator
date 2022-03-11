@@ -53,15 +53,18 @@ export const addTotalsToPaycheck =
 					paycheck.numberOfChecks
 				),
 				estimatedAGI: 0,
+				estimatedMAGI: 0,
 				takeHomePay: 0
 			},
 			annualized: {
 				estimatedAGI: 0,
+				estimatedMAGI: 0,
 				grossPay: annualizedGrossPay
 			},
 			payrollTaxCost
 		};
 	};
 
+// TODO move to file
 const totalValueForChecks = (value: number, numChecks: number): number =>
 	new Decimal(value).times(new Decimal(numChecks)).toNumber();

@@ -9,6 +9,7 @@ import Decimal from 'decimal.js';
 import { pipe } from 'fp-ts/function';
 import * as RArray from 'fp-ts/ReadonlyArray';
 
+// TODO move to file
 const totalValueForChecks = (value: number, numChecks: number): number =>
 	new Decimal(value).times(new Decimal(numChecks)).toNumber();
 

@@ -27,6 +27,9 @@ export const addCombinedTotals = (
 				pastBonusesTotal.contribution401k,
 			pastEstimatedAGI:
 				pastPaychecksTotal.estimatedAGI + pastBonusesTotal.estimatedAGI,
+			pastEstimatedMAGI:
+				pastPaychecksTotal.estimatedMAGI +
+				pastBonusesTotal.estimatedMAGI,
 			futureGrossPay:
 				futurePaychecksTotal.grossPay + futureBonusesTotal.grossPay,
 			futureContribution401k:
@@ -35,6 +38,9 @@ export const addCombinedTotals = (
 			futureEstimatedAGI:
 				futurePaychecksTotal.estimatedAGI +
 				futureBonusesTotal.estimatedAGI,
+			futureEstimatedMAGI:
+				futurePaychecksTotal.estimatedMAGI +
+				futureBonusesTotal.estimatedMAGI,
 			pastTakeHomePay: 0, // TODO just add this here
 			futureTakeHomePay: 0 // TODO just add this here
 		};
