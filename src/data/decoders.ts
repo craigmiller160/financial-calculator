@@ -34,6 +34,11 @@ const federalTaxBracketV = Codecs.readonlyType({
 	baseAmountOwed: ioType.number
 });
 
+const rothIraLimitV = Codecs.readonlyType({
+	maximumIncome: ioType.number,
+	contributionLimit: ioType.number
+});
+
 const baseBonusV = Codecs.readonlyType({
 	date: ioType.string,
 	grossPay: ioType.number
@@ -50,19 +55,21 @@ export const personalDataV = Codecs.readonlyType({
 export const legalDataV = Codecs.readonlyType({
 	contributionLimit401k: ioType.number,
 	payrollTaxRates: payrollTaxRatesV,
-	federalTaxBrackets: ioType.readonlyArray(federalTaxBracketV)
+	federalTaxBrackets: ioType.readonlyArray(federalTaxBracketV),
+	rothIraLimits: ioType.readonlyArray(rothIraLimitV)
 });
 
 export type BasePaycheck = ioType.TypeOf<typeof basePaycheckV>;
 export type PaycheckWith401k = ioType.TypeOf<typeof paycheckWith401kV>;
 export type BenefitsCost = ioType.TypeOf<typeof benefitsCostV>;
 export type BaseBonus = ioType.TypeOf<typeof baseBonusV>;
-export type BonusWith401k = ioType.TypeOf<typeof bonusWith401kV>;
+export type BonusWith401k = ioType.TypeOf<typeof bonusWith401kV>; // TODO why unused?
 export type PersonalData = ioType.TypeOf<typeof personalDataV>;
 export type PayrollTaxRates = ioType.TypeOf<typeof payrollTaxRatesV>;
 export type FederalTaxBracket = ioType.TypeOf<typeof federalTaxBracketV>;
 export type LegalData = ioType.TypeOf<typeof legalDataV>;
 export type Rate401k = ioType.TypeOf<typeof rate401kV>;
+export type RothIraLimit = ioType.TypeOf<typeof rothIraLimitV>;
 export interface Data {
 	readonly personalData: PersonalData;
 	readonly legalData: LegalData;
