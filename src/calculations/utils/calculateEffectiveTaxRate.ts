@@ -1,7 +1,7 @@
 import Decimal from 'decimal.js';
 import { FederalTaxBracket } from '../../data/decoders';
 
-export const calculateTaxes =
+export const calculateEffectiveTaxRate =
 	(annualizedAGI: number) =>
 	(bracket: FederalTaxBracket): number => {
 		const base = new Decimal(bracket.baseAmountOwed);

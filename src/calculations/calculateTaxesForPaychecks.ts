@@ -11,7 +11,7 @@ import { sumBenefits } from './CommonCalculations';
 import Decimal from 'decimal.js';
 import { findTaxBracket } from './utils/findTaxBracket';
 import * as Either from 'fp-ts/Either';
-import { calculateTaxes } from './utils/calculateTaxes';
+import { calculateEffectiveTaxRate } from './utils/calculateEffectiveTaxRate';
 
 const calculatePaycheckTaxableIncome = (
 	paycheck: PaycheckWith401k,
@@ -51,7 +51,7 @@ const calculateTaxRateForPaycheck =
 				legalData.federalTaxBrackets,
 				totalYearlyTaxableIncome
 			),
-			Either.map(calculateTaxes(totalYearlyTaxableIncome)),
+			Either.map(calculateEffectiveTaxRate(totalYearlyTaxableIncome)),
 			Either.map(calculateTaxRate(totalYearlyTaxableIncome))
 		);
 	};

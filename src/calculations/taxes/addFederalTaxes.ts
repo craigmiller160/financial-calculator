@@ -8,7 +8,7 @@ import { findTaxBracket } from '../utils/findTaxBracket';
 import { LegalData } from '../../data/decoders';
 import { pipe } from 'fp-ts/function';
 import * as Either from 'fp-ts/Either';
-import { calculateTaxes } from '../utils/calculateTaxes';
+import { calculateEffectiveTaxRate } from '../utils/calculateEffectiveTaxRate';
 import produce, { castDraft } from 'immer';
 import { TryT } from '@craigmiller160/ts-functions/types';
 import * as RArray from 'fp-ts/ReadonlyArray';
@@ -27,7 +27,7 @@ const addFederalTaxesToPaycheck =
 				legalData.federalTaxBrackets,
 				paycheck.annualized.estimatedAGI
 			),
-			Either.map(calculateTaxes(paycheck.annualized.estimatedAGI)),
+			Either.map(calculateEffectiveTaxRate(paycheck.annualized.estimatedAGI)),
 			Either.map((rate) =>
 				produce(paycheck, (draft) => {
 					draft.federalTaxCost = {
