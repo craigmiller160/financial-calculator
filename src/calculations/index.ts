@@ -59,7 +59,7 @@ const runCalculationsForFederalTaxes =
 			IOEither.chainEitherK(() =>
 				addFederalTaxes({ personalData, legalData })
 			),
-			IOEither.chainFirstIOK((data) => logger.debug('Data', data))
+			IOEither.chainFirstIOK((data) => logger.debugWithJson('Data', data))
 		);
 
 export const runCalculations = (data: Data): IOTryT<string> =>
