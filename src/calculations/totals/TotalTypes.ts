@@ -10,7 +10,7 @@ export interface BonusWithTotal {
 	readonly bonus401k: The401k;
 	readonly payrollTaxCosts: PayrollTaxCosts;
 	readonly federalTaxCosts: FederalTaxCosts;
-	readonly taxablePay: number; // TODO update this with fed
+	readonly estimatedAGI: number; // TODO update this with fed
 	readonly takeHomePay: number; // TODO update with fed
 }
 
@@ -21,14 +21,14 @@ export interface The401k {
 
 export interface Annualized {
 	readonly grossPay: number;
-	readonly taxablePay: number;
+	readonly estimatedAGI: number;
 }
 
 export interface PaycheckTotals {
 	readonly grossPay: number;
 	readonly benefitsCost: number;
 	readonly contribution401k: number;
-	readonly taxablePay: number; // TODO update this with fed
+	readonly estimatedAGI: number; // TODO update this with fed
 	readonly takeHomePay: number; // TODO update with fed
 }
 
@@ -44,7 +44,7 @@ export interface PaycheckWithTotal {
 	readonly paycheck401k: The401k;
 	readonly grossPay: number;
 	readonly numberOfChecks: number;
-	readonly taxablePay: number;
+	readonly estimatedAGI: number;
 	readonly takeHomePay: number; // TODO update with fed
 	readonly payrollTaxCost: PayrollTaxCosts;
 	readonly totalsForAllChecks: PaycheckTotals;
@@ -58,14 +58,15 @@ export interface PayrollTaxCosts {
 	readonly total: number;
 }
 
+// TODO have sub-objects here for organization
 export interface PersonalTotals {
 	readonly pastGrossPay: number;
 	readonly pastContribution401k: number;
-	readonly pastTaxablePay: number; // TODO update with fed
+	readonly pastEstimatedAGI: number; // TODO update with fed
 	readonly pastTakeHomePay: number; // TODO update with fed
 	readonly futureGrossPay: number;
 	readonly futureContribution401k: number;
-	readonly futureTaxablePay: number; // TODO update with fed
+	readonly futureEstimatedAGI: number; // TODO update with fed
 	readonly futureTakeHomePay: number; // TODO update with fed
 }
 
@@ -81,7 +82,7 @@ export interface PersonalDataWithTotals {
 export interface CombinedTotals {
 	readonly grossPay: number;
 	readonly contribution401k: number;
-	readonly taxablePay: number;
+	readonly estimatedAGI: number;
 }
 
 export interface DataWithTotals {

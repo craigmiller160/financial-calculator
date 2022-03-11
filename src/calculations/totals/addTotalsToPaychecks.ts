@@ -39,7 +39,7 @@ export const addTotalsToPaycheck =
 				rate: rate401k,
 				amount: amount401k
 			},
-			taxablePay,
+			estimatedAGI: taxablePay,
 			takeHomePay: 0,
 			federalTaxCost: {
 				effectiveRate: 0,
@@ -58,14 +58,14 @@ export const addTotalsToPaycheck =
 					paycheck.grossPay,
 					paycheck.numberOfChecks
 				),
-				taxablePay: totalValueForChecks(
+				estimatedAGI: totalValueForChecks(
 					taxablePay,
 					paycheck.numberOfChecks
 				),
 				takeHomePay: 0
 			},
 			annualized: {
-				taxablePay: annualizedTaxablePay,
+				estimatedAGI: annualizedTaxablePay,
 				grossPay: annualizedGrossPay
 			},
 			payrollTaxCost

@@ -24,7 +24,7 @@ const pastPaycheck: PaycheckWithTotal = {
 		rate: 0.21,
 		amount: 782.1303
 	},
-	taxablePay: 2540.810805,
+	estimatedAGI: 2540.810805,
 	federalTaxCost: {
 		effectiveRate: 0,
 		amount: 0
@@ -33,7 +33,7 @@ const pastPaycheck: PaycheckWithTotal = {
 		contribution401k: 3910.6515,
 		benefitsCost: 582.85,
 		grossPay: 18622.15,
-		taxablePay: 12704.054025,
+		estimatedAGI: 12704.054025,
 		takeHomePay: 0
 	},
 	payrollTaxCost: {
@@ -42,7 +42,7 @@ const pastPaycheck: PaycheckWithTotal = {
 		total: 284.918895
 	},
 	annualized: {
-		taxablePay: 66061.08093,
+		estimatedAGI: 66061.08093,
 		grossPay: 96835.18
 	}
 };
@@ -69,12 +69,12 @@ const futurePaycheck: PaycheckWithTotal = {
 		effectiveRate: 0,
 		amount: 0
 	},
-	taxablePay: 5269.423905,
+	estimatedAGI: 5269.423905,
 	totalsForAllChecks: {
 		contribution401k: 0,
 		benefitsCost: 1227.66,
 		grossPay: 121153.83,
-		taxablePay: 110657.902005,
+		estimatedAGI: 110657.902005,
 		takeHomePay: 0
 	},
 	payrollTaxCost: {
@@ -83,7 +83,7 @@ const futurePaycheck: PaycheckWithTotal = {
 		total: 441.346095
 	},
 	annualized: {
-		taxablePay: 137005.02153,
+		estimatedAGI: 137005.02153,
 		grossPay: 149999.98
 	}
 };
@@ -92,7 +92,7 @@ const futurePaychecks = [futurePaycheck, futurePaycheck];
 const pastBonus: BonusWithTotal = {
 	date: '2022-03-11',
 	grossPay: 15088,
-	taxablePay: 10765.288,
+	estimatedAGI: 10765.288,
 	bonus401k: {
 		rate: 0.21,
 		amount: 3168.48
@@ -113,7 +113,7 @@ const pastBonuses = [pastBonus, pastBonus];
 const futureBonus: BonusWithTotal = {
 	date: '2022-08-01',
 	grossPay: 5000,
-	taxablePay: 4617.5,
+	estimatedAGI: 4617.5,
 	bonus401k: {
 		rate: 0,
 		amount: 0

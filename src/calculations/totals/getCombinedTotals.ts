@@ -12,12 +12,12 @@ const combinedTotalsMonoid: MonoidT<CombinedTotals> = {
 	empty: {
 		grossPay: 0,
 		contribution401k: 0,
-		taxablePay: 0
+		estimatedAGI: 0
 	},
 	concat: (a, b) => ({
 		grossPay: a.grossPay + b.grossPay,
 		contribution401k: a.contribution401k + b.contribution401k,
-		taxablePay: a.taxablePay + b.taxablePay
+		estimatedAGI: a.estimatedAGI + b.estimatedAGI
 	})
 };
 
@@ -26,13 +26,13 @@ const paycheckToCombinedTotal = (
 ): CombinedTotals => ({
 	grossPay: paycheck.totalsForAllChecks.grossPay,
 	contribution401k: paycheck.totalsForAllChecks.contribution401k,
-	taxablePay: paycheck.totalsForAllChecks.taxablePay
+	estimatedAGI: paycheck.totalsForAllChecks.estimatedAGI
 });
 
 const bonusToCombinedTotal = (bonus: BonusWithTotal): CombinedTotals => ({
 	grossPay: bonus.grossPay,
 	contribution401k: bonus.bonus401k.amount,
-	taxablePay: bonus.taxablePay
+	estimatedAGI: bonus.estimatedAGI
 });
 
 export const getCombinedTotalsForPaychecks = (

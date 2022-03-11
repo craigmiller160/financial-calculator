@@ -51,7 +51,7 @@ const add401kToPaycheck =
 		const amount401k = new Decimal(paycheck.grossPay)
 			.times(rate)
 			.toNumber();
-		const taxablePay = new Decimal(paycheck.taxablePay)
+		const taxablePay = new Decimal(paycheck.estimatedAGI)
 			.minus(new Decimal(amount401k))
 			.toNumber();
 		return {
@@ -60,10 +60,10 @@ const add401kToPaycheck =
 				rate: rate.toNumber(),
 				amount: amount401k
 			},
-			taxablePay,
+			estimatedAGI: taxablePay,
 			totalsForAllChecks: {
 				...paycheck.totalsForAllChecks,
-				taxablePay: new Decimal(taxablePay)
+				estimatedAGI: new Decimal(taxablePay)
 					.times(paycheck.numberOfChecks)
 					.toNumber(),
 				contribution401k: new Decimal(amount401k)
@@ -72,7 +72,7 @@ const add401kToPaycheck =
 			},
 			annualized: {
 				...paycheck.annualized,
-				taxablePay: new Decimal(taxablePay).times(26).toNumber()
+				estimatedAGI: new Decimal(taxablePay).times(26).toNumber()
 			}
 		};
 	};
@@ -81,7 +81,7 @@ const add401kToBonus =
 	(rate: Decimal) =>
 	(bonus: BonusWithTotal): BonusWithTotal => {
 		const amount401k = new Decimal(bonus.grossPay).times(rate).toNumber();
-		const taxablePay = new Decimal(bonus.taxablePay)
+		const taxablePay = new Decimal(bonus.estimatedAGI)
 			.minus(amount401k)
 			.toNumber();
 		return {
@@ -90,7 +90,7 @@ const add401kToBonus =
 				rate: rate.toNumber(),
 				amount: amount401k
 			},
-			taxablePay
+			estimatedAGI: taxablePay
 		};
 	};
 
@@ -123,7 +123,7 @@ export const addFuture401k = (data: DataWithTotals): PersonalDataWithTotals => {
 		.times(rate)
 		.toNumber();
 	const futureTaxablePay = new Decimal(
-		data.personalData.totals.futureTaxablePay
+		data.personalData.totals.futureEstimatedAGI
 	)
 		.minus(futureContribution401k)
 		.toNumber();

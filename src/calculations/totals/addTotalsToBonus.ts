@@ -15,7 +15,7 @@ export const addTotalsToBonus =
 		return {
 			date: bonus.date,
 			grossPay: bonus.grossPay,
-			taxablePay: taxablePay,
+			estimatedAGI: taxablePay,
 			federalTaxCosts: {
 				effectiveRate: 0,
 				amount: 0
