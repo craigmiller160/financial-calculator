@@ -25,6 +25,6 @@ export const addTotalsToBonus =
 				amount: amount401k
 			},
 			payrollTaxCosts,
-			takeHomePay: 0
+			estimatedTakeHomePay: 0
 		};
 	};

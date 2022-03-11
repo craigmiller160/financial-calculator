@@ -17,7 +17,7 @@ const pastPaycheck: PaycheckWithTotal = {
 		vision: 3.35,
 		total: 116.57
 	},
-	takeHomePay: 0,
+	estimatedTakeHomePay: 0,
 	numberOfChecks: 5,
 	grossPay: 3724.43,
 	paycheck401k: {
@@ -36,7 +36,7 @@ const pastPaycheck: PaycheckWithTotal = {
 		grossPay: 18622.15,
 		estimatedAGI: 12704.054025,
 		estimatedMAGI: 10,
-		takeHomePay: 0
+		estimatedTakeHomePay: 0
 	},
 	payrollTaxCost: {
 		socialSecurity: 230.91466,
@@ -54,7 +54,7 @@ const pastPaychecks = [pastPaycheck, pastPaycheck];
 const futurePaycheck: PaycheckWithTotal = {
 	startDate: '2022-03-14',
 	endDate: '2022-12-31',
-	takeHomePay: 0,
+	estimatedTakeHomePay: 0,
 	benefitsCost: {
 		dental: 10,
 		hsa: 38.46,
@@ -80,7 +80,7 @@ const futurePaycheck: PaycheckWithTotal = {
 		grossPay: 121153.83,
 		estimatedAGI: 110657.902005,
 		estimatedMAGI: 10,
-		takeHomePay: 0
+		estimatedTakeHomePay: 0
 	},
 	payrollTaxCost: {
 		socialSecurity: 357.69226,
@@ -109,7 +109,7 @@ const pastBonus: BonusWithTotal = {
 		medicare: 218.776,
 		total: 1154.232
 	},
-	takeHomePay: 0,
+	estimatedTakeHomePay: 0,
 	federalTaxCosts: {
 		effectiveRate: 0,
 		amount: 0
@@ -135,7 +135,7 @@ const futureBonus: BonusWithTotal = {
 		medicare: 72.5,
 		total: 382.5
 	},
-	takeHomePay: 0
+	estimatedTakeHomePay: 0
 };
 const futureBonuses = [futureBonus, futureBonus];
 

@@ -32,7 +32,7 @@ describe('addTotalsToBonus', () => {
 				effectiveRate: 0,
 				amount: 0
 			},
-			takeHomePay: 0
+			estimatedTakeHomePay: 0
 		});
 	});
 
@@ -63,7 +63,7 @@ describe('addTotalsToBonus', () => {
 				effectiveRate: 0,
 				amount: 0
 			},
-			takeHomePay: 0
+			estimatedTakeHomePay: 0
 		});
 	});
 });
