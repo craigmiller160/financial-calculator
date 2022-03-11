@@ -21,7 +21,8 @@ describe('addTotalsToData', () => {
 						socialSecurity: 310,
 						total: 382.5
 					},
-					estimatedAGI: 4617.5,
+					estimatedAGI: 0,
+					estimatedMAGI: 0,
 					federalTaxCosts: {
 						effectiveRate: 0,
 						amount: 0
@@ -48,7 +49,8 @@ describe('addTotalsToData', () => {
 					grossPay: 5769.23,
 					annualized: {
 						grossPay: 149999.98,
-						estimatedAGI: 137005.02153
+						estimatedAGI: 0,
+						estimatedMAGI: 0
 					},
 					numberOfChecks: 21,
 					paycheck401k: {
@@ -60,12 +62,14 @@ describe('addTotalsToData', () => {
 						socialSecurity: 357.69226,
 						total: 441.346095
 					},
-					estimatedAGI: 5269.423905,
+					estimatedAGI: 0,
+					estimatedMAGI: 0,
 					totalsForAllChecks: {
 						benefitsCost: 1227.66,
 						contribution401k: 0,
 						grossPay: 121153.83,
-						estimatedAGI: 110657.902005,
+						estimatedAGI: 0,
+						estimatedMAGI: 0,
 						takeHomePay: 0
 					}
 				}
@@ -83,7 +87,8 @@ describe('addTotalsToData', () => {
 						socialSecurity: 935.456,
 						total: 1154.232
 					},
-					estimatedAGI: 10765.288,
+					estimatedAGI: 0,
+					estimatedMAGI: 0,
 					federalTaxCosts: {
 						amount: 0,
 						effectiveRate: 0
@@ -98,7 +103,8 @@ describe('addTotalsToData', () => {
 					takeHomePay: 0,
 					annualized: {
 						grossPay: 96835.18,
-						estimatedAGI: 66061.08093
+						estimatedAGI: 0,
+						estimatedMAGI: 0
 					},
 					benefitsCost: {
 						dental: 5.84,
@@ -122,23 +128,27 @@ describe('addTotalsToData', () => {
 						socialSecurity: 230.91466,
 						total: 284.918895
 					},
-					estimatedAGI: 2540.810805,
+					estimatedAGI: 0,
+					estimatedMAGI: 0,
 					totalsForAllChecks: {
 						benefitsCost: 582.85,
 						contribution401k: 3910.6515,
 						grossPay: 18622.15,
-						estimatedAGI: 12704.054025,
+						estimatedAGI: 0,
+						estimatedMAGI: 0,
 						takeHomePay: 0
 					}
 				}
 			],
 			totals: {
 				futureContribution401k: 0,
-				futureGrossPay: 126153.83,
-				futureEstimatedAGI: 115275.402005,
-				pastContribution401k: 7079.1314999999995,
-				pastGrossPay: 33710.15,
-				pastEstimatedAGI: 23469.342024999998,
+				futureGrossPay: 0,
+				futureEstimatedAGI: 0,
+				futureEstimatedMAGI: 0,
+				pastContribution401k: 0,
+				pastGrossPay: 0,
+				pastEstimatedAGI: 0,
+				pastEstimatedMAGI: 0,
 				pastTakeHomePay: 0,
 				futureTakeHomePay: 0
 			},

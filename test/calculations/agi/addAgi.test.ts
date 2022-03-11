@@ -1,14 +1,8 @@
-import { pipe } from 'fp-ts/function';
-import { getTestData } from '../../testutils/TestData';
-import * as IOEither from 'fp-ts/IOEither';
-import {
-	DataWithTotals,
-	PersonalDataWithTotals
-} from '../../../src/calculations/totals/TotalTypes';
-import { addFuture401k } from '../../../src/calculations/401k/addFuture401k';
-import '@relmify/jest-fp-ts';
+import { PersonalDataWithTotals } from '../../../src/calculations/totals/TotalTypes';
+import { addAgi } from '../../../src/agi/addAgi';
+import produce from 'immer';
 
-const personalData: PersonalDataWithTotals = {
+const data: PersonalDataWithTotals = {
 	futureBonuses: [
 		{
 			date: '2022-08-01',
@@ -24,11 +18,11 @@ const personalData: PersonalDataWithTotals = {
 			},
 			estimatedAGI: 0,
 			estimatedMAGI: 0,
-			takeHomePay: 0,
 			federalTaxCosts: {
 				effectiveRate: 0,
 				amount: 0
-			}
+			},
+			takeHomePay: 0
 		}
 	],
 	futurePaychecks: [
@@ -36,16 +30,16 @@ const personalData: PersonalDataWithTotals = {
 			startDate: '2022-03-14',
 			endDate: '2022-12-31',
 			takeHomePay: 0,
-			federalTaxCost: {
-				effectiveRate: 0,
-				amount: 0
-			},
 			benefitsCost: {
 				dental: 10,
 				hsa: 38.46,
 				medical: 0,
 				total: 58.46,
 				vision: 10
+			},
+			federalTaxCost: {
+				effectiveRate: 0,
+				amount: 0
 			},
 			grossPay: 5769.23,
 			annualized: {
@@ -90,11 +84,11 @@ const personalData: PersonalDataWithTotals = {
 			},
 			estimatedAGI: 0,
 			estimatedMAGI: 0,
-			takeHomePay: 0,
 			federalTaxCosts: {
-				effectiveRate: 0,
-				amount: 0
-			}
+				amount: 0,
+				effectiveRate: 0
+			},
+			takeHomePay: 0
 		}
 	],
 	pastPaychecks: [
@@ -113,6 +107,10 @@ const personalData: PersonalDataWithTotals = {
 				medical: 68.92,
 				total: 116.57,
 				vision: 3.35
+			},
+			federalTaxCost: {
+				amount: 0,
+				effectiveRate: 0
 			},
 			grossPay: 3724.43,
 			numberOfChecks: 5,
@@ -134,10 +132,6 @@ const personalData: PersonalDataWithTotals = {
 				estimatedAGI: 0,
 				estimatedMAGI: 0,
 				takeHomePay: 0
-			},
-			federalTaxCost: {
-				effectiveRate: 0,
-				amount: 0
 			}
 		}
 	],
@@ -146,59 +140,29 @@ const personalData: PersonalDataWithTotals = {
 		futureGrossPay: 126153.83,
 		futureEstimatedAGI: 0,
 		futureEstimatedMAGI: 0,
-		pastContribution401k: 7821.303,
+		pastContribution401k: 7079.1314999999995,
 		pastGrossPay: 33710.15,
 		pastEstimatedAGI: 0,
 		pastEstimatedMAGI: 0,
-		futureTakeHomePay: 0,
-		pastTakeHomePay: 0
+		pastTakeHomePay: 0,
+		futureTakeHomePay: 0
 	},
 	futureRate401k: 0
 };
 
-describe('addFuture401k', () => {
-	it('adds future 401k data', () => {
-		const result = pipe(
-			getTestData(),
-			IOEither.map(
-				(data): DataWithTotals => ({
-					legalData: {
-						...data.legalData
-					},
-					personalData
-				})
-			),
-			IOEither.map(addFuture401k)
-		)();
-		expect(result).toEqualRight({
-			...personalData,
-			futurePaychecks: [
-				{
-					...personalData.futurePaychecks[0],
-					paycheck401k: {
-						rate: 0.1,
-						amount: 576.923
-					},
-					totalsForAllChecks: {
-						...personalData.futurePaychecks[0].totalsForAllChecks,
-						contribution401k: 12115.383
-					}
-				}
-			],
-			futureBonuses: [
-				{
-					...personalData.futureBonuses[0],
-					bonus401k: {
-						rate: 0.1,
-						amount: 500
-					}
-				}
-			],
-			totals: {
-				...personalData.totals,
-				futureContribution401k: 12615.383
-			},
-			futureRate401k: 0.1
+describe('addAgi', () => {
+	it('test', () => {
+		const result = addAgi(data);
+		const expectedResult = produce(data, (draft) => {
+			draft.futureBonuses[0].estimatedAGI = 4617.5;
+			draft.futurePaychecks[0].annualized.estimatedAGI = 137005.02153;
+			draft.futurePaychecks[0].estimatedAGI = 5269.423905;
+			draft.futurePaychecks[0].totalsForAllChecks.estimatedAGI = 110657.902005;
+			draft.pastBonuses[0].estimatedAGI = 10765.288;
+			draft.pastPaychecks[0].annualized.estimatedAGI = 66061.08093;
+			draft.pastPaychecks[0].estimatedAGI = 2540.810805;
+			draft.pastPaychecks[0].totalsForAllChecks.estimatedAGI = 12704.054025;
 		});
+		expect(result).toEqual(expectedResult);
 	});
 });

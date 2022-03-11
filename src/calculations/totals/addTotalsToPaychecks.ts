@@ -1,8 +1,9 @@
 import { BasePaycheck, BenefitsCost, LegalData } from '../../data/decoders';
 import { BenefitsCostAndTotal, PaycheckWithTotal } from './TotalTypes';
 import { sumBenefits } from '../CommonCalculations';
-import Decimal from 'decimal.js';
 import { getAmount401k, getPayrollTaxCosts, getRate401k } from './common';
+import { annualizePayPeriodValue } from '../utils/annualizePayPeriodValue';
+import { totalValueForChecks } from '../utils/totalValueForChecks';
 
 const addTotalToBenefits = (benefits: BenefitsCost): BenefitsCostAndTotal => ({
 	...benefits,
@@ -22,13 +23,6 @@ export const addTotalsToPaycheck =
 		const amount401k = getAmount401k(paycheck.grossPay, rate401k);
 		const annualizedGrossPay = annualizePayPeriodValue(paycheck.grossPay);
 
-		const taxablePay =
-			paycheck.grossPay -
-			benefitsCost.total -
-			payrollTaxCost.total -
-			amount401k;
-		const annualizedTaxablePay = annualizePayPeriodValue(taxablePay);
-
 		return {
 			startDate: paycheck.startDate,
 			endDate: paycheck.endDate,
@@ -39,7 +33,8 @@ export const addTotalsToPaycheck =
 				rate: rate401k,
 				amount: amount401k
 			},
-			estimatedAGI: taxablePay,
+			estimatedAGI: 0,
+			estimatedMAGI: 0,
 			takeHomePay: 0,
 			federalTaxCost: {
 				effectiveRate: 0,
@@ -58,21 +53,15 @@ export const addTotalsToPaycheck =
 					paycheck.grossPay,
 					paycheck.numberOfChecks
 				),
-				estimatedAGI: totalValueForChecks(
-					taxablePay,
-					paycheck.numberOfChecks
-				),
+				estimatedAGI: 0,
+				estimatedMAGI: 0,
 				takeHomePay: 0
 			},
 			annualized: {
-				estimatedAGI: annualizedTaxablePay,
+				estimatedAGI: 0,
+				estimatedMAGI: 0,
 				grossPay: annualizedGrossPay
 			},
 			payrollTaxCost
 		};
 	};
-
-const annualizePayPeriodValue = (value: number): number =>
-	new Decimal(value).times(new Decimal(26)).toNumber();
-const totalValueForChecks = (value: number, numChecks: number): number =>
-	new Decimal(value).times(new Decimal(numChecks)).toNumber();
