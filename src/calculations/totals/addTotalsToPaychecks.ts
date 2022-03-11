@@ -1,9 +1,11 @@
 import { BasePaycheck, BenefitsCost, LegalData } from '../../data/decoders';
 import { BenefitsCostAndTotal, PaycheckWithTotal } from './TotalTypes';
-import { sumBenefits } from '../CommonCalculations';
 import { getAmount401k, getPayrollTaxCosts, getRate401k } from './common';
 import { annualizePayPeriodValue } from '../utils/annualizePayPeriodValue';
 import { totalValueForChecks } from '../utils/totalValueForChecks';
+
+export const sumBenefits = (benefits: BenefitsCost): number =>
+	benefits.dental + benefits.hsa + benefits.medical + benefits.vision;
 
 const addTotalToBenefits = (benefits: BenefitsCost): BenefitsCostAndTotal => ({
 	...benefits,
