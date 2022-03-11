@@ -1,9 +1,9 @@
 import { BasePaycheck, BenefitsCost, LegalData } from '../../data/decoders';
 import { BenefitsCostAndTotal, PaycheckWithTotal } from './TotalTypes';
 import { sumBenefits } from '../CommonCalculations';
-import Decimal from 'decimal.js';
 import { getAmount401k, getPayrollTaxCosts, getRate401k } from './common';
 import { annualizePayPeriodValue } from '../utils/annualizePayPeriodValue';
+import { totalValueForChecks } from '../utils/totalValueForChecks';
 
 const addTotalToBenefits = (benefits: BenefitsCost): BenefitsCostAndTotal => ({
 	...benefits,
@@ -65,7 +65,3 @@ export const addTotalsToPaycheck =
 			payrollTaxCost
 		};
 	};
-
-// TODO move to file
-const totalValueForChecks = (value: number, numChecks: number): number =>
-	new Decimal(value).times(new Decimal(numChecks)).toNumber();
