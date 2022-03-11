@@ -1,6 +1,6 @@
 export {};
 
-describe('addTaxes', () => {
+describe('addFederalTaxes', () => {
 	it('adds federal tax info', () => {
 		throw new Error();
 	});
