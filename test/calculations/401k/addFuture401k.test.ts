@@ -171,13 +171,13 @@ describe('addFuture401k', () => {
 					},
 					annualized: {
 						...personalData.futurePaychecks[0].annualized,
-						taxablePay: 122005.02353
+						estimatedAGI: 122005.02353
 					},
-					taxablePay: 4692.500905,
+					estimatedAGI: 4692.500905,
 					totalsForAllChecks: {
 						...personalData.futurePaychecks[0].totalsForAllChecks,
 						contribution401k: 12115.383,
-						taxablePay: 98542.519005
+						estimatedAGI: 98542.519005
 					}
 				}
 			],
@@ -188,13 +188,13 @@ describe('addFuture401k', () => {
 						rate: 0.1,
 						amount: 500
 					},
-					taxablePay: 4117.5
+					estimatedAGI: 4117.5
 				}
 			],
 			totals: {
 				...personalData.totals,
 				futureContribution401k: 12615.383,
-				futureTaxablePay: 102660.019005
+				futureEstimatedAGI: 102660.019005
 			},
 			futureRate401k: 0.1
 		});

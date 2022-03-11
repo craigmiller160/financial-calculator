@@ -17,7 +17,7 @@ describe('addTotalsToBonus', () => {
 		expect(result).toEqualRight({
 			date: '2022-03-11',
 			grossPay: 15088,
-			taxablePay: 10765.288,
+			estimatedAGI: 10765.288,
 			bonus401k: {
 				rate: 0.21,
 				amount: 3168.48
@@ -47,7 +47,7 @@ describe('addTotalsToBonus', () => {
 		expect(result).toEqualRight({
 			date: '2022-08-01',
 			grossPay: 5000,
-			taxablePay: 4617.5,
+			estimatedAGI: 4617.5,
 			bonus401k: {
 				rate: 0,
 				amount: 0
