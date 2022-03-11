@@ -1,5 +1,6 @@
 import {
 	BonusWithTotal,
+	DataWithTotals,
 	PaycheckWithTotal,
 	PersonalDataWithTotals
 } from '../totals/TotalTypes';
@@ -42,39 +43,39 @@ const addFederalTaxesToBonus = (bonus: BonusWithTotal): BonusWithTotal =>
 			.toNumber();
 	});
 
-export const addFederalTaxes =
-	(legalData: LegalData) =>
-	(data: PersonalDataWithTotals): TryT<PersonalDataWithTotals> => {
-		const pastPaychecksEither = pipe(
-			data.pastPaychecks,
-			RArray.map(addFederalTaxesToPaycheck(legalData)),
-			Either.sequenceArray
-		);
-		const futurePaychecksEither = pipe(
-			data.futurePaychecks,
-			RArray.map(addFederalTaxesToPaycheck(legalData)),
-			Either.sequenceArray
-		);
-		const pastBonuses = pipe(
-			data.pastBonuses,
-			RArray.map(addFederalTaxesToBonus)
-		);
-		const futureBonuses = pipe(
-			data.futureBonuses,
-			RArray.map(addFederalTaxesToBonus)
-		);
+export const addFederalTaxes = (
+	data: DataWithTotals
+): TryT<PersonalDataWithTotals> => {
+	const pastPaychecksEither = pipe(
+		data.personalData.pastPaychecks,
+		RArray.map(addFederalTaxesToPaycheck(data.legalData)),
+		Either.sequenceArray
+	);
+	const futurePaychecksEither = pipe(
+		data.personalData.futurePaychecks,
+		RArray.map(addFederalTaxesToPaycheck(data.legalData)),
+		Either.sequenceArray
+	);
+	const pastBonuses = pipe(
+		data.personalData.pastBonuses,
+		RArray.map(addFederalTaxesToBonus)
+	);
+	const futureBonuses = pipe(
+		data.personalData.futureBonuses,
+		RArray.map(addFederalTaxesToBonus)
+	);
 
-		return pipe(
-			pastPaychecksEither,
-			Either.bindTo('pastPaychecks'),
-			Either.bind('futurePaychecks', () => futurePaychecksEither),
-			Either.map(({ pastPaychecks, futurePaychecks }) =>
-				produce(data, (draft) => {
-					draft.pastPaychecks = castDraft(pastPaychecks);
-					draft.futurePaychecks = castDraft(futurePaychecks);
-					draft.pastBonuses = castDraft(pastBonuses);
-					draft.futureBonuses = castDraft(futureBonuses);
-				})
-			)
-		);
-	};
+	return pipe(
+		pastPaychecksEither,
+		Either.bindTo('pastPaychecks'),
+		Either.bind('futurePaychecks', () => futurePaychecksEither),
+		Either.map(({ pastPaychecks, futurePaychecks }) =>
+			produce(data.personalData, (draft) => {
+				draft.pastPaychecks = castDraft(pastPaychecks);
+				draft.futurePaychecks = castDraft(futurePaychecks);
+				draft.pastBonuses = castDraft(pastBonuses);
+				draft.futureBonuses = castDraft(futureBonuses);
+			})
+		)
+	);
+};
