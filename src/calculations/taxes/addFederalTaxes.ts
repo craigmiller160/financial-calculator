@@ -24,7 +24,7 @@ const addFederalTaxesToPaycheck =
 				legalData.federalTaxBrackets,
 				paycheck.annualized.estimatedAGI
 			),
-			Either.map(calculateTaxes(paycheck.estimatedAGI)),
+			Either.map(calculateTaxes(paycheck.annualized.estimatedAGI)),
 			Either.map(([rate, amount]) =>
 				produce(paycheck, (draft) => {
 					draft.federalTaxCost = {
