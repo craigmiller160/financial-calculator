@@ -122,7 +122,7 @@ export const addFuture401k = (data: DataWithTotals): PersonalDataWithTotals => {
 	)
 		.times(rate)
 		.toNumber();
-	const futureTaxablePay = new Decimal(
+	const futureEstimatedAGI = new Decimal(
 		data.personalData.totals.futureEstimatedAGI
 	)
 		.minus(futureContribution401k)
@@ -131,7 +131,7 @@ export const addFuture401k = (data: DataWithTotals): PersonalDataWithTotals => {
 		draft.futurePaychecks = castDraft(futurePaychecks);
 		draft.futureBonuses = castDraft(futureBonuses);
 		draft.totals.futureContribution401k = futureContribution401k;
-		draft.totals.futureTaxablePay = futureTaxablePay;
+		draft.totals.futureEstimatedAGI = futureEstimatedAGI;
 		draft.futureRate401k = rate.toNumber();
 	});
 };

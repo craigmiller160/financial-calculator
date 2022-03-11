@@ -35,12 +35,12 @@ describe('addTotalsToPaychecks', () => {
 				amount: 0,
 				effectiveRate: 0
 			},
-			taxablePay: 2540.810805,
+			estimatedAGI: 2540.810805,
 			totalsForAllChecks: {
 				contribution401k: 3910.6515,
 				benefitsCost: 582.85,
 				grossPay: 18622.15,
-				taxablePay: 12704.054025,
+				estimatedAGI: 12704.054025,
 				takeHomePay: 0
 			},
 			payrollTaxCost: {
@@ -49,7 +49,7 @@ describe('addTotalsToPaychecks', () => {
 				total: 284.918895
 			},
 			annualized: {
-				taxablePay: 66061.08093,
+				estimatedAGI: 66061.08093,
 				grossPay: 96835.18
 			}
 		});
@@ -85,12 +85,12 @@ describe('addTotalsToPaychecks', () => {
 				rate: 0,
 				amount: 0
 			},
-			taxablePay: 5269.423905,
+			estimatedAGI: 5269.423905,
 			totalsForAllChecks: {
 				contribution401k: 0,
 				benefitsCost: 1227.66,
 				grossPay: 121153.83,
-				taxablePay: 110657.902005,
+				estimatedAGI: 110657.902005,
 				takeHomePay: 0
 			},
 			payrollTaxCost: {
@@ -99,7 +99,7 @@ describe('addTotalsToPaychecks', () => {
 				total: 441.346095
 			},
 			annualized: {
-				taxablePay: 137005.02153,
+				estimatedAGI: 137005.02153,
 				grossPay: 149999.98
 			}
 		});
