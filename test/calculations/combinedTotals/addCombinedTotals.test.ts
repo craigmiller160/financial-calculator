@@ -18,8 +18,8 @@ describe('addCombinedTotals', () => {
 				futureContribution401k: 13326.9213,
 				futureEstimatedAGI: 97330.98070499998,
 				futureEstimatedMAGI: 97330.98070499998,
-				pastTakeHomePay: 0,
-				futureTakeHomePay: 0
+				pastEstimatedTakeHomePay: 0,
+				futureEstimatedTakeHomePay: 0
 			};
 		});
 		expect(result).toEqual(expectedResult);

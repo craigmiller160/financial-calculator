@@ -18,7 +18,7 @@
       },
       "estimatedAGI": 2540.810805,
       "estimatedMAGI": 2540.810805,
-      "takeHomePay": 0,
+      "estimatedTakeHomePay": 0,
       "federalTaxCost": {
         "effectiveRate": 0,
         "amount": 0
@@ -29,7 +29,7 @@
         "grossPay": 18622.15,
         "estimatedAGI": 12704.054025,
         "estimatedMAGI": 12704.054025,
-        "takeHomePay": 0
+        "estimatedTakeHomePay": 0
       },
       "annualized": {
         "estimatedAGI": 66061.08093,
@@ -62,7 +62,7 @@
         "medicare": 218.776,
         "total": 1154.232
       },
-      "takeHomePay": 0
+      "estimatedTakeHomePay": 0
     }
   ],
   "futurePaychecks": [
@@ -84,7 +84,7 @@
       },
       "estimatedAGI": 4634.808604999999,
       "estimatedMAGI": 4634.808604999999,
-      "takeHomePay": 0,
+      "estimatedTakeHomePay": 0,
       "federalTaxCost": {
         "effectiveRate": 0,
         "amount": 0
@@ -95,7 +95,7 @@
         "grossPay": 121153.83,
         "estimatedAGI": 97330.98070499998,
         "estimatedMAGI": 97330.98070499998,
-        "takeHomePay": 0
+        "estimatedTakeHomePay": 0
       },
       "annualized": {
         "estimatedAGI": 120505.02372999997,
@@ -119,8 +119,8 @@
     "futureContribution401k": 0,
     "futureEstimatedAGI": 0,
     "futureEstimatedMAGI": 0,
-    "pastTakeHomePay": 0,
-    "futureTakeHomePay": 0
+    "pastEstimatedTakeHomePay": 0,
+    "futureEstimatedTakeHomePay": 0
   },
   "futureRate401k": 0.11
 }

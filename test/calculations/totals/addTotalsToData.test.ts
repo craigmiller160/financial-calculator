@@ -27,14 +27,14 @@ describe('addTotalsToData', () => {
 						effectiveRate: 0,
 						amount: 0
 					},
-					takeHomePay: 0
+					estimatedTakeHomePay: 0
 				}
 			],
 			futurePaychecks: [
 				{
 					startDate: '2022-03-14',
 					endDate: '2022-12-31',
-					takeHomePay: 0,
+					estimatedTakeHomePay: 0,
 					benefitsCost: {
 						dental: 10,
 						hsa: 38.46,
@@ -70,7 +70,7 @@ describe('addTotalsToData', () => {
 						grossPay: 121153.83,
 						estimatedAGI: 0,
 						estimatedMAGI: 0,
-						takeHomePay: 0
+						estimatedTakeHomePay: 0
 					}
 				}
 			],
@@ -93,14 +93,14 @@ describe('addTotalsToData', () => {
 						amount: 0,
 						effectiveRate: 0
 					},
-					takeHomePay: 0
+					estimatedTakeHomePay: 0
 				}
 			],
 			pastPaychecks: [
 				{
 					startDate: '2022-01-01',
 					endDate: '2022-03-11',
-					takeHomePay: 0,
+					estimatedTakeHomePay: 0,
 					annualized: {
 						grossPay: 96835.18,
 						estimatedAGI: 0,
@@ -136,7 +136,7 @@ describe('addTotalsToData', () => {
 						grossPay: 18622.15,
 						estimatedAGI: 0,
 						estimatedMAGI: 0,
-						takeHomePay: 0
+						estimatedTakeHomePay: 0
 					}
 				}
 			],
@@ -149,8 +149,8 @@ describe('addTotalsToData', () => {
 				pastGrossPay: 0,
 				pastEstimatedAGI: 0,
 				pastEstimatedMAGI: 0,
-				pastTakeHomePay: 0,
-				futureTakeHomePay: 0
+				pastEstimatedTakeHomePay: 0,
+				futureEstimatedTakeHomePay: 0
 			},
 			futureRate401k: 0
 		});

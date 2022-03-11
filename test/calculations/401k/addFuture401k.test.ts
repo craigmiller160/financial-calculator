@@ -24,7 +24,7 @@ const personalData: PersonalDataWithTotals = {
 			},
 			estimatedAGI: 0,
 			estimatedMAGI: 0,
-			takeHomePay: 0,
+			estimatedTakeHomePay: 0,
 			federalTaxCosts: {
 				effectiveRate: 0,
 				amount: 0
@@ -35,7 +35,7 @@ const personalData: PersonalDataWithTotals = {
 		{
 			startDate: '2022-03-14',
 			endDate: '2022-12-31',
-			takeHomePay: 0,
+			estimatedTakeHomePay: 0,
 			federalTaxCost: {
 				effectiveRate: 0,
 				amount: 0
@@ -71,7 +71,7 @@ const personalData: PersonalDataWithTotals = {
 				grossPay: 121153.83,
 				estimatedAGI: 0,
 				estimatedMAGI: 0,
-				takeHomePay: 0
+				estimatedTakeHomePay: 0
 			}
 		}
 	],
@@ -90,7 +90,7 @@ const personalData: PersonalDataWithTotals = {
 			},
 			estimatedAGI: 0,
 			estimatedMAGI: 0,
-			takeHomePay: 0,
+			estimatedTakeHomePay: 0,
 			federalTaxCosts: {
 				effectiveRate: 0,
 				amount: 0
@@ -101,7 +101,7 @@ const personalData: PersonalDataWithTotals = {
 		{
 			startDate: '2022-01-01',
 			endDate: '2022-03-11',
-			takeHomePay: 0,
+			estimatedTakeHomePay: 0,
 			annualized: {
 				grossPay: 96835.18,
 				estimatedAGI: 0,
@@ -133,7 +133,7 @@ const personalData: PersonalDataWithTotals = {
 				grossPay: 18622.15,
 				estimatedAGI: 0,
 				estimatedMAGI: 0,
-				takeHomePay: 0
+				estimatedTakeHomePay: 0
 			},
 			federalTaxCost: {
 				effectiveRate: 0,
@@ -150,8 +150,8 @@ const personalData: PersonalDataWithTotals = {
 		pastGrossPay: 33710.15,
 		pastEstimatedAGI: 0,
 		pastEstimatedMAGI: 0,
-		futureTakeHomePay: 0,
-		pastTakeHomePay: 0
+		futureEstimatedTakeHomePay: 0,
+		pastEstimatedTakeHomePay: 0
 	},
 	futureRate401k: 0
 };
