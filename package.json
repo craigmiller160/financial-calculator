@@ -1,5 +1,5 @@
 {
-  "name": "401k-calculator-v2",
+  "name": "@craigmiller160/financial-calculator",
   "version": "1.0.0",
   "scripts": {
     "prepare": "husky install",
