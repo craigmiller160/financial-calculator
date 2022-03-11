@@ -1,7 +1,7 @@
 export {};
 
 describe('addCombinedTotals', () => {
-	it('test', () => {
+	it('calculates and adds the combined totals', () => {
 		throw new Error();
 	});
 });
