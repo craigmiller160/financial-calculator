@@ -25,7 +25,7 @@ const pastPaycheck: PaycheckWithTotal = {
 		amount: 782.1303
 	},
 	estimatedAGI: 2540.810805,
-	estimatedMAGI: 0,
+	estimatedMAGI: 10,
 	federalTaxCost: {
 		effectiveRate: 0,
 		amount: 0
@@ -35,7 +35,7 @@ const pastPaycheck: PaycheckWithTotal = {
 		benefitsCost: 582.85,
 		grossPay: 18622.15,
 		estimatedAGI: 12704.054025,
-		estimatedMAGI: 0,
+		estimatedMAGI: 10,
 		takeHomePay: 0
 	},
 	payrollTaxCost: {
@@ -45,7 +45,7 @@ const pastPaycheck: PaycheckWithTotal = {
 	},
 	annualized: {
 		estimatedAGI: 66061.08093,
-		estimatedMAGI: 0,
+		estimatedMAGI: 10,
 		grossPay: 96835.18
 	}
 };
@@ -73,13 +73,13 @@ const futurePaycheck: PaycheckWithTotal = {
 		amount: 0
 	},
 	estimatedAGI: 5269.423905,
-	estimatedMAGI: 0,
+	estimatedMAGI: 10,
 	totalsForAllChecks: {
 		contribution401k: 0,
 		benefitsCost: 1227.66,
 		grossPay: 121153.83,
 		estimatedAGI: 110657.902005,
-		estimatedMAGI: 0,
+		estimatedMAGI: 10,
 		takeHomePay: 0
 	},
 	payrollTaxCost: {
@@ -89,7 +89,7 @@ const futurePaycheck: PaycheckWithTotal = {
 	},
 	annualized: {
 		estimatedAGI: 137005.02153,
-		estimatedMAGI: 0,
+		estimatedMAGI: 10,
 		grossPay: 149999.98
 	}
 };
@@ -99,7 +99,7 @@ const pastBonus: BonusWithTotal = {
 	date: '2022-03-11',
 	grossPay: 15088,
 	estimatedAGI: 10765.288,
-	estimatedMAGI: 0,
+	estimatedMAGI: 10,
 	bonus401k: {
 		rate: 0.21,
 		amount: 3168.48
@@ -121,7 +121,7 @@ const futureBonus: BonusWithTotal = {
 	date: '2022-08-01',
 	grossPay: 5000,
 	estimatedAGI: 4617.5,
-	estimatedMAGI: 0,
+	estimatedMAGI: 10,
 	bonus401k: {
 		rate: 0,
 		amount: 0
@@ -145,7 +145,8 @@ describe('getCombinedTotals', () => {
 		expect(result).toEqual({
 			grossPay: 37244.3,
 			contribution401k: 7821.303,
-			estimatedAGI: 25408.10805
+			estimatedAGI: 25408.10805,
+			estimatedMAGI: 20
 		});
 	});
 
@@ -154,7 +155,8 @@ describe('getCombinedTotals', () => {
 		expect(result).toEqual({
 			grossPay: 242307.66,
 			contribution401k: 0,
-			estimatedAGI: 221315.80401
+			estimatedAGI: 221315.80401,
+			estimatedMAGI: 20
 		});
 	});
 
@@ -163,7 +165,8 @@ describe('getCombinedTotals', () => {
 		expect(result).toEqual({
 			grossPay: 30176,
 			contribution401k: 6336.96,
-			estimatedAGI: 21530.576
+			estimatedAGI: 21530.576,
+			estimatedMAGI: 20
 		});
 	});
 
@@ -172,7 +175,8 @@ describe('getCombinedTotals', () => {
 		expect(result).toEqual({
 			grossPay: 10000,
 			contribution401k: 0,
-			estimatedAGI: 9235
+			estimatedAGI: 9235,
+			estimatedMAGI: 20
 		});
 	});
 });
