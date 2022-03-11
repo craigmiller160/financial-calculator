@@ -1,4 +1,5 @@
 import {
+	BonusWithTotal,
 	PaycheckWithTotal,
 	PersonalDataWithTotals
 } from '../calculations/totals/TotalTypes';
@@ -26,6 +27,14 @@ const addAgiToPaycheck = (paycheck: PaycheckWithTotal): PaycheckWithTotal => {
 	});
 };
 
+const addAgiToBonus = (bonus: BonusWithTotal): BonusWithTotal => {
+	const agi =
+		bonus.grossPay - bonus.payrollTaxCosts.total - bonus.bonus401k.amount;
+	return produce(bonus, (draft) => {
+		draft.estimatedAGI = agi;
+	});
+};
+
 export const addAgi = (
 	personalData: PersonalDataWithTotals
 ): PersonalDataWithTotals => {
@@ -37,8 +46,18 @@ export const addAgi = (
 		personalData.futurePaychecks,
 		RArray.map(addAgiToPaycheck)
 	);
+	const pastBonuses = pipe(
+		personalData.pastBonuses,
+		RArray.map(addAgiToBonus)
+	);
+	const futureBonuses = pipe(
+		personalData.futureBonuses,
+		RArray.map(addAgiToBonus)
+	);
 	return produce(personalData, (draft) => {
 		draft.pastPaychecks = castDraft(pastPaychecks);
 		draft.futurePaychecks = castDraft(futurePaychecks);
+		draft.pastBonuses = castDraft(pastBonuses);
+		draft.futureBonuses = castDraft(futureBonuses);
 	});
 };

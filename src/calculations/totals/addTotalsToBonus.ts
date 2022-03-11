@@ -11,11 +11,10 @@ export const addTotalsToBonus =
 			bonus.grossPay,
 			legalData.payrollTaxRates
 		);
-		const taxablePay = bonus.grossPay - amount401k - payrollTaxCosts.total;
 		return {
 			date: bonus.date,
 			grossPay: bonus.grossPay,
-			estimatedAGI: taxablePay,
+			estimatedAGI: 0,
 			federalTaxCosts: {
 				effectiveRate: 0,
 				amount: 0
