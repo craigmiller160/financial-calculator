@@ -16,6 +16,9 @@ import Decimal from 'decimal.js';
 
 const BONUS_WITHHOLDING = 0.22;
 
+const calculateTaxAmount = (agi: number, rate: number): number =>
+	new Decimal(agi).times(new Decimal(rate)).toNumber();
+
 const addFederalTaxesToPaycheck =
 	(legalData: LegalData) =>
 	(paycheck: PaycheckWithTotal): TryT<PaycheckWithTotal> =>
@@ -25,11 +28,11 @@ const addFederalTaxesToPaycheck =
 				paycheck.annualized.estimatedAGI
 			),
 			Either.map(calculateTaxes(paycheck.annualized.estimatedAGI)),
-			Either.map(([rate, amount]) =>
+			Either.map((rate) =>
 				produce(paycheck, (draft) => {
 					draft.federalTaxCost = {
 						effectiveRate: rate,
-						amount
+						amount: calculateTaxAmount(draft.estimatedAGI, rate)
 					};
 				})
 			)
@@ -38,9 +41,10 @@ const addFederalTaxesToPaycheck =
 const addFederalTaxesToBonus = (bonus: BonusWithTotal): BonusWithTotal =>
 	produce(bonus, (draft) => {
 		draft.federalTaxCosts.effectiveRate = BONUS_WITHHOLDING;
-		draft.federalTaxCosts.amount = new Decimal(draft.estimatedAGI)
-			.times(new Decimal(BONUS_WITHHOLDING))
-			.toNumber();
+		draft.federalTaxCosts.amount = calculateTaxAmount(
+			draft.estimatedAGI,
+			BONUS_WITHHOLDING
+		);
 	});
 
 export const addFederalTaxes = (
