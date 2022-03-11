@@ -4,6 +4,48 @@
     "socialSecurity": 0.062,
     "medicare": 0.0145
   },
+  "rothIraLimits": [
+    {
+      "incomeIsUnder": 129000,
+      "maxContribution": 6000
+    },
+    {
+      "incomeIsUnder": 130500,
+      "maxContribution": 5400
+    },
+    {
+      "incomeIsUnder": 132000,
+      "maxContribution": 4800
+    },
+    {
+      "incomeIsUnder": 133500,
+      "maxContribution": 4200
+    },
+    {
+      "incomeIsUnder": 135000,
+      "maxContribution": 3600
+    },
+    {
+      "incomeIsUnder": 136500,
+      "maxContribution": 3000
+    },
+    {
+      "incomeIsUnder": 138000,
+      "maxContribution": 2400
+    },
+    {
+      "incomeIsUnder": 139500,
+      "maxContribution": 1800
+    },
+    {
+      "incomeIsUnder": 141000,
+      "maxContribution": 1200
+    },
+    {
+      "incomeIsUnder": 142500,
+      "maxContribution": 600
+    }
+  ],
   "federalTaxBrackets": [
     {
       "rate": 0.1,
