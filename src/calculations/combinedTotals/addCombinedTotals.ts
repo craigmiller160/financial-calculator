@@ -56,8 +56,14 @@ export const addCombinedTotals = (
 				futurePaychecksTotal.estimatedMAGI,
 				futureBonusesTotal.estimatedMAGI
 			),
-			pastEstimatedTakeHomePay: 0, // TODO just add this here
-			futureEstimatedTakeHomePay: 0 // TODO just add this here
+			pastEstimatedTakeHomePay: decimalAdd(
+				pastPaychecksTotal.estimatedTakeHomePay,
+				pastBonusesTotal.estimatedTakeHomePay
+			),
+			futureEstimatedTakeHomePay: decimalAdd(
+				futurePaychecksTotal.estimatedTakeHomePay,
+				futureBonusesTotal.estimatedTakeHomePay
+			)
 		};
 	});
 };
