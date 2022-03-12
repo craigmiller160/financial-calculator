@@ -18,7 +18,8 @@ const combinedTotalsMonoid: MonoidT<CombinedTotals> = {
 		contribution401k: 0,
 		estimatedAGI: 0,
 		estimatedMAGI: 0,
-		estimatedTakeHomePay: 0
+		estimatedTakeHomePay: 0,
+		contributionHsa: 0
 	},
 	concat: (a, b) => ({
 		grossPay: decimalAdd(a.grossPay, b.grossPay),
@@ -28,7 +29,8 @@ const combinedTotalsMonoid: MonoidT<CombinedTotals> = {
 		estimatedTakeHomePay: decimalAdd(
 			a.estimatedTakeHomePay,
 			b.estimatedTakeHomePay
-		)
+		),
+		contributionHsa: decimalAdd(a.contributionHsa, b.contributionHsa)
 	})
 };
 
@@ -39,7 +41,8 @@ const paycheckToCombinedTotal = (
 	contribution401k: paycheck.totalsForAllChecks.contribution401k,
 	estimatedAGI: paycheck.totalsForAllChecks.estimatedAGI,
 	estimatedMAGI: paycheck.totalsForAllChecks.estimatedMAGI,
-	estimatedTakeHomePay: paycheck.totalsForAllChecks.estimatedTakeHomePay
+	estimatedTakeHomePay: paycheck.totalsForAllChecks.estimatedTakeHomePay,
+	contributionHsa: paycheck.totalsForAllChecks.contributionHsa
 });
 
 const bonusToCombinedTotal = (bonus: BonusWithTotal): CombinedTotals => ({
@@ -47,7 +50,8 @@ const bonusToCombinedTotal = (bonus: BonusWithTotal): CombinedTotals => ({
 	contribution401k: bonus.bonus401k.amount,
 	estimatedAGI: bonus.estimatedAGI,
 	estimatedMAGI: bonus.estimatedMAGI,
-	estimatedTakeHomePay: bonus.estimatedTakeHomePay
+	estimatedTakeHomePay: bonus.estimatedTakeHomePay,
+	contributionHsa: 0
 });
 
 export const getCombinedTotalsForPaychecks = (

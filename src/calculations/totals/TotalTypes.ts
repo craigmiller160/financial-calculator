@@ -116,6 +116,7 @@ export interface PersonalDataWithTotals {
 export interface CombinedTotals {
 	readonly grossPay: number;
 	readonly contribution401k: number;
+	readonly contributionHsa: number;
 	readonly estimatedAGI: number;
 	readonly estimatedMAGI: number;
 	readonly estimatedTakeHomePay: number;

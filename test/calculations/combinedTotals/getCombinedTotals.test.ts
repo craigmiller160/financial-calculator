@@ -146,6 +146,7 @@ describe('getCombinedTotals', () => {
 		const result = getCombinedTotalsForPaychecks(pastPaychecks);
 		expect(result).toEqual({
 			grossPay: 37244.3,
+			contributionHsa: 1615.32,
 			contribution401k: 7821.303,
 			estimatedAGI: 25408.10805,
 			estimatedMAGI: 20,
@@ -157,6 +158,7 @@ describe('getCombinedTotals', () => {
 		const result = getCombinedTotalsForPaychecks(futurePaychecks);
 		expect(result).toEqual({
 			grossPay: 242307.66,
+			contributionHsa: 1615.32,
 			contribution401k: 0,
 			estimatedAGI: 221315.80401,
 			estimatedMAGI: 20,
@@ -171,7 +173,8 @@ describe('getCombinedTotals', () => {
 			contribution401k: 6336.96,
 			estimatedAGI: 21530.576,
 			estimatedMAGI: 20,
-			estimatedTakeHomePay: 60
+			estimatedTakeHomePay: 60,
+			contributionHsa: 0
 		});
 	});
 
@@ -182,7 +185,8 @@ describe('getCombinedTotals', () => {
 			contribution401k: 0,
 			estimatedAGI: 9235,
 			estimatedMAGI: 20,
-			estimatedTakeHomePay: 40
+			estimatedTakeHomePay: 40,
+			contributionHsa: 0
 		});
 	});
 });
