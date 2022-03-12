@@ -156,12 +156,21 @@ const data: PersonalDataWithTotals = {
 			estimatedAGI: 0,
 			estimatedMAGI: 0,
 			estimatedTakeHomePay: 0
+		},
+		combinedWithAdditionalIncome: {
+			estimatedAGI: 0,
+			estimatedMAGI: 0,
+			estimatedTakeHomePay: 0
 		}
 	},
 	futureRate401k: 0,
 	rothIraLimit: 0,
 	additionalIncome: {
-		taxableInvestmentIncome: 0
+		taxableInvestmentIncome: 0,
+		total: {
+			estimatedAGI: 0,
+			estimatedMAGI: 0
+		}
 	}
 };
 

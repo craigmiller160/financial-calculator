@@ -172,7 +172,11 @@ const personalData: PersonalDataWithTotals = {
 	futureRate401k: 0,
 	rothIraLimit: 0,
 	additionalIncome: {
-		taxableInvestmentIncome: 0
+		taxableInvestmentIncome: 0,
+		total: {
+			estimatedAGI: 0,
+			estimatedMAGI: 0
+		}
 	}
 };
 
