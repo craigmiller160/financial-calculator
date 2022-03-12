@@ -91,20 +91,19 @@ const formatAllPaychecks = (
 		Monoid.concatAll(newlineMonoid)
 	);
 
-// TODO reduce leading whitespace
 export const formatOutput = (data: PersonalDataWithTotals): string => {
 	const percent401k = formatPercent(data.futureRate401k);
 	const rothIraLimit = formatCurrency(data.rothIraLimit);
 	return `
-		PAYCHECKS
-			${PAYCHECK_HEADER}
-			${formatAllPaychecks(data.pastPaychecks)}
-			${formatAllPaychecks(data.futurePaychecks)}
+	PAYCHECKS
+		${PAYCHECK_HEADER}
+		${formatAllPaychecks(data.pastPaychecks)}
+		${formatAllPaychecks(data.futurePaychecks)}
+	
+	BONUSES
+		${BONUS_HEADER}
 		
-		BONUSES
-			${BONUS_HEADER}
-			
-	    New 401k Contribution Rate: ${percent401k}
-	    This Year's Roth IRA Limit: ${rothIraLimit}  
+	New 401k Contribution Rate: ${percent401k}
+	This Year's Roth IRA Limit: ${rothIraLimit}  
 	`;
 };
