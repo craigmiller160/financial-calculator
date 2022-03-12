@@ -26,11 +26,11 @@ const PERCENT_FORMAT = new Intl.NumberFormat('en-US', {
 	minimumFractionDigits: 2,
 	maximumFractionDigits: 2
 });
-const COL_LENGTH = 10;
+const COL_LENGTH = 15;
 
 const formatPercent = (num: number): string => PERCENT_FORMAT.format(num);
 const formatCurrency = (num: number): string => CURRENCY_FORMAT.format(num);
-const pad = (text: string): string => text.padEnd(COL_LENGTH, ' ');
+const pad = (text: string): string => ` ${text.padEnd(COL_LENGTH, ' ')}`;
 
 const PAYCHECK_HEADER = `|${pad('Start')}|${pad('End')}|${pad(
 	'Gross Pay'
