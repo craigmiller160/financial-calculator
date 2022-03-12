@@ -82,7 +82,6 @@ export const addCombinedTotals = (
 			past,
 			future,
 			combined,
-			// TODO add to test
 			combinedWithAdditionalIncome: {
 				estimatedAGI: decimalAdd(
 					combined.estimatedAGI,
@@ -92,7 +91,7 @@ export const addCombinedTotals = (
 					combined.estimatedMAGI,
 					draft.additionalIncome.total.estimatedMAGI
 				),
-				// TODO what should this be?
+				// TODO do I want this here? It seems to confuse things
 				estimatedTakeHomePay: combined.estimatedTakeHomePay
 			}
 		};
