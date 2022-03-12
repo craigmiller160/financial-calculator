@@ -4,7 +4,6 @@ import * as RArray from 'fp-ts/ReadonlyArray';
 import * as Option from 'fp-ts/Option';
 import produce from 'immer';
 
-// TODO integrate correct magi value here
 export const addRothIraLimit = (
 	data: DataWithTotals
 ): PersonalDataWithTotals => {
@@ -13,7 +12,8 @@ export const addRothIraLimit = (
 		RArray.findFirst(
 			(limit) =>
 				limit.maximumIncome >
-				data.personalData.totals.combined.estimatedMAGI
+				data.personalData.totals.combinedWithAdditionalIncome
+					.estimatedMAGI
 		),
 		Option.fold(
 			() => 0,
