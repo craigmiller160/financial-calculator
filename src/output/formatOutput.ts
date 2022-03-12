@@ -102,6 +102,26 @@ const formatBonus = (bonus: BonusWithTotal): string => {
 const formatAllBonuses = (bonuses: ReadonlyArray<BonusWithTotal>): string =>
 	pipe(bonuses, RArray.map(formatBonus), Monoid.concatAll(newlineMonoid));
 
+const formatTotals = (data: PersonalDataWithTotals): string => {
+	const grossPay = pad(formatCurrency(data.totals.combined.grossPay));
+	const agiMagi = pad(formatCurrency(data.totals.combined.estimatedAGI));
+	const amount401k = pad(
+		formatCurrency(data.totals.combined.contribution401k)
+	);
+	const takeHome = pad(
+		formatCurrency(data.totals.combined.estimatedTakeHomePay)
+	);
+	const fullIncome = pad(
+		formatCurrency(
+			sum(
+				data.totals.combined.estimatedTakeHomePay,
+				data.totals.combined.contribution401k
+			)
+		)
+	);
+	return `|${grossPay}|${agiMagi}|${amount401k}|${takeHome}|${fullIncome}|`;
+};
+
 export const formatOutput = (data: PersonalDataWithTotals): string => {
 	const percent401k = formatPercent(data.futureRate401k);
 	const rothIraLimit = formatCurrency(data.rothIraLimit);
@@ -118,6 +138,7 @@ export const formatOutput = (data: PersonalDataWithTotals): string => {
 	
 	TOTALS
 		${TOTAL_HEADER}
+		${formatTotals(data)}
 	
 	NEW TARGETS
 		New 401k Contribution Rate: ${percent401k}
