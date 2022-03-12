@@ -63,35 +63,20 @@ export interface PayrollTaxCosts {
 	readonly total: number;
 }
 
+export interface PersonalTotalSection {
+	readonly grossPay: number;
+	readonly contribution401k: number;
+	readonly contributionHsa: number;
+	readonly estimatedAGI: number;
+	readonly estimatedMAGI: number;
+	readonly estimatedTakeHomePay: number;
+}
+
 export interface PersonalTotals {
-	readonly past: {
-		readonly grossPay: number;
-		readonly contribution401k: number;
-		readonly estimatedAGI: number;
-		readonly estimatedMAGI: number;
-		readonly estimatedTakeHomePay: number;
-	};
-	readonly future: {
-		readonly grossPay: number;
-		readonly contribution401k: number;
-		readonly estimatedAGI: number;
-		readonly estimatedMAGI: number;
-		readonly estimatedTakeHomePay: number;
-	};
-	readonly combined: {
-		readonly grossPay: number;
-		readonly contribution401k: number;
-		readonly estimatedAGI: number;
-		readonly estimatedMAGI: number;
-		readonly estimatedTakeHomePay: number;
-	};
-	readonly combinedWithAdditionalIncome: {
-		readonly grossPay: number;
-		readonly contribution401k: number;
-		readonly estimatedAGI: number;
-		readonly estimatedMAGI: number;
-		readonly estimatedTakeHomePay: number;
-	};
+	readonly past: PersonalTotalSection;
+	readonly future: PersonalTotalSection;
+	readonly combined: PersonalTotalSection;
+	readonly combinedWithAdditionalIncome: PersonalTotalSection;
 }
 
 export interface AdditionalIncomeWithTotals extends AdditionalIncome {

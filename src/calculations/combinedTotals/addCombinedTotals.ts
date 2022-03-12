@@ -2,7 +2,10 @@ import {
 	getCombinedTotalsForBonuses,
 	getCombinedTotalsForPaychecks
 } from './getCombinedTotals';
-import { PersonalDataWithTotals } from '../totals/TotalTypes';
+import {
+	PersonalDataWithTotals,
+	PersonalTotalSection
+} from '../totals/TotalTypes';
 import produce from 'immer';
 import Decimal from 'decimal.js';
 
@@ -21,7 +24,7 @@ export const addCombinedTotals = (
 	);
 	const futureBonusesTotal = getCombinedTotalsForBonuses(data.futureBonuses);
 	return produce(data, (draft) => {
-		const past = {
+		const past: PersonalTotalSection = {
 			grossPay: decimalAdd(
 				pastPaychecksTotal.grossPay,
 				pastBonusesTotal.grossPay
@@ -29,6 +32,10 @@ export const addCombinedTotals = (
 			contribution401k: decimalAdd(
 				pastPaychecksTotal.contribution401k,
 				pastBonusesTotal.contribution401k
+			),
+			contributionHsa: decimalAdd(
+				pastPaychecksTotal.contributionHsa,
+				pastBonusesTotal.contributionHsa
 			),
 			estimatedAGI: decimalAdd(
 				pastPaychecksTotal.estimatedAGI,
@@ -43,7 +50,7 @@ export const addCombinedTotals = (
 				pastBonusesTotal.estimatedTakeHomePay
 			)
 		};
-		const future = {
+		const future: PersonalTotalSection = {
 			grossPay: decimalAdd(
 				futurePaychecksTotal.grossPay,
 				futureBonusesTotal.grossPay
@@ -51,6 +58,10 @@ export const addCombinedTotals = (
 			contribution401k: decimalAdd(
 				futurePaychecksTotal.contribution401k,
 				futureBonusesTotal.contribution401k
+			),
+			contributionHsa: decimalAdd(
+				futurePaychecksTotal.contributionHsa,
+				futureBonusesTotal.contributionHsa
 			),
 			estimatedAGI: decimalAdd(
 				futurePaychecksTotal.estimatedAGI,
@@ -65,11 +76,15 @@ export const addCombinedTotals = (
 				futureBonusesTotal.estimatedTakeHomePay
 			)
 		};
-		const combined = {
+		const combined: PersonalTotalSection = {
 			grossPay: decimalAdd(past.grossPay, future.grossPay),
 			contribution401k: decimalAdd(
 				past.contribution401k,
 				future.contribution401k
+			),
+			contributionHsa: decimalAdd(
+				past.contributionHsa,
+				future.contributionHsa
 			),
 			estimatedAGI: decimalAdd(past.estimatedAGI, future.estimatedAGI),
 			estimatedMAGI: decimalAdd(past.estimatedMAGI, future.estimatedMAGI),
@@ -88,6 +103,7 @@ export const addCombinedTotals = (
 					draft.additionalIncome.total.grossPay
 				),
 				contribution401k: combined.contribution401k,
+				contributionHsa: combined.contributionHsa,
 				estimatedAGI: decimalAdd(
 					combined.estimatedAGI,
 					draft.additionalIncome.total.estimatedAGI

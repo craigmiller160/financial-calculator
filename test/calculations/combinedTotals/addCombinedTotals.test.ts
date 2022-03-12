@@ -13,6 +13,7 @@ describe('addCombinedTotals', () => {
 				past: {
 					grossPay: 33710.15,
 					contribution401k: 7079.1315,
+					contributionHsa: 0,
 					estimatedAGI: 23469.342025,
 					estimatedMAGI: 23469.342025,
 					estimatedTakeHomePay: 19148.971394884615
@@ -20,6 +21,7 @@ describe('addCombinedTotals', () => {
 				future: {
 					grossPay: 121153.83,
 					contribution401k: 13326.9213,
+					contributionHsa: 0,
 					estimatedAGI: 97330.98070499998,
 					estimatedMAGI: 97330.98070499998,
 					estimatedTakeHomePay: 78950.56456656921
@@ -27,6 +29,7 @@ describe('addCombinedTotals', () => {
 				combined: {
 					grossPay: 154863.98,
 					contribution401k: 20406.0528,
+					contributionHsa: 0,
 					estimatedAGI: 120800.32272999999,
 					estimatedMAGI: 120800.32272999999,
 					estimatedTakeHomePay: 98099.53596145383
@@ -34,6 +37,7 @@ describe('addCombinedTotals', () => {
 				combinedWithAdditionalIncome: {
 					grossPay: 155863.98,
 					contribution401k: 20406.0528,
+					contributionHsa: 0,
 					estimatedAGI: 121800.32272999999,
 					estimatedTakeHomePay: 98099.53596145383,
 					estimatedMAGI: 121800.32272999999
