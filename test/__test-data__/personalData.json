@@ -40,5 +40,8 @@
       "grossPay": 5000,
       "date": "2022-08-01"
     }
-  ]
+  ],
+  "additionalIncome": {
+    "taxableInvestmentIncome": 0
+  }
 }
