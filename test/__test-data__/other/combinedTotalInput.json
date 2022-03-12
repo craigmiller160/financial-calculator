@@ -112,17 +112,17 @@
   "futureBonuses": [],
   "totals": {
     "past": {
-      "grossPay": 33710.15,
-      "contribution401k": 7079.1315,
-      "estimatedAGI": 23469.342025,
-      "estimatedMAGI": 23469.342025,
+      "grossPay": 0,
+      "contribution401k": 0,
+      "estimatedAGI": 0,
+      "estimatedMAGI": 0,
       "estimatedTakeHomePay": 0
     },
     "future": {
-      "grossPay": 121153.83,
-      "contribution401k": 13326.9213,
-      "estimatedAGI": 97330.98070499998,
-      "estimatedMAGI": 97330.98070499998,
+      "grossPay": 0,
+      "contribution401k": 0,
+      "estimatedAGI": 0,
+      "estimatedMAGI": 0,
       "estimatedTakeHomePay": 0
     },
     "combined": {
