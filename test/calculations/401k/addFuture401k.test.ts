@@ -165,7 +165,10 @@ const personalData: PersonalDataWithTotals = {
 		}
 	},
 	futureRate401k: 0,
-	rothIraLimit: 0
+	rothIraLimit: 0,
+	additionalIncome: {
+		taxableInvestmentIncome: 0
+	}
 };
 
 describe('addFuture401k', () => {

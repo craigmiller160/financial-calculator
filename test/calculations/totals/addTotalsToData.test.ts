@@ -164,7 +164,10 @@ describe('addTotalsToData', () => {
 				}
 			},
 			futureRate401k: 0,
-			rothIraLimit: 0
+			rothIraLimit: 0,
+			additionalIncome: {
+				taxableInvestmentIncome: 0
+			}
 		});
 	});
 });
