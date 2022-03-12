@@ -2,7 +2,7 @@ import {
 	BonusWithTotal,
 	PaycheckWithTotal,
 	PersonalDataWithTotals
-} from '../calculations/totals/TotalTypes';
+} from '../totals/TotalTypes';
 import produce, { castDraft } from 'immer';
 import { pipe } from 'fp-ts/function';
 import * as RArray from 'fp-ts/ReadonlyArray';

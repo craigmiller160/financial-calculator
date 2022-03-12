@@ -1,5 +1,5 @@
 import { PersonalDataWithTotals } from '../../../src/calculations/totals/TotalTypes';
-import { addMagi } from '../../../src/agi/addMagi';
+import { addMagi } from '../../../src/calculations/agi/addMagi';
 import produce from 'immer';
 
 const data: PersonalDataWithTotals = {

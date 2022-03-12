@@ -2,12 +2,12 @@ import {
 	BonusWithTotal,
 	PaycheckWithTotal,
 	PersonalDataWithTotals
-} from '../calculations/totals/TotalTypes';
+} from '../totals/TotalTypes';
 import produce, { castDraft } from 'immer';
-import { annualizePayPeriodValue } from '../calculations/utils/annualizePayPeriodValue';
+import { annualizePayPeriodValue } from '../utils/annualizePayPeriodValue';
 import { pipe } from 'fp-ts/function';
 import * as RArray from 'fp-ts/ReadonlyArray';
-import { totalValueForChecks } from '../calculations/utils/totalValueForChecks';
+import { totalValueForChecks } from '../utils/totalValueForChecks';
 
 const addAgiToPaycheck = (paycheck: PaycheckWithTotal): PaycheckWithTotal => {
 	const agi =
