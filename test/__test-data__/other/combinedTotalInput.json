@@ -24,6 +24,7 @@
         "amount": 390.40145402307695
       },
       "totalsForAllChecks": {
+        "contributionHsa": 192.6,
         "contribution401k": 3910.6515,
         "benefitsCost": 582.85,
         "grossPay": 18622.15,
@@ -90,6 +91,7 @@
         "amount": 875.2579113538459
       },
       "totalsForAllChecks": {
+        "contributionHsa": 807.66,
         "contribution401k": 13326.9213,
         "benefitsCost": 1227.66,
         "grossPay": 121153.83,
@@ -114,6 +116,7 @@
     "past": {
       "grossPay": 0,
       "contribution401k": 0,
+      "contributionHsa": 0,
       "estimatedAGI": 0,
       "estimatedMAGI": 0,
       "estimatedTakeHomePay": 0
@@ -121,6 +124,7 @@
     "future": {
       "grossPay": 0,
       "contribution401k": 0,
+      "contributionHsa": 0,
       "estimatedAGI": 0,
       "estimatedMAGI": 0,
       "estimatedTakeHomePay": 0
@@ -128,6 +132,7 @@
     "combined": {
       "grossPay": 0,
       "contribution401k": 0,
+      "contributionHsa": 0,
       "estimatedAGI": 0,
       "estimatedMAGI": 0,
       "estimatedTakeHomePay": 0
@@ -135,6 +140,7 @@
     "combinedWithAdditionalIncome": {
       "grossPay": 0,
       "contribution401k": 0,
+      "contributionHsa": 0,
       "estimatedAGI": 0,
       "estimatedMAGI": 0,
       "estimatedTakeHomePay": 0

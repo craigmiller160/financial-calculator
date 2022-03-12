@@ -66,6 +66,7 @@ const personalData: PersonalDataWithTotals = {
 			estimatedAGI: 0,
 			estimatedMAGI: 0,
 			totalsForAllChecks: {
+				contributionHsa: 807.66,
 				benefitsCost: 1227.66,
 				contribution401k: 0,
 				grossPay: 121153.83,
@@ -128,6 +129,7 @@ const personalData: PersonalDataWithTotals = {
 			estimatedAGI: 0,
 			estimatedMAGI: 0,
 			totalsForAllChecks: {
+				contributionHsa: 192.6,
 				benefitsCost: 582.85,
 				contribution401k: 3910.6515,
 				grossPay: 18622.15,
@@ -144,6 +146,7 @@ const personalData: PersonalDataWithTotals = {
 	totals: {
 		past: {
 			contribution401k: 7821.303,
+			contributionHsa: 0,
 			grossPay: 33710.15,
 			estimatedAGI: 0,
 			estimatedMAGI: 0,
@@ -151,6 +154,7 @@ const personalData: PersonalDataWithTotals = {
 		},
 		future: {
 			contribution401k: 0,
+			contributionHsa: 0,
 			grossPay: 126153.83,
 			estimatedAGI: 0,
 			estimatedMAGI: 0,
@@ -158,12 +162,14 @@ const personalData: PersonalDataWithTotals = {
 		},
 		combined: {
 			grossPay: 0,
+			contributionHsa: 0,
 			contribution401k: 0,
 			estimatedAGI: 0,
 			estimatedMAGI: 0,
 			estimatedTakeHomePay: 0
 		},
 		combinedWithAdditionalIncome: {
+			contributionHsa: 0,
 			grossPay: 0,
 			contribution401k: 0,
 			estimatedAGI: 0,

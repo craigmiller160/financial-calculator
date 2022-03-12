@@ -12,6 +12,7 @@ A variety of data is outputted when this application is run:
 | AGI/MAGI    | Adjusted Gross Income/Modified Adjusted Gross Income. AGI is what taxes are based on, MAGI is what tax-advantage eligibility is basedd on. For the moment they are both the same in my calcluations. |
 | 401k Rate   | The % of a given amount of income contributed to my 401k.                                                                                                                                            |
 | 401k Amount | The raw $ amount contributed to my 401k.                                                                                                                                                             |
+| HSA Amount  | The raw $ amount contributed to my HSA.                                                                                                                                                              |
 | Take Home   | This is the complicated one. This is how much money I take home after taxes, contributions, etc, from my main salary. It does not include additional sources of income.                              |
 | Full Income | This captures the total amount of income I am bringing in, including all additional sources (like investments).                                                                                      |
 

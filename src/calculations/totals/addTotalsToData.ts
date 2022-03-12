@@ -31,6 +31,7 @@ export const addTotalsToData = (data: Data): PersonalDataWithTotals => {
 		futureBonuses,
 		totals: {
 			past: {
+				contributionHsa: 0,
 				grossPay: 0,
 				contribution401k: 0,
 				estimatedAGI: 0,
@@ -38,6 +39,7 @@ export const addTotalsToData = (data: Data): PersonalDataWithTotals => {
 				estimatedTakeHomePay: 0
 			},
 			future: {
+				contributionHsa: 0,
 				grossPay: 0,
 				contribution401k: 0,
 				estimatedAGI: 0,
@@ -45,6 +47,7 @@ export const addTotalsToData = (data: Data): PersonalDataWithTotals => {
 				estimatedTakeHomePay: 0
 			},
 			combined: {
+				contributionHsa: 0,
 				grossPay: 0,
 				contribution401k: 0,
 				estimatedAGI: 0,
@@ -52,6 +55,7 @@ export const addTotalsToData = (data: Data): PersonalDataWithTotals => {
 				estimatedTakeHomePay: 0
 			},
 			combinedWithAdditionalIncome: {
+				contributionHsa: 0,
 				grossPay: 0,
 				contribution401k: 0,
 				estimatedAGI: 0,
