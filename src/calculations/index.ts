@@ -10,6 +10,7 @@ import * as IOEither from 'fp-ts/IOEither';
 import { addAgi } from '../agi/addAgi';
 import { addCombinedTotals } from './combinedTotals/addCombinedTotals';
 import { addMagi } from '../agi/addMagi';
+import { addFederalTaxes } from './taxes/addFederalTaxes';
 
 const runCalculationsForTotals = (data: Data): IOT<PersonalDataWithTotals> =>
 	pipe(
@@ -49,6 +50,18 @@ const runCalculationsForCombinedTotals = (
 		IO.chainFirst((data) => logger.debugWithJson('Data', data))
 	);
 
+const runCalculationsForFederalTaxes =
+	(legalData: LegalData) =>
+	(personalData: PersonalDataWithTotals): IOTryT<PersonalDataWithTotals> =>
+		pipe(
+			logger.debug('Calculating Federal Taxes'),
+			IOEither.rightIO,
+			IOEither.chainEitherK(() =>
+				addFederalTaxes({ personalData, legalData })
+			),
+			IOEither.chainFirstIOK((data) => logger.debugWithJson('Data', data))
+		);
+
 export const runCalculations = (data: Data): IOTryT<string> =>
 	pipe(
 		runCalculationsForTotals(data),
@@ -58,5 +71,6 @@ export const runCalculations = (data: Data): IOTryT<string> =>
 		IO.chain(runCalculationsForAgiMagi),
 		IO.chain(runCalculationsForCombinedTotals),
 		IOEither.rightIO,
+		IOEither.chain(runCalculationsForFederalTaxes(data.legalData)),
 		IOEither.map((data) => `${data.futureRate401k}`)
 	);

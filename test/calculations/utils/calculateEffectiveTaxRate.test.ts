@@ -1,6 +1,5 @@
 import { FederalTaxBracket } from '../../../src/data/decoders';
-import { calculateTaxes } from '../../../src/calculations/utils/calculateTaxes';
-import Decimal from 'decimal.js';
+import { calculateEffectiveTaxRate } from '../../../src/calculations/utils/calculateEffectiveTaxRate';
 
 const bracket: FederalTaxBracket = {
 	rate: 0.22,
@@ -11,7 +10,7 @@ const bracket: FederalTaxBracket = {
 
 describe('calculateTaxes', () => {
 	it('does the calculation', () => {
-		const result = calculateTaxes(new Decimal(36_000))(bracket);
-		expect(result).toEqual(new Decimal(8520));
+		const result = calculateEffectiveTaxRate(36_000)(bracket);
+		expect(result).toEqual(0.23666666666666666);
 	});
 });
