@@ -12,9 +12,7 @@
       "numberOfChecks": 5,
       "grossPay": 3724.43,
       "rate401k": 0.21
-    }
-  ],
-  "futurePaychecks": [
+    },
     {
       "startDate": "2022-03-25",
       "endDate": "2022-03-25",
@@ -25,8 +23,11 @@
         "vision": 10
       },
       "numberOfChecks": 1,
-      "grossPay": 5585.645
-    },
+      "grossPay": 5585.645,
+      "rate401k": 0.21
+    }
+  ],
+  "futurePaychecks": [
     {
       "startDate": "2022-03-14",
       "endDate": "2022-12-31",
