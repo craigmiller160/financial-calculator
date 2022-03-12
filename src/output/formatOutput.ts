@@ -1,4 +1,5 @@
 import {
+	BonusWithTotal,
 	PaycheckWithTotal,
 	PersonalDataWithTotals
 } from '../calculations/totals/TotalTypes';
@@ -74,12 +75,12 @@ const formatPaycheck = (paycheck: PaycheckWithTotal): string => {
 	const rate401k = pad(formatPercent(paycheck.paycheck401k.rate));
 	const amount401k = pad(formatCurrency(paycheck.paycheck401k.amount));
 	const takeHome = pad(formatCurrency(paycheck.estimatedTakeHomePay));
-	const combinedIncome = pad(
+	const fullIncome = pad(
 		formatCurrency(
 			sum(paycheck.paycheck401k.amount, paycheck.estimatedTakeHomePay)
 		)
 	);
-	return `|${startDate}|${endDate}|${grossPay}|${rate401k}|${amount401k}|${takeHome}|${combinedIncome}|`;
+	return `|${startDate}|${endDate}|${grossPay}|${rate401k}|${amount401k}|${takeHome}|${fullIncome}|`;
 };
 
 const formatAllPaychecks = (
@@ -90,6 +91,21 @@ const formatAllPaychecks = (
 		RArray.map(formatPaycheck),
 		Monoid.concatAll(newlineMonoid)
 	);
+
+const formatBonus = (bonus: BonusWithTotal): string => {
+	const date = pad(bonus.date);
+	const grossPay = pad(formatCurrency(bonus.grossPay));
+	const rate401k = pad(formatPercent(bonus.bonus401k.rate));
+	const amount401k = pad(formatCurrency(bonus.bonus401k.amount));
+	const takeHome = pad(formatCurrency(bonus.estimatedTakeHomePay));
+	const fullIncome = pad(
+		formatCurrency(sum(bonus.bonus401k.amount, bonus.estimatedTakeHomePay))
+	);
+	return `|${date}|${grossPay}|${rate401k}|${amount401k}|${takeHome}|${fullIncome}|`;
+};
+
+const formatAllBonuses = (bonuses: ReadonlyArray<BonusWithTotal>): string =>
+	pipe(bonuses, RArray.map(formatBonus), Monoid.concatAll(newlineMonoid));
 
 export const formatOutput = (data: PersonalDataWithTotals): string => {
 	const percent401k = formatPercent(data.futureRate401k);
@@ -102,6 +118,8 @@ export const formatOutput = (data: PersonalDataWithTotals): string => {
 	
 	BONUSES
 		${BONUS_HEADER}
+		${formatAllBonuses(data.pastBonuses)}
+		${formatAllBonuses(data.futureBonuses)}
 		
 	New 401k Contribution Rate: ${percent401k}
 	This Year's Roth IRA Limit: ${rothIraLimit}  
