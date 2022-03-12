@@ -61,7 +61,6 @@ export const addAgi = (
 		draft.futurePaychecks = castDraft(futurePaychecks);
 		draft.pastBonuses = castDraft(pastBonuses);
 		draft.futureBonuses = castDraft(futureBonuses);
-		// TODO add to tests
 		draft.additionalIncome.total.estimatedAGI = getAdditionalIncomeAgi(
 			draft.additionalIncome
 		);

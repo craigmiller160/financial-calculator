@@ -173,8 +173,8 @@ describe('addTotalsToData', () => {
 			additionalIncome: {
 				taxableInvestmentIncome: 1000,
 				total: {
-					estimatedAGI: 1000,
-					estimatedMAGI: 1000
+					estimatedAGI: 0,
+					estimatedMAGI: 0
 				}
 			}
 		});

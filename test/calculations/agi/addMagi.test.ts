@@ -166,9 +166,9 @@ const data: PersonalDataWithTotals = {
 	futureRate401k: 0,
 	rothIraLimit: 0,
 	additionalIncome: {
-		taxableInvestmentIncome: 0,
+		taxableInvestmentIncome: 1000,
 		total: {
-			estimatedAGI: 0,
+			estimatedAGI: 1000,
 			estimatedMAGI: 0
 		}
 	}
@@ -186,6 +186,8 @@ describe('addMagi', () => {
 			draft.pastPaychecks[0].annualized.estimatedMAGI = 66061.08093;
 			draft.pastPaychecks[0].estimatedMAGI = 2540.810805;
 			draft.pastPaychecks[0].totalsForAllChecks.estimatedMAGI = 12704.054025;
+			draft.additionalIncome.total.estimatedMAGI =
+				draft.additionalIncome.total.estimatedAGI;
 		});
 		expect(result).toEqual(expectedResult);
 	});

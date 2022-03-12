@@ -39,7 +39,6 @@ export const addMagi = (
 		draft.pastBonuses = castDraft(pastBonuses);
 		draft.futurePaychecks = castDraft(futurePaychecks);
 		draft.futureBonuses = castDraft(futureBonuses);
-		// TODO add to tests
 		draft.additionalIncome.total.estimatedMAGI =
 			draft.additionalIncome.total.estimatedAGI;
 	});
