@@ -42,6 +42,6 @@
     }
   ],
   "additionalIncome": {
-    "taxableInvestmentIncome": 0
+    "taxableInvestmentIncome": 1000
   }
 }

@@ -63,8 +63,10 @@ export const addTotalsToData = (data: Data): PersonalDataWithTotals => {
 			taxableInvestmentIncome:
 				data.personalData.additionalIncome.taxableInvestmentIncome,
 			total: {
-				estimatedAGI: 0,
-				estimatedMAGI: 0
+				estimatedAGI:
+					data.personalData.additionalIncome.taxableInvestmentIncome,
+				estimatedMAGI:
+					data.personalData.additionalIncome.taxableInvestmentIncome
 			}
 		}
 	};
