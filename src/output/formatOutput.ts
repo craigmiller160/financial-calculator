@@ -18,6 +18,10 @@ const newlineMonoid: MonoidT<string> = {
 		return `${a}\n${b}`;
 	}
 };
+const decimalSumMonoid: MonoidT<Decimal> = {
+	empty: new Decimal(0),
+	concat: (a, b) => a.plus(b)
+};
 
 const CURRENCY_FORMAT = new Intl.NumberFormat('en-US', {
 	style: 'currency',
@@ -45,11 +49,15 @@ const BONUS_HEADER = `|${pad('Date')}|${pad('Gross Pay')}|${pad(
 )}|${pad('401k Amount')}|${pad('Take Home')}|${pad('Full Income')}|`;
 
 const TOTAL_HEADER = `|${pad('Gross Pay')}|${pad('AGI/MAGI')}|${pad(
-	'401k Amount'
-)}|${pad('Take Home')}|${pad('Full Income')}|`;
+	'Add. Income'
+)}|${pad('401k Amount')}|${pad('Take Home')}|${pad('Full Income')}|`;
 
-const sum = (num1: number, num2: number): number =>
-	new Decimal(num1).plus(new Decimal(num2)).toNumber();
+const sum = (values: ReadonlyArray<number>): number =>
+	pipe(
+		values,
+		RArray.map((_) => new Decimal(_)),
+		Monoid.concatAll(decimalSumMonoid)
+	).toNumber();
 
 const formatPaycheck = (paycheck: PaycheckWithTotal): string => {
 	const startDate = pad(paycheck.startDate);
@@ -60,7 +68,7 @@ const formatPaycheck = (paycheck: PaycheckWithTotal): string => {
 	const takeHome = pad(formatCurrency(paycheck.estimatedTakeHomePay));
 	const fullIncome = pad(
 		formatCurrency(
-			sum(paycheck.paycheck401k.amount, paycheck.estimatedTakeHomePay)
+			sum([paycheck.paycheck401k.amount, paycheck.estimatedTakeHomePay])
 		)
 	);
 	return `|${startDate}|${endDate}|${grossPay}|${rate401k}|${amount401k}|${takeHome}|${fullIncome}|`;
@@ -82,7 +90,9 @@ const formatBonus = (bonus: BonusWithTotal): string => {
 	const amount401k = pad(formatCurrency(bonus.bonus401k.amount));
 	const takeHome = pad(formatCurrency(bonus.estimatedTakeHomePay));
 	const fullIncome = pad(
-		formatCurrency(sum(bonus.bonus401k.amount, bonus.estimatedTakeHomePay))
+		formatCurrency(
+			sum([bonus.bonus401k.amount, bonus.estimatedTakeHomePay])
+		)
 	);
 	return `|${date}|${grossPay}|${rate401k}|${amount401k}|${takeHome}|${fullIncome}|`;
 };
@@ -91,23 +101,33 @@ const formatAllBonuses = (bonuses: ReadonlyArray<BonusWithTotal>): string =>
 	pipe(bonuses, RArray.map(formatBonus), Monoid.concatAll(newlineMonoid));
 
 const formatTotals = (data: PersonalDataWithTotals): string => {
-	const grossPay = pad(formatCurrency(data.totals.combined.grossPay));
-	const agiMagi = pad(formatCurrency(data.totals.combined.estimatedAGI));
+	const grossPay = pad(
+		formatCurrency(data.totals.combinedWithAdditionalIncome.grossPay)
+	);
+	const agiMagi = pad(
+		formatCurrency(data.totals.combinedWithAdditionalIncome.estimatedAGI)
+	);
 	const amount401k = pad(
-		formatCurrency(data.totals.combined.contribution401k)
-	);
-	const takeHome = pad(
-		formatCurrency(data.totals.combined.estimatedTakeHomePay)
-	);
-	const fullIncome = pad(
 		formatCurrency(
-			sum(
-				data.totals.combined.estimatedTakeHomePay,
-				data.totals.combined.contribution401k
-			)
+			data.totals.combinedWithAdditionalIncome.contribution401k
 		)
 	);
-	return `|${grossPay}|${agiMagi}|${amount401k}|${takeHome}|${fullIncome}|`;
+	const takeHome = pad(
+		formatCurrency(
+			data.totals.combinedWithAdditionalIncome.estimatedTakeHomePay
+		)
+	);
+	const addIncome = pad(formatCurrency(data.additionalIncome.total.grossPay));
+	const fullIncome = pad(
+		formatCurrency(
+			sum([
+				data.totals.combinedWithAdditionalIncome.estimatedTakeHomePay,
+				data.totals.combinedWithAdditionalIncome.contribution401k,
+				data.additionalIncome.total.grossPay
+			])
+		)
+	);
+	return `|${grossPay}|${agiMagi}|${addIncome}|${amount401k}|${takeHome}|${fullIncome}|`;
 };
 
 export const formatOutput = (data: PersonalDataWithTotals): string => {

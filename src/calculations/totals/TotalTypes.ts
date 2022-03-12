@@ -1,4 +1,4 @@
-import { BenefitsCost, LegalData } from '../../data/decoders';
+import { AdditionalIncome, BenefitsCost, LegalData } from '../../data/decoders';
 
 export interface BenefitsCostAndTotal extends BenefitsCost {
 	readonly total: number;
@@ -84,6 +84,21 @@ export interface PersonalTotals {
 		readonly estimatedMAGI: number;
 		readonly estimatedTakeHomePay: number;
 	};
+	readonly combinedWithAdditionalIncome: {
+		readonly grossPay: number;
+		readonly contribution401k: number;
+		readonly estimatedAGI: number;
+		readonly estimatedMAGI: number;
+		readonly estimatedTakeHomePay: number;
+	};
+}
+
+export interface AdditionalIncomeWithTotals extends AdditionalIncome {
+	readonly total: {
+		readonly grossPay: number;
+		readonly estimatedAGI: number;
+		readonly estimatedMAGI: number;
+	};
 }
 
 export interface PersonalDataWithTotals {
@@ -94,6 +109,7 @@ export interface PersonalDataWithTotals {
 	readonly totals: PersonalTotals;
 	readonly futureRate401k: number;
 	readonly rothIraLimit: number;
+	readonly additionalIncome: AdditionalIncomeWithTotals;
 }
 
 export interface CombinedTotals {

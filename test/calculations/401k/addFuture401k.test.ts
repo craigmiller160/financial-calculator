@@ -162,10 +162,25 @@ const personalData: PersonalDataWithTotals = {
 			estimatedAGI: 0,
 			estimatedMAGI: 0,
 			estimatedTakeHomePay: 0
+		},
+		combinedWithAdditionalIncome: {
+			grossPay: 0,
+			contribution401k: 0,
+			estimatedAGI: 0,
+			estimatedMAGI: 0,
+			estimatedTakeHomePay: 0
 		}
 	},
 	futureRate401k: 0,
-	rothIraLimit: 0
+	rothIraLimit: 0,
+	additionalIncome: {
+		taxableInvestmentIncome: 0,
+		total: {
+			grossPay: 0,
+			estimatedAGI: 0,
+			estimatedMAGI: 0
+		}
+	}
 };
 
 describe('addFuture401k', () => {

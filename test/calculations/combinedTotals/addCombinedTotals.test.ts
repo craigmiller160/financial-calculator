@@ -30,6 +30,13 @@ describe('addCombinedTotals', () => {
 					estimatedAGI: 120800.32272999999,
 					estimatedMAGI: 120800.32272999999,
 					estimatedTakeHomePay: 98099.53596145383
+				},
+				combinedWithAdditionalIncome: {
+					grossPay: 155863.98,
+					contribution401k: 20406.0528,
+					estimatedAGI: 121800.32272999999,
+					estimatedTakeHomePay: 98099.53596145383,
+					estimatedMAGI: 121800.32272999999
 				}
 			};
 		});

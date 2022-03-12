@@ -156,10 +156,25 @@ const data: PersonalDataWithTotals = {
 			estimatedAGI: 0,
 			estimatedMAGI: 0,
 			estimatedTakeHomePay: 0
+		},
+		combinedWithAdditionalIncome: {
+			grossPay: 0,
+			contribution401k: 0,
+			estimatedAGI: 0,
+			estimatedMAGI: 0,
+			estimatedTakeHomePay: 0
 		}
 	},
 	futureRate401k: 0,
-	rothIraLimit: 0
+	rothIraLimit: 0,
+	additionalIncome: {
+		taxableInvestmentIncome: 1000,
+		total: {
+			grossPay: 1000,
+			estimatedAGI: 0,
+			estimatedMAGI: 0
+		}
+	}
 };
 
 describe('addAgi', () => {
@@ -174,6 +189,8 @@ describe('addAgi', () => {
 			draft.pastPaychecks[0].annualized.estimatedAGI = 66061.08093;
 			draft.pastPaychecks[0].estimatedAGI = 2540.810805;
 			draft.pastPaychecks[0].totalsForAllChecks.estimatedAGI = 12704.054025;
+			draft.additionalIncome.total.estimatedAGI =
+				draft.additionalIncome.total.grossPay;
 		});
 		expect(result).toEqual(expectedResult);
 	});

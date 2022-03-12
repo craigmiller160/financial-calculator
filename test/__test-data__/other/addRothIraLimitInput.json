@@ -131,8 +131,23 @@
       "estimatedAGI": 120800.32272999999,
       "estimatedMAGI": 137000,
       "estimatedTakeHomePay": 98099.53596145383
+    },
+    "combinedWithAdditionalIncome": {
+      "grossPay": 0,
+      "contribution401k": 0,
+      "estimatedAGI": 0,
+      "estimatedMAGI": 0,
+      "estimatedTakeHomePay": 0
     }
   },
   "futureRate401k": 0.11,
-  "rothIraLimit": 0
+  "rothIraLimit": 0,
+  "additionalIncome": {
+    "taxableInvestmentIncome": 0,
+    "total": {
+      "grossPay": 0,
+      "estimatedAGI": 0,
+      "estimatedMAGI": 0
+    }
+  }
 }

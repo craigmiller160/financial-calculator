@@ -45,11 +45,16 @@ const baseBonusV = Codecs.readonlyType({
 });
 const bonusWith401kV = ioType.intersection([baseBonusV, rate401kV]);
 
+const additionalIncomeV = Codecs.readonlyType({
+	taxableInvestmentIncome: ioType.number
+});
+
 export const personalDataV = Codecs.readonlyType({
 	pastPaychecks: ioType.readonlyArray(paycheckWith401kV),
 	futurePaychecks: ioType.readonlyArray(basePaycheckV),
 	pastBonuses: ioType.readonlyArray(bonusWith401kV),
-	futureBonuses: ioType.readonlyArray(baseBonusV)
+	futureBonuses: ioType.readonlyArray(baseBonusV),
+	additionalIncome: additionalIncomeV
 });
 
 export const legalDataV = Codecs.readonlyType({
@@ -70,6 +75,7 @@ export type FederalTaxBracket = ioType.TypeOf<typeof federalTaxBracketV>;
 export type LegalData = ioType.TypeOf<typeof legalDataV>;
 export type Rate401k = ioType.TypeOf<typeof rate401kV>;
 export type RothIraLimit = ioType.TypeOf<typeof rothIraLimitV>;
+export type AdditionalIncome = ioType.TypeOf<typeof additionalIncomeV>;
 export interface Data {
 	readonly personalData: PersonalData;
 	readonly legalData: LegalData;
