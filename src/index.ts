@@ -11,10 +11,14 @@ pipe(
 	IOEither.chain(runCalculations),
 	IOEither.map(formatOutput),
 	IOEither.fold(
-		(ex) => logger.errorWithStack('Error calculating 401k', ex),
+		(ex) =>
+			logger.errorWithStack(
+				'Error performing financial calculations',
+				ex
+			),
 		(output) =>
 			pipe(
-				logger.info('Successfully calculated 401k'),
+				logger.info('Successfully performed financial calculations'),
 				IO.chain(() => logger.info(output))
 			)
 	)
