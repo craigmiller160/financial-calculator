@@ -47,6 +47,10 @@ export const addTotalsToPaycheck =
 					amount401k,
 					paycheck.numberOfChecks
 				),
+				contributionHsa: totalValueForChecks(
+					paycheck.benefitsCost.hsa,
+					paycheck.numberOfChecks
+				),
 				benefitsCost: totalValueForChecks(
 					benefitsCost.total,
 					paycheck.numberOfChecks

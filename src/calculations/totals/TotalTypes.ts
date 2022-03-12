@@ -33,6 +33,7 @@ export interface PaycheckTotals {
 	readonly estimatedAGI: number;
 	readonly estimatedMAGI: number;
 	readonly estimatedTakeHomePay: number;
+	readonly contributionHsa: number;
 }
 
 export interface FederalTaxCosts {
