@@ -15,14 +15,14 @@ describe('addCombinedTotals', () => {
 					contribution401k: 7079.1315,
 					estimatedAGI: 23469.342025,
 					estimatedMAGI: 23469.342025,
-					estimatedTakeHomePay: 250
+					estimatedTakeHomePay: 19148.971394884615
 				},
 				future: {
 					grossPay: 121153.83,
 					contribution401k: 13326.9213,
 					estimatedAGI: 97330.98070499998,
 					estimatedMAGI: 97330.98070499998,
-					estimatedTakeHomePay: 100
+					estimatedTakeHomePay: 78950.56456656921
 				},
 				combined: {
 					grossPay: 0,
