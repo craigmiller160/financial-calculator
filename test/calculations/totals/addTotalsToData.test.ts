@@ -163,7 +163,8 @@ describe('addTotalsToData', () => {
 					estimatedTakeHomePay: 0
 				}
 			},
-			futureRate401k: 0
+			futureRate401k: 0,
+			rothIraLimit: 0
 		});
 	});
 });
