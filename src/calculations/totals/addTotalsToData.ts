@@ -53,6 +53,7 @@ export const addTotalsToData = (data: Data): PersonalDataWithTotals => {
 			}
 		},
 		futureRate401k: 0,
-		rothIraLimit: 0
+		rothIraLimit: 0,
+		additionalIncome: data.personalData.additionalIncome
 	};
 };
