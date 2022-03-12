@@ -40,9 +40,9 @@ const pad = (text: string): string => ` ${text.padEnd(COL_LENGTH, ' ')}`;
 
 const PAYCHECK_HEADER = `|${pad('Start')}|${pad('End')}|${pad(
 	'Gross Pay'
-)}|${pad('401k Rate')}|${pad('401k Amount')}|${pad('Take Home')}|${pad(
-	'Full Income'
-)}|`;
+)}|${pad('401k Rate')}|${pad('401k Amount')}|${pad('HSA Amount')}|${pad(
+	'Take Home'
+)}|${pad('Full Income')}|`;
 
 const BONUS_HEADER = `|${pad('Date')}|${pad('Gross Pay')}|${pad(
 	'401k Rate'
@@ -65,13 +65,18 @@ const formatPaycheck = (paycheck: PaycheckWithTotal): string => {
 	const grossPay = pad(formatCurrency(paycheck.grossPay));
 	const rate401k = pad(formatPercent(paycheck.paycheck401k.rate));
 	const amount401k = pad(formatCurrency(paycheck.paycheck401k.amount));
+	const amountHsa = pad(formatCurrency(paycheck.benefitsCost.hsa));
 	const takeHome = pad(formatCurrency(paycheck.estimatedTakeHomePay));
 	const fullIncome = pad(
 		formatCurrency(
-			sum([paycheck.paycheck401k.amount, paycheck.estimatedTakeHomePay])
+			sum([
+				paycheck.paycheck401k.amount,
+				paycheck.estimatedTakeHomePay,
+				paycheck.benefitsCost.hsa
+			])
 		)
 	);
-	return `|${startDate}|${endDate}|${grossPay}|${rate401k}|${amount401k}|${takeHome}|${fullIncome}|`;
+	return `|${startDate}|${endDate}|${grossPay}|${rate401k}|${amount401k}|${amountHsa}|${takeHome}|${fullIncome}|`;
 };
 
 const formatAllPaychecks = (
