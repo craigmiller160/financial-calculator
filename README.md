@@ -8,7 +8,7 @@ A variety of data is outputted when this application is run:
 
 | Field       | Description                                                                                                                                                                                          |
 |-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Gross Pay   | This is the total pay I receive, before taxes, retirement contribution, etc                                                                                                                          |
+| Gross Pay   | This is the total pay I receive, before taxes, retirement contribution, etc. For TOTALS It includes additional sources of income like investmenets.                                                  |
 | AGI/MAGI    | Adjusted Gross Income/Modified Adjusted Gross Income. AGI is what taxes are based on, MAGI is what tax-advantage eligibility is basedd on. For the moment they are both the same in my calcluations. |
 | 401k Rate   | The % of a given amount of income contributed to my 401k.                                                                                                                                            |
 | 401k Amount | The raw $ amount contributed to my 401k.                                                                                                                                                             |

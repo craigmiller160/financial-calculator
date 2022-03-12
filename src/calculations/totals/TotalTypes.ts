@@ -85,6 +85,8 @@ export interface PersonalTotals {
 		readonly estimatedTakeHomePay: number;
 	};
 	readonly combinedWithAdditionalIncome: {
+		readonly grossPay: number;
+		readonly contribution401k: number;
 		readonly estimatedAGI: number;
 		readonly estimatedMAGI: number;
 		readonly estimatedTakeHomePay: number;
@@ -93,6 +95,7 @@ export interface PersonalTotals {
 
 export interface AdditionalIncomeWithTotals extends AdditionalIncome {
 	readonly total: {
+		readonly grossPay: number;
 		readonly estimatedAGI: number;
 		readonly estimatedMAGI: number;
 	};

@@ -52,6 +52,8 @@ export const addTotalsToData = (data: Data): PersonalDataWithTotals => {
 				estimatedTakeHomePay: 0
 			},
 			combinedWithAdditionalIncome: {
+				grossPay: 0,
+				contribution401k: 0,
 				estimatedAGI: 0,
 				estimatedMAGI: 0,
 				estimatedTakeHomePay: 0
@@ -63,6 +65,8 @@ export const addTotalsToData = (data: Data): PersonalDataWithTotals => {
 			taxableInvestmentIncome:
 				data.personalData.additionalIncome.taxableInvestmentIncome,
 			total: {
+				grossPay:
+					data.personalData.additionalIncome.taxableInvestmentIncome,
 				estimatedAGI: 0,
 				estimatedMAGI: 0
 			}

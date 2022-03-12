@@ -83,6 +83,11 @@ export const addCombinedTotals = (
 			future,
 			combined,
 			combinedWithAdditionalIncome: {
+				grossPay: decimalAdd(
+					combined.grossPay,
+					draft.additionalIncome.total.grossPay
+				),
+				contribution401k: combined.contribution401k,
 				estimatedAGI: decimalAdd(
 					combined.estimatedAGI,
 					draft.additionalIncome.total.estimatedAGI
@@ -91,7 +96,6 @@ export const addCombinedTotals = (
 					combined.estimatedMAGI,
 					draft.additionalIncome.total.estimatedMAGI
 				),
-				// TODO do I want this here? It seems to confuse things
 				estimatedTakeHomePay: combined.estimatedTakeHomePay
 			}
 		};
