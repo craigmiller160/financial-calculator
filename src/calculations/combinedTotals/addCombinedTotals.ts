@@ -21,47 +21,72 @@ export const addCombinedTotals = (
 	);
 	const futureBonusesTotal = getCombinedTotalsForBonuses(data.futureBonuses);
 	return produce(data, (draft) => {
-		draft.totals = {
-			pastGrossPay: decimalAdd(
+		const past = {
+			grossPay: decimalAdd(
 				pastPaychecksTotal.grossPay,
 				pastBonusesTotal.grossPay
 			),
-			pastContribution401k: decimalAdd(
+			contribution401k: decimalAdd(
 				pastPaychecksTotal.contribution401k,
 				pastBonusesTotal.contribution401k
 			),
-			pastEstimatedAGI: decimalAdd(
+			estimatedAGI: decimalAdd(
 				pastPaychecksTotal.estimatedAGI,
 				pastBonusesTotal.estimatedAGI
 			),
-			pastEstimatedMAGI: decimalAdd(
+			estimatedMAGI: decimalAdd(
 				pastPaychecksTotal.estimatedMAGI,
 				pastBonusesTotal.estimatedMAGI
 			),
-			futureGrossPay: decimalAdd(
+			estimatedTakeHomePay: decimalAdd(
+				pastPaychecksTotal.estimatedTakeHomePay,
+				pastBonusesTotal.estimatedTakeHomePay
+			)
+		};
+		const future = {
+			grossPay: decimalAdd(
 				futurePaychecksTotal.grossPay,
 				futureBonusesTotal.grossPay
 			),
-			futureContribution401k: decimalAdd(
+			contribution401k: decimalAdd(
 				futurePaychecksTotal.contribution401k,
 				futureBonusesTotal.contribution401k
 			),
-			futureEstimatedAGI: decimalAdd(
+			estimatedAGI: decimalAdd(
 				futurePaychecksTotal.estimatedAGI,
 				futureBonusesTotal.estimatedAGI
 			),
-			futureEstimatedMAGI: decimalAdd(
+			estimatedMAGI: decimalAdd(
 				futurePaychecksTotal.estimatedMAGI,
 				futureBonusesTotal.estimatedMAGI
 			),
-			pastEstimatedTakeHomePay: decimalAdd(
-				pastPaychecksTotal.estimatedTakeHomePay,
-				pastBonusesTotal.estimatedTakeHomePay
-			),
-			futureEstimatedTakeHomePay: decimalAdd(
+			estimatedTakeHomePay: decimalAdd(
 				futurePaychecksTotal.estimatedTakeHomePay,
 				futureBonusesTotal.estimatedTakeHomePay
 			)
+		};
+		draft.totals = {
+			past,
+			future,
+			combined: {
+				grossPay: decimalAdd(past.grossPay, future.grossPay),
+				contribution401k: decimalAdd(
+					past.contribution401k,
+					future.contribution401k
+				),
+				estimatedAGI: decimalAdd(
+					past.estimatedAGI,
+					future.estimatedAGI
+				),
+				estimatedMAGI: decimalAdd(
+					past.estimatedMAGI,
+					future.estimatedMAGI
+				),
+				estimatedTakeHomePay: decimalAdd(
+					past.estimatedTakeHomePay,
+					future.estimatedTakeHomePay
+				)
+			}
 		};
 	});
 };

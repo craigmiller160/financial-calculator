@@ -62,18 +62,28 @@ export interface PayrollTaxCosts {
 	readonly total: number;
 }
 
-// TODO have sub-objects here for organization
 export interface PersonalTotals {
-	readonly pastGrossPay: number;
-	readonly pastContribution401k: number;
-	readonly pastEstimatedAGI: number;
-	readonly pastEstimatedMAGI: number;
-	readonly pastEstimatedTakeHomePay: number;
-	readonly futureGrossPay: number;
-	readonly futureContribution401k: number;
-	readonly futureEstimatedAGI: number;
-	readonly futureEstimatedMAGI: number;
-	readonly futureEstimatedTakeHomePay: number;
+	readonly past: {
+		readonly grossPay: number;
+		readonly contribution401k: number;
+		readonly estimatedAGI: number;
+		readonly estimatedMAGI: number;
+		readonly estimatedTakeHomePay: number;
+	};
+	readonly future: {
+		readonly grossPay: number;
+		readonly contribution401k: number;
+		readonly estimatedAGI: number;
+		readonly estimatedMAGI: number;
+		readonly estimatedTakeHomePay: number;
+	};
+	readonly combined: {
+		readonly grossPay: number;
+		readonly contribution401k: number;
+		readonly estimatedAGI: number;
+		readonly estimatedMAGI: number;
+		readonly estimatedTakeHomePay: number;
+	};
 }
 
 export interface PersonalDataWithTotals {

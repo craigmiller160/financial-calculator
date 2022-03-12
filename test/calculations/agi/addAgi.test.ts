@@ -136,16 +136,27 @@ const data: PersonalDataWithTotals = {
 		}
 	],
 	totals: {
-		futureContribution401k: 0,
-		futureGrossPay: 126153.83,
-		futureEstimatedAGI: 0,
-		futureEstimatedMAGI: 0,
-		pastContribution401k: 7079.1314999999995,
-		pastGrossPay: 33710.15,
-		pastEstimatedAGI: 0,
-		pastEstimatedMAGI: 0,
-		pastEstimatedTakeHomePay: 0,
-		futureEstimatedTakeHomePay: 0
+		past: {
+			grossPay: 0,
+			contribution401k: 0,
+			estimatedAGI: 0,
+			estimatedMAGI: 0,
+			estimatedTakeHomePay: 0
+		},
+		future: {
+			grossPay: 0,
+			contribution401k: 0,
+			estimatedAGI: 0,
+			estimatedMAGI: 0,
+			estimatedTakeHomePay: 0
+		},
+		combined: {
+			grossPay: 0,
+			contribution401k: 0,
+			estimatedAGI: 0,
+			estimatedMAGI: 0,
+			estimatedTakeHomePay: 0
+		}
 	},
 	futureRate401k: 0
 };

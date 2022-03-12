@@ -30,16 +30,27 @@ export const addTotalsToData = (data: Data): PersonalDataWithTotals => {
 		futurePaychecks,
 		futureBonuses,
 		totals: {
-			pastGrossPay: 0,
-			pastContribution401k: 0,
-			pastEstimatedAGI: 0,
-			pastEstimatedMAGI: 0,
-			futureGrossPay: 0,
-			futureContribution401k: 0,
-			futureEstimatedAGI: 0,
-			futureEstimatedMAGI: 0,
-			pastEstimatedTakeHomePay: 0,
-			futureEstimatedTakeHomePay: 0
+			past: {
+				grossPay: 0,
+				contribution401k: 0,
+				estimatedAGI: 0,
+				estimatedMAGI: 0,
+				estimatedTakeHomePay: 0
+			},
+			future: {
+				grossPay: 0,
+				contribution401k: 0,
+				estimatedAGI: 0,
+				estimatedMAGI: 0,
+				estimatedTakeHomePay: 0
+			},
+			combined: {
+				grossPay: 0,
+				contribution401k: 0,
+				estimatedAGI: 0,
+				estimatedMAGI: 0,
+				estimatedTakeHomePay: 0
+			}
 		},
 		futureRate401k: 0
 	};
