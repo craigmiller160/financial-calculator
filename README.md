@@ -16,3 +16,8 @@ A variety of data is outputted when this application is run:
 | Full Income | This captures the total amount of income I am bringing in, including all additional sources (like investments).                                                                                      |
 
 And of course, at the very end it tells me what my new 401k Contribution should be and how much I can contribute to my Roth IRA this year. 
+
+## Taxable Investment Income Criteria
+
+1. Dividends
+2. Sale of Shares in Taxable Brokerage
