@@ -16,6 +16,18 @@
   ],
   "futurePaychecks": [
     {
+      "startDate": "2022-03-25",
+      "endDate": "2022-03-25",
+      "benefitsCost": {
+        "dental": 10,
+        "hsa": 38.46,
+        "medical": 0,
+        "vision": 10
+      },
+      "numberOfChecks": 1,
+      "grossPay": 5585.645
+    },
+    {
       "startDate": "2022-03-14",
       "endDate": "2022-12-31",
       "benefitsCost": {
