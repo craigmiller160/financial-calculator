@@ -1,5 +1,3 @@
-// TODO integrate MAGI
-
 import {
 	getCombinedTotalsForBonuses,
 	getCombinedTotalsForPaychecks

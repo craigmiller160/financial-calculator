@@ -21,7 +21,6 @@ interface Context {
 // 0.1%
 const INTERVAL = new Decimal(0.001);
 
-// TODO add tests for both of these scenarios
 const noAmount401k: PredicateT<Context> = (ctx) =>
 	ctx.amount401k.eq(new Decimal(0));
 const tooHighAmount401k: PredicateT<Context> = (ctx) =>
