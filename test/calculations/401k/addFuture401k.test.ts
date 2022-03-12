@@ -142,16 +142,27 @@ const personalData: PersonalDataWithTotals = {
 		}
 	],
 	totals: {
-		futureContribution401k: 0,
-		futureGrossPay: 126153.83,
-		futureEstimatedAGI: 0,
-		futureEstimatedMAGI: 0,
-		pastContribution401k: 7821.303,
-		pastGrossPay: 33710.15,
-		pastEstimatedAGI: 0,
-		pastEstimatedMAGI: 0,
-		futureEstimatedTakeHomePay: 0,
-		pastEstimatedTakeHomePay: 0
+		past: {
+			contribution401k: 7821.303,
+			grossPay: 33710.15,
+			estimatedAGI: 0,
+			estimatedMAGI: 0,
+			estimatedTakeHomePay: 0
+		},
+		future: {
+			contribution401k: 0,
+			grossPay: 126153.83,
+			estimatedAGI: 0,
+			estimatedMAGI: 0,
+			estimatedTakeHomePay: 0
+		},
+		combined: {
+			grossPay: 0,
+			contribution401k: 0,
+			estimatedAGI: 0,
+			estimatedMAGI: 0,
+			estimatedTakeHomePay: 0
+		}
 	},
 	futureRate401k: 0
 };
@@ -196,7 +207,10 @@ describe('addFuture401k', () => {
 			],
 			totals: {
 				...personalData.totals,
-				futureContribution401k: 12615.383
+				future: {
+					...personalData.totals.future,
+					contribution401k: 12615.383
+				}
 			},
 			futureRate401k: 0.1
 		});
