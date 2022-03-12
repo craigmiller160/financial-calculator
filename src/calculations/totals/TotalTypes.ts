@@ -68,12 +68,12 @@ export interface PersonalTotals {
 	readonly pastContribution401k: number;
 	readonly pastEstimatedAGI: number;
 	readonly pastEstimatedMAGI: number;
-	readonly pastEstimatedTakeHomePay: number; // TODO update with fed
+	readonly pastEstimatedTakeHomePay: number;
 	readonly futureGrossPay: number;
 	readonly futureContribution401k: number;
 	readonly futureEstimatedAGI: number;
 	readonly futureEstimatedMAGI: number;
-	readonly futureEstimatedTakeHomePay: number; // TODO update with fed
+	readonly futureEstimatedTakeHomePay: number;
 }
 
 export interface PersonalDataWithTotals {
