@@ -158,6 +158,8 @@ const data: PersonalDataWithTotals = {
 			estimatedTakeHomePay: 0
 		},
 		combinedWithAdditionalIncome: {
+			grossPay: 0,
+			contribution401k: 0,
 			estimatedAGI: 0,
 			estimatedMAGI: 0,
 			estimatedTakeHomePay: 0
@@ -168,6 +170,7 @@ const data: PersonalDataWithTotals = {
 	additionalIncome: {
 		taxableInvestmentIncome: 1000,
 		total: {
+			grossPay: 0,
 			estimatedAGI: 1000,
 			estimatedMAGI: 0
 		}

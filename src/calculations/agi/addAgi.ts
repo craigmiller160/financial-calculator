@@ -35,7 +35,7 @@ const addAgiToBonus = (bonus: BonusWithTotal): BonusWithTotal => {
 
 const getAdditionalIncomeAgi = (
 	additionalIncome: AdditionalIncomeWithTotals
-): number => additionalIncome.taxableInvestmentIncome;
+): number => additionalIncome.total.grossPay;
 
 export const addAgi = (
 	personalData: PersonalDataWithTotals
