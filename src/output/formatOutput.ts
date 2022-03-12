@@ -90,6 +90,7 @@ const formatBonus = (bonus: BonusWithTotal): string => {
 const formatAllBonuses = (bonuses: ReadonlyArray<BonusWithTotal>): string =>
 	pipe(bonuses, RArray.map(formatBonus), Monoid.concatAll(newlineMonoid));
 
+// TODO add investment income as column and include in full income
 const formatTotals = (data: PersonalDataWithTotals): string => {
 	const grossPay = pad(formatCurrency(data.totals.combined.grossPay));
 	const agiMagi = pad(formatCurrency(data.totals.combined.estimatedAGI));
