@@ -1,4 +1,4 @@
-import { BenefitsCost, LegalData } from '../../data/decoders';
+import { AdditionalIncome, BenefitsCost, LegalData } from '../../data/decoders';
 
 export interface BenefitsCostAndTotal extends BenefitsCost {
 	readonly total: number;
@@ -94,6 +94,7 @@ export interface PersonalDataWithTotals {
 	readonly totals: PersonalTotals;
 	readonly futureRate401k: number;
 	readonly rothIraLimit: number;
+	readonly additionalIncome: AdditionalIncome;
 }
 
 export interface CombinedTotals {
