@@ -65,33 +65,35 @@ export const addCombinedTotals = (
 				futureBonusesTotal.estimatedTakeHomePay
 			)
 		};
+		const combined = {
+			grossPay: decimalAdd(past.grossPay, future.grossPay),
+			contribution401k: decimalAdd(
+				past.contribution401k,
+				future.contribution401k
+			),
+			estimatedAGI: decimalAdd(past.estimatedAGI, future.estimatedAGI),
+			estimatedMAGI: decimalAdd(past.estimatedMAGI, future.estimatedMAGI),
+			estimatedTakeHomePay: decimalAdd(
+				past.estimatedTakeHomePay,
+				future.estimatedTakeHomePay
+			)
+		};
 		draft.totals = {
 			past,
 			future,
-			combined: {
-				grossPay: decimalAdd(past.grossPay, future.grossPay),
-				contribution401k: decimalAdd(
-					past.contribution401k,
-					future.contribution401k
-				),
+			combined,
+			// TODO add to test
+			combinedWithAdditionalIncome: {
 				estimatedAGI: decimalAdd(
-					past.estimatedAGI,
-					future.estimatedAGI
+					combined.estimatedAGI,
+					draft.additionalIncome.total.estimatedAGI
 				),
 				estimatedMAGI: decimalAdd(
-					past.estimatedMAGI,
-					future.estimatedMAGI
+					combined.estimatedMAGI,
+					draft.additionalIncome.total.estimatedMAGI
 				),
-				estimatedTakeHomePay: decimalAdd(
-					past.estimatedTakeHomePay,
-					future.estimatedTakeHomePay
-				)
-			},
-			// TODO fix below
-			combinedWithAdditionalIncome: {
-				estimatedAGI: 0,
-				estimatedMAGI: 0,
-				estimatedTakeHomePay: 0
+				// TODO what should this be?
+				estimatedTakeHomePay: combined.estimatedTakeHomePay
 			}
 		};
 	});
