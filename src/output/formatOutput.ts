@@ -51,18 +51,6 @@ const TOTAL_HEADER = `|${pad('Gross Pay')}|${pad('AGI/MAGI')}|${pad(
 const sum = (num1: number, num2: number): number =>
 	new Decimal(num1).plus(new Decimal(num2)).toNumber();
 
-/*
- * 3) Totals
- * 		a) Gross Pay
- * 		b) AGI/MAGI
- * 		c) 401k Contribution
- * 		d) Take Home Pay
- * 		e) Full Income
- * 4) New Stats
- * 		a) 401k
- * 		b) Roth IRA
- */
-
 const formatPaycheck = (paycheck: PaycheckWithTotal): string => {
 	const startDate = pad(paycheck.startDate);
 	const endDate = pad(paycheck.endDate);
