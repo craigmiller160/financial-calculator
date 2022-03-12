@@ -6,6 +6,7 @@ import { MonoidT } from '@craigmiller160/ts-functions/types';
 import * as Monoid from 'fp-ts/Monoid';
 import { pipe } from 'fp-ts/function';
 import * as RArray from 'fp-ts/ReadonlyArray';
+import Decimal from 'decimal.js';
 
 const newlineMonoid: MonoidT<string> = {
 	empty: '',
@@ -34,7 +35,16 @@ const pad = (text: string): string => ` ${text.padEnd(COL_LENGTH, ' ')}`;
 
 const PAYCHECK_HEADER = `|${pad('Start')}|${pad('End')}|${pad(
 	'Gross Pay'
-)}|${pad('401k Rate')}|${pad('Take Home')}|`;
+)}|${pad('401k Rate')}|${pad('401k Amount')}|${pad('Take Home')}|${pad(
+	'Full Income'
+)}|`;
+
+const BONUS_HEADER = `|${pad('Date')}|${pad('Gross Pay')}|${pad(
+	'401k Rate'
+)}|${pad('401k Amount')}|${pad('Take Home')}|${pad('Full Income')}|`;
+
+const sum = (num1: number, num2: number): number =>
+	new Decimal(num1).plus(new Decimal(num2)).toNumber();
 
 /*
  * 1) Paycheck Info
@@ -62,8 +72,14 @@ const formatPaycheck = (paycheck: PaycheckWithTotal): string => {
 	const endDate = pad(paycheck.endDate);
 	const grossPay = pad(formatCurrency(paycheck.grossPay));
 	const rate401k = pad(formatPercent(paycheck.paycheck401k.rate));
+	const amount401k = pad(formatCurrency(paycheck.paycheck401k.amount));
 	const takeHome = pad(formatCurrency(paycheck.estimatedTakeHomePay));
-	return `|${startDate}|${endDate}|${grossPay}|${rate401k}|${takeHome}|`;
+	const combinedIncome = pad(
+		formatCurrency(
+			sum(paycheck.paycheck401k.amount, paycheck.estimatedTakeHomePay)
+		)
+	);
+	return `|${startDate}|${endDate}|${grossPay}|${rate401k}|${amount401k}|${takeHome}|${combinedIncome}|`;
 };
 
 const formatAllPaychecks = (
@@ -75,6 +91,7 @@ const formatAllPaychecks = (
 		Monoid.concatAll(newlineMonoid)
 	);
 
+// TODO reduce leading whitespace
 export const formatOutput = (data: PersonalDataWithTotals): string => {
 	const percent401k = formatPercent(data.futureRate401k);
 	const rothIraLimit = formatCurrency(data.rothIraLimit);
