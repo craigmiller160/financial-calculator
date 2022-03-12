@@ -36,7 +36,7 @@ const pastPaycheck: PaycheckWithTotal = {
 		grossPay: 18622.15,
 		estimatedAGI: 12704.054025,
 		estimatedMAGI: 10,
-		estimatedTakeHomePay: 0
+		estimatedTakeHomePay: 200
 	},
 	payrollTaxCost: {
 		socialSecurity: 230.91466,
@@ -80,7 +80,7 @@ const futurePaycheck: PaycheckWithTotal = {
 		grossPay: 121153.83,
 		estimatedAGI: 110657.902005,
 		estimatedMAGI: 10,
-		estimatedTakeHomePay: 0
+		estimatedTakeHomePay: 100
 	},
 	payrollTaxCost: {
 		socialSecurity: 357.69226,
@@ -109,7 +109,7 @@ const pastBonus: BonusWithTotal = {
 		medicare: 218.776,
 		total: 1154.232
 	},
-	estimatedTakeHomePay: 0,
+	estimatedTakeHomePay: 30,
 	federalTaxCosts: {
 		effectiveRate: 0,
 		amount: 0
@@ -135,7 +135,7 @@ const futureBonus: BonusWithTotal = {
 		medicare: 72.5,
 		total: 382.5
 	},
-	estimatedTakeHomePay: 0
+	estimatedTakeHomePay: 20
 };
 const futureBonuses = [futureBonus, futureBonus];
 
@@ -146,7 +146,8 @@ describe('getCombinedTotals', () => {
 			grossPay: 37244.3,
 			contribution401k: 7821.303,
 			estimatedAGI: 25408.10805,
-			estimatedMAGI: 20
+			estimatedMAGI: 20,
+			estimatedTakeHomePay: 400
 		});
 	});
 
@@ -156,7 +157,8 @@ describe('getCombinedTotals', () => {
 			grossPay: 242307.66,
 			contribution401k: 0,
 			estimatedAGI: 221315.80401,
-			estimatedMAGI: 20
+			estimatedMAGI: 20,
+			estimatedTakeHomePay: 200
 		});
 	});
 
@@ -166,7 +168,8 @@ describe('getCombinedTotals', () => {
 			grossPay: 30176,
 			contribution401k: 6336.96,
 			estimatedAGI: 21530.576,
-			estimatedMAGI: 20
+			estimatedMAGI: 20,
+			estimatedTakeHomePay: 60
 		});
 	});
 
@@ -176,7 +179,8 @@ describe('getCombinedTotals', () => {
 			grossPay: 10000,
 			contribution401k: 0,
 			estimatedAGI: 9235,
-			estimatedMAGI: 20
+			estimatedMAGI: 20,
+			estimatedTakeHomePay: 40
 		});
 	});
 });
