@@ -84,6 +84,18 @@ export interface PersonalTotals {
 		readonly estimatedMAGI: number;
 		readonly estimatedTakeHomePay: number;
 	};
+	readonly combinedWithAdditionalIncome: {
+		readonly estimatedAGI: number;
+		readonly estimatedMAGI: number;
+		readonly estimatedTakeHomePay: number;
+	};
+}
+
+export interface AdditionalIncomeWithTotals extends AdditionalIncome {
+	readonly total: {
+		readonly estimatedAGI: number;
+		readonly estimatedMAGI: number;
+	};
 }
 
 export interface PersonalDataWithTotals {
@@ -94,7 +106,7 @@ export interface PersonalDataWithTotals {
 	readonly totals: PersonalTotals;
 	readonly futureRate401k: number;
 	readonly rothIraLimit: number;
-	readonly additionalIncome: AdditionalIncome;
+	readonly additionalIncome: AdditionalIncomeWithTotals;
 }
 
 export interface CombinedTotals {

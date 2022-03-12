@@ -1,4 +1,5 @@
 import {
+	AdditionalIncomeWithTotals,
 	BonusWithTotal,
 	PaycheckWithTotal,
 	PersonalDataWithTotals
@@ -32,6 +33,10 @@ const addAgiToBonus = (bonus: BonusWithTotal): BonusWithTotal => {
 	});
 };
 
+const getAdditionalIncomeAgi = (
+	additionalIncome: AdditionalIncomeWithTotals
+): number => additionalIncome.taxableInvestmentIncome;
+
 export const addAgi = (
 	personalData: PersonalDataWithTotals
 ): PersonalDataWithTotals => {
@@ -56,5 +61,8 @@ export const addAgi = (
 		draft.futurePaychecks = castDraft(futurePaychecks);
 		draft.pastBonuses = castDraft(pastBonuses);
 		draft.futureBonuses = castDraft(futureBonuses);
+		draft.additionalIncome.total.estimatedAGI = getAdditionalIncomeAgi(
+			draft.additionalIncome
+		);
 	});
 };
