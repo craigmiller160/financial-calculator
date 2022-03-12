@@ -116,6 +116,7 @@
     "past": {
       "grossPay": 0,
       "contribution401k": 0,
+      "contributionHsa": 0,
       "estimatedAGI": 0,
       "estimatedMAGI": 0,
       "estimatedTakeHomePay": 0
@@ -123,6 +124,7 @@
     "future": {
       "grossPay": 0,
       "contribution401k": 0,
+      "contributionHsa": 0,
       "estimatedAGI": 0,
       "estimatedMAGI": 0,
       "estimatedTakeHomePay": 0
@@ -130,6 +132,7 @@
     "combined": {
       "grossPay": 0,
       "contribution401k": 0,
+      "contributionHsa": 0,
       "estimatedAGI": 0,
       "estimatedMAGI": 0,
       "estimatedTakeHomePay": 0
@@ -137,6 +140,7 @@
     "combinedWithAdditionalIncome": {
       "grossPay": 0,
       "contribution401k": 0,
+      "contributionHsa": 0,
       "estimatedAGI": 0,
       "estimatedMAGI": 0,
       "estimatedTakeHomePay": 0

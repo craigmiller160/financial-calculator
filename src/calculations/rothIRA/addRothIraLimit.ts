@@ -4,6 +4,7 @@ import * as RArray from 'fp-ts/ReadonlyArray';
 import * as Option from 'fp-ts/Option';
 import produce from 'immer';
 
+// TODO integrate correct magi value here
 export const addRothIraLimit = (
 	data: DataWithTotals
 ): PersonalDataWithTotals => {
