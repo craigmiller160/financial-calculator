@@ -164,7 +164,8 @@ const personalData: PersonalDataWithTotals = {
 			estimatedTakeHomePay: 0
 		}
 	},
-	futureRate401k: 0
+	futureRate401k: 0,
+	rothIraLimit: 0
 };
 
 describe('addFuture401k', () => {

@@ -52,6 +52,7 @@ export const addTotalsToData = (data: Data): PersonalDataWithTotals => {
 				estimatedTakeHomePay: 0
 			}
 		},
-		futureRate401k: 0
+		futureRate401k: 0,
+		rothIraLimit: 0
 	};
 };

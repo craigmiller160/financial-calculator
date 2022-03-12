@@ -93,6 +93,7 @@ export interface PersonalDataWithTotals {
 	readonly futureBonuses: ReadonlyArray<BonusWithTotal>;
 	readonly totals: PersonalTotals;
 	readonly futureRate401k: number;
+	readonly rothIraLimit: number;
 }
 
 export interface CombinedTotals {
