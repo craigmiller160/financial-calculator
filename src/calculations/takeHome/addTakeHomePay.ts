@@ -10,16 +10,18 @@ import Decimal from 'decimal.js';
 
 const addTakeHomeForBonus = (bonus: BonusWithTotal): BonusWithTotal =>
 	produce(bonus, (draft) => {
-		draft.estimatedTakeHomePay =
-			draft.estimatedAGI - draft.federalTaxCosts.amount;
+		draft.estimatedTakeHomePay = new Decimal(draft.estimatedAGI)
+			.minus(new Decimal(draft.federalTaxCosts.amount))
+			.toNumber();
 	});
 
 const addTakeHomeForPaycheck = (
 	paycheck: PaycheckWithTotal
 ): PaycheckWithTotal =>
 	produce(paycheck, (draft) => {
-		draft.estimatedTakeHomePay =
-			draft.estimatedAGI - draft.federalTaxCost.amount;
+		draft.estimatedTakeHomePay = new Decimal(draft.estimatedAGI)
+			.minus(new Decimal(draft.federalTaxCost.amount))
+			.toNumber();
 		draft.totalsForAllChecks.estimatedTakeHomePay = new Decimal(
 			draft.estimatedTakeHomePay
 		)
