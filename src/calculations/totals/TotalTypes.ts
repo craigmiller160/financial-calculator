@@ -12,7 +12,7 @@ export interface BonusWithTotal {
 	readonly federalTaxCosts: FederalTaxCosts;
 	readonly estimatedAGI: number;
 	readonly estimatedMAGI: number;
-	readonly estimatedTakeHomePay: number; // TODO update with fed
+	readonly estimatedTakeHomePay: number;
 }
 
 export interface The401k {
