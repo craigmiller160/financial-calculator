@@ -15,7 +15,7 @@ const newlineMonoid: MonoidT<string> = {
 		if (a.length === 0) {
 			return b;
 		}
-		return `${a}\n${b}`;
+		return `${a}\n\t\t${b}`;
 	}
 };
 const decimalSumMonoid: MonoidT<Decimal> = {
