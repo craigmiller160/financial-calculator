@@ -100,7 +100,6 @@ const formatBonus = (bonus: BonusWithTotal): string => {
 const formatAllBonuses = (bonuses: ReadonlyArray<BonusWithTotal>): string =>
 	pipe(bonuses, RArray.map(formatBonus), Monoid.concatAll(newlineMonoid));
 
-// TODO add investment income as column and include in full income
 const formatTotals = (data: PersonalDataWithTotals): string => {
 	const grossPay = pad(
 		formatCurrency(data.totals.combinedWithAdditionalIncome.grossPay)
@@ -123,7 +122,8 @@ const formatTotals = (data: PersonalDataWithTotals): string => {
 		formatCurrency(
 			sum([
 				data.totals.combinedWithAdditionalIncome.estimatedTakeHomePay,
-				data.totals.combinedWithAdditionalIncome.contribution401k
+				data.totals.combinedWithAdditionalIncome.contribution401k,
+				data.additionalIncome.total.grossPay
 			])
 		)
 	);
