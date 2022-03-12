@@ -12,6 +12,7 @@ import { addCombinedTotals } from './combinedTotals/addCombinedTotals';
 import { addMagi } from '../agi/addMagi';
 import { addFederalTaxes } from './taxes/addFederalTaxes';
 import { addTakeHomePay } from './takeHome/addTakeHomePay';
+import { addRothIraLimit } from './rothIRA/addRothIraLimit';
 
 const runCalculationsForTotals = (data: Data): IOT<PersonalDataWithTotals> =>
 	pipe(
@@ -72,6 +73,15 @@ const runCalculationsForTakeHomePay = (
 		IO.chainFirst((data) => logger.debugWithJson('Data', data))
 	);
 
+const runCalculationsForRothIraLimit =
+	(legalData: LegalData) =>
+	(personalData: PersonalDataWithTotals): IOT<PersonalDataWithTotals> =>
+		pipe(
+			logger.debug('Calculating Roth IRA Limit'),
+			IO.map(() => addRothIraLimit({ legalData, personalData })),
+			IO.chainFirst((data) => logger.debugWithJson('Data', data))
+		);
+
 export const runCalculations = (data: Data): IOTryT<string> =>
 	pipe(
 		runCalculationsForTotals(data),
@@ -84,5 +94,6 @@ export const runCalculations = (data: Data): IOTryT<string> =>
 		IOEither.chain(runCalculationsForFederalTaxes(data.legalData)),
 		IOEither.chainIOK(runCalculationsForTakeHomePay),
 		IOEither.chainIOK(runCalculationsForCombinedTotals),
+		IOEither.chainIOK(runCalculationsForRothIraLimit(data.legalData)),
 		IOEither.map((data) => `${data.futureRate401k}`)
 	);
