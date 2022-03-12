@@ -22,3 +22,6 @@ And of course, at the very end it tells me what my new 401k Contribution should 
 
 1. Dividends
 2. Sale of Shares in Taxable Brokerage
+3. RSUs vesting
+
+There is the `investmentIncome.json` file in the data directory to help track these items. It is not used by the program.
