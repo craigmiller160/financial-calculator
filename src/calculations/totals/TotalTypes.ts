@@ -90,6 +90,7 @@ export interface CombinedTotals {
 	readonly contribution401k: number;
 	readonly estimatedAGI: number;
 	readonly estimatedMAGI: number;
+	readonly estimatedTakeHomePay: number;
 }
 
 export interface DataWithTotals {
