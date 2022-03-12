@@ -45,8 +45,8 @@ const BONUS_HEADER = `|${pad('Date')}|${pad('Gross Pay')}|${pad(
 )}|${pad('401k Amount')}|${pad('Take Home')}|${pad('Full Income')}|`;
 
 const TOTAL_HEADER = `|${pad('Gross Pay')}|${pad('AGI/MAGI')}|${pad(
-	'401k Amount'
-)}|${pad('Take Home')}|${pad('Full Income')}|`;
+	'Add. Income'
+)}|${pad('401k Amount')}|${pad('Take Home')}|${pad('Full Income')}|`;
 
 const sum = (num1: number, num2: number): number =>
 	new Decimal(num1).plus(new Decimal(num2)).toNumber();
@@ -92,23 +92,32 @@ const formatAllBonuses = (bonuses: ReadonlyArray<BonusWithTotal>): string =>
 
 // TODO add investment income as column and include in full income
 const formatTotals = (data: PersonalDataWithTotals): string => {
-	const grossPay = pad(formatCurrency(data.totals.combined.grossPay));
-	const agiMagi = pad(formatCurrency(data.totals.combined.estimatedAGI));
+	const grossPay = pad(
+		formatCurrency(data.totals.combinedWithAdditionalIncome.grossPay)
+	);
+	const agiMagi = pad(
+		formatCurrency(data.totals.combinedWithAdditionalIncome.estimatedAGI)
+	);
 	const amount401k = pad(
-		formatCurrency(data.totals.combined.contribution401k)
+		formatCurrency(
+			data.totals.combinedWithAdditionalIncome.contribution401k
+		)
 	);
 	const takeHome = pad(
-		formatCurrency(data.totals.combined.estimatedTakeHomePay)
+		formatCurrency(
+			data.totals.combinedWithAdditionalIncome.estimatedTakeHomePay
+		)
 	);
+	const addIncome = pad(formatCurrency(data.additionalIncome.total.grossPay));
 	const fullIncome = pad(
 		formatCurrency(
 			sum(
-				data.totals.combined.estimatedTakeHomePay,
-				data.totals.combined.contribution401k
+				data.totals.combinedWithAdditionalIncome.estimatedTakeHomePay,
+				data.totals.combinedWithAdditionalIncome.contribution401k
 			)
 		)
 	);
-	return `|${grossPay}|${agiMagi}|${amount401k}|${takeHome}|${fullIncome}|`;
+	return `|${grossPay}|${agiMagi}|${addIncome}|${amount401k}|${takeHome}|${fullIncome}|`;
 };
 
 export const formatOutput = (data: PersonalDataWithTotals): string => {
