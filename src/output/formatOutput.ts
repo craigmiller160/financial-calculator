@@ -44,25 +44,20 @@ const BONUS_HEADER = `|${pad('Date')}|${pad('Gross Pay')}|${pad(
 	'401k Rate'
 )}|${pad('401k Amount')}|${pad('Take Home')}|${pad('Full Income')}|`;
 
+const TOTAL_HEADER = `|${pad('Gross Pay')}|${pad('AGI/MAGI')}|${pad(
+	'401k Amount'
+)}|${pad('Take Home')}|${pad('Full Income')}|`;
+
 const sum = (num1: number, num2: number): number =>
 	new Decimal(num1).plus(new Decimal(num2)).toNumber();
 
 /*
- * 1) Paycheck Info
- * 		a) Date Range
- * 		b) Gross Pay
- * 		c) 401k Rate
- * 		d) Take Home Pay
- * 2) Bonuses
- * 		a) Date
- * 		b) Gross Pay
- * 		c) 401k Rate
- * 		d) Take Home Pay
  * 3) Totals
  * 		a) Gross Pay
  * 		b) AGI/MAGI
  * 		c) 401k Contribution
  * 		d) Take Home Pay
+ * 		e) Full Income
  * 4) New Stats
  * 		a) 401k
  * 		b) Roth IRA
@@ -120,8 +115,12 @@ export const formatOutput = (data: PersonalDataWithTotals): string => {
 		${BONUS_HEADER}
 		${formatAllBonuses(data.pastBonuses)}
 		${formatAllBonuses(data.futureBonuses)}
-		
-	New 401k Contribution Rate: ${percent401k}
-	This Year's Roth IRA Limit: ${rothIraLimit}  
+	
+	TOTALS
+		${TOTAL_HEADER}
+	
+	NEW TARGETS
+		New 401k Contribution Rate: ${percent401k}
+		This Year's Roth IRA Limit: ${rothIraLimit}  
 	`;
 };
