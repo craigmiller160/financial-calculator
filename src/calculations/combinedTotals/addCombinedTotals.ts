@@ -86,6 +86,12 @@ export const addCombinedTotals = (
 					past.estimatedTakeHomePay,
 					future.estimatedTakeHomePay
 				)
+			},
+			// TODO fix below
+			combinedWithAdditionalIncome: {
+				estimatedAGI: 0,
+				estimatedMAGI: 0,
+				estimatedTakeHomePay: 0
 			}
 		};
 	});

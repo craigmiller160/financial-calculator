@@ -50,10 +50,22 @@ export const addTotalsToData = (data: Data): PersonalDataWithTotals => {
 				estimatedAGI: 0,
 				estimatedMAGI: 0,
 				estimatedTakeHomePay: 0
+			},
+			combinedWithAdditionalIncome: {
+				estimatedAGI: 0,
+				estimatedMAGI: 0,
+				estimatedTakeHomePay: 0
 			}
 		},
 		futureRate401k: 0,
 		rothIraLimit: 0,
-		additionalIncome: data.personalData.additionalIncome
+		additionalIncome: {
+			taxableInvestmentIncome:
+				data.personalData.additionalIncome.taxableInvestmentIncome,
+			total: {
+				estimatedAGI: 0,
+				estimatedMAGI: 0
+			}
+		}
 	};
 };
