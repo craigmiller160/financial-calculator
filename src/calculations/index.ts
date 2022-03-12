@@ -11,6 +11,7 @@ import { addAgi } from '../agi/addAgi';
 import { addCombinedTotals } from './combinedTotals/addCombinedTotals';
 import { addMagi } from '../agi/addMagi';
 import { addFederalTaxes } from './taxes/addFederalTaxes';
+import { addTakeHomePay } from './takeHome/addTakeHomePay';
 
 const runCalculationsForTotals = (data: Data): IOT<PersonalDataWithTotals> =>
 	pipe(
@@ -62,6 +63,15 @@ const runCalculationsForFederalTaxes =
 			IOEither.chainFirstIOK((data) => logger.debugWithJson('Data', data))
 		);
 
+const runCalculationsForTakeHomePay = (
+	personalData: PersonalDataWithTotals
+): IOT<PersonalDataWithTotals> =>
+	pipe(
+		logger.debug('Calculating Take Home Pay'),
+		IO.map(() => addTakeHomePay(personalData)),
+		IO.chainFirst((data) => logger.debugWithJson('Data', data))
+	);
+
 export const runCalculations = (data: Data): IOTryT<string> =>
 	pipe(
 		runCalculationsForTotals(data),
@@ -72,5 +82,7 @@ export const runCalculations = (data: Data): IOTryT<string> =>
 		IO.chain(runCalculationsForCombinedTotals),
 		IOEither.rightIO,
 		IOEither.chain(runCalculationsForFederalTaxes(data.legalData)),
+		IOEither.chainIOK(runCalculationsForTakeHomePay),
+		IOEither.chainIOK(runCalculationsForCombinedTotals),
 		IOEither.map((data) => `${data.futureRate401k}`)
 	);

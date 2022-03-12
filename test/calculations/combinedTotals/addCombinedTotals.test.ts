@@ -11,15 +11,15 @@ describe('addCombinedTotals', () => {
 		const expectedResult = produce(inputData, (draft) => {
 			draft.totals = {
 				pastGrossPay: 33710.15,
-				pastContribution401k: 7079.1314999999995,
-				pastEstimatedAGI: 23469.342024999998,
-				pastEstimatedMAGI: 23469.342024999998,
+				pastContribution401k: 7079.1315,
+				pastEstimatedAGI: 23469.342025,
+				pastEstimatedMAGI: 23469.342025,
 				futureGrossPay: 121153.83,
 				futureContribution401k: 13326.9213,
 				futureEstimatedAGI: 97330.98070499998,
 				futureEstimatedMAGI: 97330.98070499998,
-				pastEstimatedTakeHomePay: 0,
-				futureEstimatedTakeHomePay: 0
+				pastEstimatedTakeHomePay: 250,
+				futureEstimatedTakeHomePay: 100
 			};
 		});
 		expect(result).toEqual(expectedResult);

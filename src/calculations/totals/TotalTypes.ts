@@ -12,7 +12,7 @@ export interface BonusWithTotal {
 	readonly federalTaxCosts: FederalTaxCosts;
 	readonly estimatedAGI: number;
 	readonly estimatedMAGI: number;
-	readonly estimatedTakeHomePay: number; // TODO update with fed
+	readonly estimatedTakeHomePay: number;
 }
 
 export interface The401k {
@@ -32,7 +32,7 @@ export interface PaycheckTotals {
 	readonly contribution401k: number;
 	readonly estimatedAGI: number;
 	readonly estimatedMAGI: number;
-	readonly estimatedTakeHomePay: number; // TODO update with fed
+	readonly estimatedTakeHomePay: number;
 }
 
 export interface FederalTaxCosts {
@@ -49,7 +49,7 @@ export interface PaycheckWithTotal {
 	readonly numberOfChecks: number;
 	readonly estimatedAGI: number;
 	readonly estimatedMAGI: number;
-	readonly estimatedTakeHomePay: number; // TODO update with fed
+	readonly estimatedTakeHomePay: number;
 	readonly payrollTaxCost: PayrollTaxCosts;
 	readonly totalsForAllChecks: PaycheckTotals;
 	readonly federalTaxCost: FederalTaxCosts;
@@ -90,6 +90,7 @@ export interface CombinedTotals {
 	readonly contribution401k: number;
 	readonly estimatedAGI: number;
 	readonly estimatedMAGI: number;
+	readonly estimatedTakeHomePay: number;
 }
 
 export interface DataWithTotals {

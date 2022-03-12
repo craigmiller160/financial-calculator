@@ -20,8 +20,8 @@
       "estimatedMAGI": 2540.810805,
       "estimatedTakeHomePay": 0,
       "federalTaxCost": {
-        "effectiveRate": 0,
-        "amount": 0
+        "effectiveRate": 0.15365231179543765,
+        "amount": 390.40145402307695
       },
       "totalsForAllChecks": {
         "contribution401k": 3910.6515,
@@ -29,7 +29,7 @@
         "grossPay": 18622.15,
         "estimatedAGI": 12704.054025,
         "estimatedMAGI": 12704.054025,
-        "estimatedTakeHomePay": 200
+        "estimatedTakeHomePay": 0
       },
       "annualized": {
         "estimatedAGI": 66061.08093,
@@ -50,8 +50,8 @@
       "estimatedAGI": 10765.288,
       "estimatedMAGI": 10765.288,
       "federalTaxCosts": {
-        "effectiveRate": 0,
-        "amount": 0
+        "effectiveRate": 0.22,
+        "amount": 2368.36336
       },
       "bonus401k": {
         "rate": 0.21,
@@ -62,7 +62,7 @@
         "medicare": 218.776,
         "total": 1154.232
       },
-      "estimatedTakeHomePay": 50
+      "estimatedTakeHomePay": 0
     }
   ],
   "futurePaychecks": [
@@ -86,8 +86,8 @@
       "estimatedMAGI": 4634.808604999999,
       "estimatedTakeHomePay": 0,
       "federalTaxCost": {
-        "effectiveRate": 0,
-        "amount": 0
+        "effectiveRate": 0.18884445636215136,
+        "amount": 875.2579113538459
       },
       "totalsForAllChecks": {
         "contribution401k": 13326.9213,
@@ -95,7 +95,7 @@
         "grossPay": 121153.83,
         "estimatedAGI": 97330.98070499998,
         "estimatedMAGI": 97330.98070499998,
-        "estimatedTakeHomePay": 100
+        "estimatedTakeHomePay": 0
       },
       "annualized": {
         "estimatedAGI": 120505.02372999997,
@@ -111,14 +111,14 @@
   ],
   "futureBonuses": [],
   "totals": {
-    "pastGrossPay": 0,
-    "pastContribution401k": 0,
-    "pastEstimatedAGI": 0,
-    "pastEstimatedMAGI": 0,
-    "futureGrossPay": 0,
-    "futureContribution401k": 0,
-    "futureEstimatedAGI": 0,
-    "futureEstimatedMAGI": 0,
+    "pastGrossPay": 33710.15,
+    "pastContribution401k": 7079.1314999999995,
+    "pastEstimatedAGI": 23469.342024999998,
+    "pastEstimatedMAGI": 23469.342024999998,
+    "futureGrossPay": 121153.83,
+    "futureContribution401k": 13326.9213,
+    "futureEstimatedAGI": 97330.98070499998,
+    "futureEstimatedMAGI": 97330.98070499998,
     "pastEstimatedTakeHomePay": 0,
     "futureEstimatedTakeHomePay": 0
   },

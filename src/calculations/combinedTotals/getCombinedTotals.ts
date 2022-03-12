@@ -7,19 +7,28 @@ import { MonoidT } from '@craigmiller160/ts-functions/types';
 import * as Monoid from 'fp-ts/Monoid';
 import * as RArray from 'fp-ts/ReadonlyArray';
 import { pipe } from 'fp-ts/function';
+import Decimal from 'decimal.js';
+
+const decimalAdd = (a: number, b: number): number =>
+	new Decimal(a).plus(new Decimal(b)).toNumber();
 
 const combinedTotalsMonoid: MonoidT<CombinedTotals> = {
 	empty: {
 		grossPay: 0,
 		contribution401k: 0,
 		estimatedAGI: 0,
-		estimatedMAGI: 0
+		estimatedMAGI: 0,
+		estimatedTakeHomePay: 0
 	},
 	concat: (a, b) => ({
-		grossPay: a.grossPay + b.grossPay,
-		contribution401k: a.contribution401k + b.contribution401k,
-		estimatedAGI: a.estimatedAGI + b.estimatedAGI,
-		estimatedMAGI: a.estimatedMAGI + b.estimatedMAGI
+		grossPay: decimalAdd(a.grossPay, b.grossPay),
+		contribution401k: decimalAdd(a.contribution401k, b.contribution401k),
+		estimatedAGI: decimalAdd(a.estimatedAGI, b.estimatedAGI),
+		estimatedMAGI: decimalAdd(a.estimatedMAGI, b.estimatedMAGI),
+		estimatedTakeHomePay: decimalAdd(
+			a.estimatedTakeHomePay,
+			b.estimatedTakeHomePay
+		)
 	})
 };
 
@@ -29,14 +38,16 @@ const paycheckToCombinedTotal = (
 	grossPay: paycheck.totalsForAllChecks.grossPay,
 	contribution401k: paycheck.totalsForAllChecks.contribution401k,
 	estimatedAGI: paycheck.totalsForAllChecks.estimatedAGI,
-	estimatedMAGI: paycheck.totalsForAllChecks.estimatedMAGI
+	estimatedMAGI: paycheck.totalsForAllChecks.estimatedMAGI,
+	estimatedTakeHomePay: paycheck.totalsForAllChecks.estimatedTakeHomePay
 });
 
 const bonusToCombinedTotal = (bonus: BonusWithTotal): CombinedTotals => ({
 	grossPay: bonus.grossPay,
 	contribution401k: bonus.bonus401k.amount,
 	estimatedAGI: bonus.estimatedAGI,
-	estimatedMAGI: bonus.estimatedMAGI
+	estimatedMAGI: bonus.estimatedMAGI,
+	estimatedTakeHomePay: bonus.estimatedTakeHomePay
 });
 
 export const getCombinedTotalsForPaychecks = (
