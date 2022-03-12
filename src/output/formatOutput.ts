@@ -100,6 +100,9 @@ export const formatOutput = (data: PersonalDataWithTotals): string => {
 			${PAYCHECK_HEADER}
 			${formatAllPaychecks(data.pastPaychecks)}
 			${formatAllPaychecks(data.futurePaychecks)}
+		
+		BONUSES
+			${BONUS_HEADER}
 			
 	    New 401k Contribution Rate: ${percent401k}
 	    This Year's Roth IRA Limit: ${rothIraLimit}  
