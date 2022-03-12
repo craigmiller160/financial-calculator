@@ -65,19 +65,20 @@ const formatPaycheck = (paycheck: PaycheckWithTotal): string => {
 	const startDate = pad(paycheck.startDate);
 	const endDate = pad(paycheck.endDate);
 	const numChecks = pad(paycheck.numberOfChecks.toString());
-	const grossPay = pad(formatCurrency(paycheck.grossPay));
-	const rate401k = pad(formatPercent(paycheck.paycheck401k.rate));
-	const amount401k = pad(formatCurrency(paycheck.paycheck401k.amount));
-	const amountHsa = pad(formatCurrency(paycheck.benefitsCost.hsa));
-	const takeHome = pad(formatCurrency(paycheck.estimatedTakeHomePay));
-	const fullIncome = pad(
-		formatCurrency(
-			sum([
-				paycheck.paycheck401k.amount,
-				paycheck.estimatedTakeHomePay,
-				paycheck.benefitsCost.hsa
-			])
-		)
+	const grossPay = pipe(paycheck.grossPay, formatCurrency, pad);
+	const rate401k = pipe(paycheck.paycheck401k.rate, formatPercent, pad);
+	const amount401k = pipe(paycheck.paycheck401k.amount, formatCurrency, pad);
+	const amountHsa = pipe(paycheck.benefitsCost.hsa, formatCurrency, pad);
+	const takeHome = pipe(paycheck.estimatedTakeHomePay, formatCurrency, pad);
+	const fullIncome = pipe(
+		[
+			paycheck.paycheck401k.amount,
+			paycheck.estimatedTakeHomePay,
+			paycheck.benefitsCost.hsa
+		],
+		sum,
+		formatCurrency,
+		pad
 	);
 	return `|${startDate}|${endDate}|${numChecks}|${grossPay}|${rate401k}|${amount401k}|${amountHsa}|${takeHome}|${fullIncome}|`;
 };
@@ -93,14 +94,15 @@ const formatAllPaychecks = (
 
 const formatBonus = (bonus: BonusWithTotal): string => {
 	const date = pad(bonus.date);
-	const grossPay = pad(formatCurrency(bonus.grossPay));
-	const rate401k = pad(formatPercent(bonus.bonus401k.rate));
-	const amount401k = pad(formatCurrency(bonus.bonus401k.amount));
-	const takeHome = pad(formatCurrency(bonus.estimatedTakeHomePay));
-	const fullIncome = pad(
-		formatCurrency(
-			sum([bonus.bonus401k.amount, bonus.estimatedTakeHomePay])
-		)
+	const grossPay = pipe(bonus.grossPay, formatCurrency, pad);
+	const rate401k = pipe(bonus.bonus401k.rate, formatPercent, pad);
+	const amount401k = pipe(bonus.bonus401k.amount, formatCurrency, pad);
+	const takeHome = pipe(bonus.estimatedTakeHomePay, formatCurrency, pad);
+	const fullIncome = pipe(
+		[bonus.bonus401k.amount, bonus.estimatedTakeHomePay],
+		sum,
+		formatCurrency,
+		pad
 	);
 	return `|${date}|${grossPay}|${rate401k}|${amount401k}|${takeHome}|${fullIncome}|`;
 };
