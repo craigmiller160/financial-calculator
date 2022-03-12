@@ -22,46 +22,58 @@ export const addCombinedTotals = (
 	const futureBonusesTotal = getCombinedTotalsForBonuses(data.futureBonuses);
 	return produce(data, (draft) => {
 		draft.totals = {
-			pastGrossPay: decimalAdd(
-				pastPaychecksTotal.grossPay,
-				pastBonusesTotal.grossPay
-			),
-			pastContribution401k: decimalAdd(
-				pastPaychecksTotal.contribution401k,
-				pastBonusesTotal.contribution401k
-			),
-			pastEstimatedAGI: decimalAdd(
-				pastPaychecksTotal.estimatedAGI,
-				pastBonusesTotal.estimatedAGI
-			),
-			pastEstimatedMAGI: decimalAdd(
-				pastPaychecksTotal.estimatedMAGI,
-				pastBonusesTotal.estimatedMAGI
-			),
-			futureGrossPay: decimalAdd(
-				futurePaychecksTotal.grossPay,
-				futureBonusesTotal.grossPay
-			),
-			futureContribution401k: decimalAdd(
-				futurePaychecksTotal.contribution401k,
-				futureBonusesTotal.contribution401k
-			),
-			futureEstimatedAGI: decimalAdd(
-				futurePaychecksTotal.estimatedAGI,
-				futureBonusesTotal.estimatedAGI
-			),
-			futureEstimatedMAGI: decimalAdd(
-				futurePaychecksTotal.estimatedMAGI,
-				futureBonusesTotal.estimatedMAGI
-			),
-			pastEstimatedTakeHomePay: decimalAdd(
-				pastPaychecksTotal.estimatedTakeHomePay,
-				pastBonusesTotal.estimatedTakeHomePay
-			),
-			futureEstimatedTakeHomePay: decimalAdd(
-				futurePaychecksTotal.estimatedTakeHomePay,
-				futureBonusesTotal.estimatedTakeHomePay
-			)
+			past: {
+				grossPay: decimalAdd(
+					pastPaychecksTotal.grossPay,
+					pastBonusesTotal.grossPay
+				),
+				contribution401k: decimalAdd(
+					pastPaychecksTotal.contribution401k,
+					pastBonusesTotal.contribution401k
+				),
+				estimatedAGI: decimalAdd(
+					pastPaychecksTotal.estimatedAGI,
+					pastBonusesTotal.estimatedAGI
+				),
+				estimatedMAGI: decimalAdd(
+					pastPaychecksTotal.estimatedMAGI,
+					pastBonusesTotal.estimatedMAGI
+				),
+				estimatedTakeHomePay: decimalAdd(
+					pastPaychecksTotal.estimatedTakeHomePay,
+					pastBonusesTotal.estimatedTakeHomePay
+				)
+			},
+			future: {
+				grossPay: decimalAdd(
+					futurePaychecksTotal.grossPay,
+					futureBonusesTotal.grossPay
+				),
+				contribution401k: decimalAdd(
+					futurePaychecksTotal.contribution401k,
+					futureBonusesTotal.contribution401k
+				),
+				estimatedAGI: decimalAdd(
+					futurePaychecksTotal.estimatedAGI,
+					futureBonusesTotal.estimatedAGI
+				),
+				estimatedMAGI: decimalAdd(
+					futurePaychecksTotal.estimatedMAGI,
+					futureBonusesTotal.estimatedMAGI
+				),
+				estimatedTakeHomePay: decimalAdd(
+					futurePaychecksTotal.estimatedTakeHomePay,
+					futureBonusesTotal.estimatedTakeHomePay
+				)
+			},
+			combined: {
+				// TODO fix this
+				grossPay: 0,
+				contribution401k: 0,
+				estimatedAGI: 0,
+				estimatedMAGI: 0,
+				estimatedTakeHomePay: 0
+			}
 		};
 	});
 };

@@ -81,10 +81,10 @@ const add401kToBonus =
 export const addFuture401k = (data: DataWithTotals): PersonalDataWithTotals => {
 	const remainingAmount401k = new Decimal(
 		data.legalData.contributionLimit401k -
-			data.personalData.totals.pastContribution401k
+			data.personalData.totals.past.contribution401k
 	);
 	const totalFutureIncome = new Decimal(
-		data.personalData.totals.futureGrossPay
+		data.personalData.totals.future.grossPay
 	);
 	const initContext: Context = {
 		remainingAmount401k,
@@ -102,14 +102,14 @@ export const addFuture401k = (data: DataWithTotals): PersonalDataWithTotals => {
 		RArray.map(add401kToBonus(rate))
 	);
 	const futureContribution401k = new Decimal(
-		data.personalData.totals.futureGrossPay
+		data.personalData.totals.future.grossPay
 	)
 		.times(rate)
 		.toNumber();
 	return produce(data.personalData, (draft) => {
 		draft.futurePaychecks = castDraft(futurePaychecks);
 		draft.futureBonuses = castDraft(futureBonuses);
-		draft.totals.futureContribution401k = futureContribution401k;
+		draft.totals.future.contribution401k = futureContribution401k;
 		draft.futureRate401k = rate.toNumber();
 	});
 };
