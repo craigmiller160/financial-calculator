@@ -14,7 +14,7 @@ import { TryT } from '@craigmiller160/ts-functions/types';
 import * as RArray from 'fp-ts/ReadonlyArray';
 import Decimal from 'decimal.js';
 
-const BONUS_WITHHOLDING = 0.22;
+export const BONUS_WITHHOLDING = 0.22;
 
 const calculateTaxAmount = (agi: number, rate: number): number =>
 	new Decimal(agi).times(new Decimal(rate)).toNumber();
@@ -27,7 +27,9 @@ const addFederalTaxesToPaycheck =
 				legalData.federalTaxBrackets,
 				paycheck.annualized.estimatedAGI
 			),
-			Either.map(calculateEffectiveTaxRate(paycheck.annualized.estimatedAGI)),
+			Either.map(
+				calculateEffectiveTaxRate(paycheck.annualized.estimatedAGI)
+			),
 			Either.map((rate) =>
 				produce(paycheck, (draft) => {
 					draft.federalTaxCost = {
