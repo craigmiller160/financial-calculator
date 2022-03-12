@@ -29,7 +29,7 @@
         "grossPay": 18622.15,
         "estimatedAGI": 12704.054025,
         "estimatedMAGI": 12704.054025,
-        "estimatedTakeHomePay": 0
+        "estimatedTakeHomePay": 200
       },
       "annualized": {
         "estimatedAGI": 66061.08093,
@@ -62,7 +62,7 @@
         "medicare": 218.776,
         "total": 1154.232
       },
-      "estimatedTakeHomePay": 0
+      "estimatedTakeHomePay": 50
     }
   ],
   "futurePaychecks": [
@@ -95,7 +95,7 @@
         "grossPay": 121153.83,
         "estimatedAGI": 97330.98070499998,
         "estimatedMAGI": 97330.98070499998,
-        "estimatedTakeHomePay": 0
+        "estimatedTakeHomePay": 100
       },
       "annualized": {
         "estimatedAGI": 120505.02372999997,
