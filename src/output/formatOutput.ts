@@ -18,6 +18,10 @@ const newlineMonoid: MonoidT<string> = {
 		return `${a}\n${b}`;
 	}
 };
+const decimalSumMonoid: MonoidT<Decimal> = {
+	empty: new Decimal(0),
+	concat: (a, b) => a.plus(b)
+};
 
 const CURRENCY_FORMAT = new Intl.NumberFormat('en-US', {
 	style: 'currency',
@@ -48,8 +52,12 @@ const TOTAL_HEADER = `|${pad('Gross Pay')}|${pad('AGI/MAGI')}|${pad(
 	'Add. Income'
 )}|${pad('401k Amount')}|${pad('Take Home')}|${pad('Full Income')}|`;
 
-const sum = (num1: number, num2: number): number =>
-	new Decimal(num1).plus(new Decimal(num2)).toNumber();
+const sum = (values: ReadonlyArray<number>): number =>
+	pipe(
+		values,
+		RArray.map((_) => new Decimal(_)),
+		Monoid.concatAll(decimalSumMonoid)
+	).toNumber();
 
 const formatPaycheck = (paycheck: PaycheckWithTotal): string => {
 	const startDate = pad(paycheck.startDate);
@@ -60,7 +68,7 @@ const formatPaycheck = (paycheck: PaycheckWithTotal): string => {
 	const takeHome = pad(formatCurrency(paycheck.estimatedTakeHomePay));
 	const fullIncome = pad(
 		formatCurrency(
-			sum(paycheck.paycheck401k.amount, paycheck.estimatedTakeHomePay)
+			sum([paycheck.paycheck401k.amount, paycheck.estimatedTakeHomePay])
 		)
 	);
 	return `|${startDate}|${endDate}|${grossPay}|${rate401k}|${amount401k}|${takeHome}|${fullIncome}|`;
@@ -82,7 +90,9 @@ const formatBonus = (bonus: BonusWithTotal): string => {
 	const amount401k = pad(formatCurrency(bonus.bonus401k.amount));
 	const takeHome = pad(formatCurrency(bonus.estimatedTakeHomePay));
 	const fullIncome = pad(
-		formatCurrency(sum(bonus.bonus401k.amount, bonus.estimatedTakeHomePay))
+		formatCurrency(
+			sum([bonus.bonus401k.amount, bonus.estimatedTakeHomePay])
+		)
 	);
 	return `|${date}|${grossPay}|${rate401k}|${amount401k}|${takeHome}|${fullIncome}|`;
 };
@@ -111,10 +121,10 @@ const formatTotals = (data: PersonalDataWithTotals): string => {
 	const addIncome = pad(formatCurrency(data.additionalIncome.total.grossPay));
 	const fullIncome = pad(
 		formatCurrency(
-			sum(
+			sum([
 				data.totals.combinedWithAdditionalIncome.estimatedTakeHomePay,
 				data.totals.combinedWithAdditionalIncome.contribution401k
-			)
+			])
 		)
 	);
 	return `|${grossPay}|${agiMagi}|${addIncome}|${amount401k}|${takeHome}|${fullIncome}|`;
