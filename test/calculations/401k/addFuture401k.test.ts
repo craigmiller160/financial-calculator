@@ -162,6 +162,11 @@ const personalData: PersonalDataWithTotals = {
 			estimatedAGI: 0,
 			estimatedMAGI: 0,
 			estimatedTakeHomePay: 0
+		},
+		combinedWithAdditionalIncome: {
+			estimatedAGI: 0,
+			estimatedMAGI: 0,
+			estimatedTakeHomePay: 0
 		}
 	},
 	futureRate401k: 0,
