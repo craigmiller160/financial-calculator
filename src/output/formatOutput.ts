@@ -50,7 +50,9 @@ const BONUS_HEADER = `|${pad('Date')}|${pad('Gross Pay')}|${pad(
 
 const TOTAL_HEADER = `|${pad('Gross Pay')}|${pad('AGI/MAGI')}|${pad(
 	'Add. Income'
-)}|${pad('401k Amount')}|${pad('Take Home')}|${pad('Full Income')}|`;
+)}|${pad('401k Amount')}|${pad('HSA Amount')}|${pad('Take Home')}|${pad(
+	'Full Income'
+)}|`;
 
 const sum = (values: ReadonlyArray<number>): number =>
 	pipe(
@@ -128,11 +130,15 @@ const formatTotals = (data: PersonalDataWithTotals): string => {
 			sum([
 				data.totals.combinedWithAdditionalIncome.estimatedTakeHomePay,
 				data.totals.combinedWithAdditionalIncome.contribution401k,
+				data.totals.combinedWithAdditionalIncome.contributionHsa,
 				data.additionalIncome.total.grossPay
 			])
 		)
 	);
-	return `|${grossPay}|${agiMagi}|${addIncome}|${amount401k}|${takeHome}|${fullIncome}|`;
+	const amountHsa = pad(
+		formatCurrency(data.totals.combinedWithAdditionalIncome.contributionHsa)
+	);
+	return `|${grossPay}|${agiMagi}|${addIncome}|${amount401k}|${amountHsa}|${takeHome}|${fullIncome}|`;
 };
 
 export const formatOutput = (data: PersonalDataWithTotals): string => {
