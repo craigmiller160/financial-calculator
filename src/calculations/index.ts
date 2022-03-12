@@ -82,7 +82,7 @@ const runCalculationsForRothIraLimit =
 			IO.chainFirst((data) => logger.debugWithJson('Data', data))
 		);
 
-export const runCalculations = (data: Data): IOTryT<string> =>
+export const runCalculations = (data: Data): IOTryT<PersonalDataWithTotals> =>
 	pipe(
 		runCalculationsForTotals(data),
 		IO.chain(runCalculationsForCombinedTotals),
@@ -94,6 +94,5 @@ export const runCalculations = (data: Data): IOTryT<string> =>
 		IOEither.chain(runCalculationsForFederalTaxes(data.legalData)),
 		IOEither.chainIOK(runCalculationsForTakeHomePay),
 		IOEither.chainIOK(runCalculationsForCombinedTotals),
-		IOEither.chainIOK(runCalculationsForRothIraLimit(data.legalData)),
-		IOEither.map((data) => `${data.futureRate401k}`)
+		IOEither.chainIOK(runCalculationsForRothIraLimit(data.legalData))
 	);
