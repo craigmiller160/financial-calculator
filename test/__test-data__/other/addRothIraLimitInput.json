@@ -1,0 +1,138 @@
+{
+  "pastPaychecks": [
+    {
+      "startDate": "2022-01-01",
+      "endDate": "2022-03-11",
+      "benefitsCost": {
+        "dental": 5.84,
+        "hsa": 38.46,
+        "medical": 68.92,
+        "vision": 3.35,
+        "total": 116.57
+      },
+      "numberOfChecks": 5,
+      "grossPay": 3724.43,
+      "paycheck401k": {
+        "rate": 0.21,
+        "amount": 782.1303
+      },
+      "estimatedAGI": 2540.810805,
+      "estimatedMAGI": 2540.810805,
+      "estimatedTakeHomePay": 2150.409350976923,
+      "federalTaxCost": {
+        "effectiveRate": 0.15365231179543765,
+        "amount": 390.40145402307695
+      },
+      "totalsForAllChecks": {
+        "contribution401k": 3910.6515,
+        "benefitsCost": 582.85,
+        "grossPay": 18622.15,
+        "estimatedAGI": 12704.054025,
+        "estimatedMAGI": 12704.054025,
+        "estimatedTakeHomePay": 10752.046754884615
+      },
+      "annualized": {
+        "estimatedAGI": 66061.08093,
+        "estimatedMAGI": 66061.08093,
+        "grossPay": 96835.18
+      },
+      "payrollTaxCost": {
+        "socialSecurity": 230.91466,
+        "medicare": 54.004235,
+        "total": 284.918895
+      }
+    }
+  ],
+  "pastBonuses": [
+    {
+      "date": "2022-03-11",
+      "grossPay": 15088,
+      "estimatedAGI": 10765.288,
+      "estimatedMAGI": 10765.288,
+      "federalTaxCosts": {
+        "effectiveRate": 0.22,
+        "amount": 2368.36336
+      },
+      "bonus401k": {
+        "rate": 0.21,
+        "amount": 3168.48
+      },
+      "payrollTaxCosts": {
+        "socialSecurity": 935.456,
+        "medicare": 218.776,
+        "total": 1154.232
+      },
+      "estimatedTakeHomePay": 8396.92464
+    }
+  ],
+  "futurePaychecks": [
+    {
+      "startDate": "2022-03-14",
+      "endDate": "2022-12-31",
+      "benefitsCost": {
+        "dental": 10,
+        "hsa": 38.46,
+        "medical": 0,
+        "vision": 10,
+        "total": 58.46
+      },
+      "numberOfChecks": 21,
+      "grossPay": 5769.23,
+      "paycheck401k": {
+        "rate": 0.11,
+        "amount": 634.6153
+      },
+      "estimatedAGI": 4634.808604999999,
+      "estimatedMAGI": 4634.808604999999,
+      "estimatedTakeHomePay": 3759.550693646153,
+      "federalTaxCost": {
+        "effectiveRate": 0.18884445636215136,
+        "amount": 875.2579113538459
+      },
+      "totalsForAllChecks": {
+        "contribution401k": 13326.9213,
+        "benefitsCost": 1227.66,
+        "grossPay": 121153.83,
+        "estimatedAGI": 97330.98070499998,
+        "estimatedMAGI": 97330.98070499998,
+        "estimatedTakeHomePay": 78950.56456656921
+      },
+      "annualized": {
+        "estimatedAGI": 120505.02372999997,
+        "estimatedMAGI": 120505.02372999997,
+        "grossPay": 149999.98
+      },
+      "payrollTaxCost": {
+        "socialSecurity": 357.69226,
+        "medicare": 83.653835,
+        "total": 441.346095
+      }
+    }
+  ],
+  "futureBonuses": [],
+  "totals": {
+    "past": {
+      "grossPay": 33710.15,
+      "contribution401k": 7079.1315,
+      "estimatedAGI": 23469.342025,
+      "estimatedMAGI": 23469.342025,
+      "estimatedTakeHomePay": 19148.971394884615
+    },
+    "future": {
+      "grossPay": 121153.83,
+      "contribution401k": 13326.9213,
+      "estimatedAGI": 97330.98070499998,
+      "estimatedMAGI": 97330.98070499998,
+      "estimatedTakeHomePay": 78950.56456656921
+    },
+    "combined": {
+      "grossPay": 154863.98,
+      "contribution401k": 20406.0528,
+      "estimatedAGI": 120800.32272999999,
+      "estimatedMAGI": 137000,
+      "estimatedTakeHomePay": 98099.53596145383
+    }
+  },
+  "futureRate401k": 0.11,
+  "rothIraLimit": 0
+}
