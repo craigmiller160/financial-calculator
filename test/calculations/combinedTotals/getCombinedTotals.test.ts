@@ -31,6 +31,7 @@ const pastPaycheck: PaycheckWithTotal = {
 		amount: 0
 	},
 	totalsForAllChecks: {
+		contributionHsa: 807.66,
 		contribution401k: 3910.6515,
 		benefitsCost: 582.85,
 		grossPay: 18622.15,
@@ -75,6 +76,7 @@ const futurePaycheck: PaycheckWithTotal = {
 	estimatedAGI: 5269.423905,
 	estimatedMAGI: 10,
 	totalsForAllChecks: {
+		contributionHsa: 807.66,
 		contribution401k: 0,
 		benefitsCost: 1227.66,
 		grossPay: 121153.83,

@@ -24,6 +24,7 @@
         "amount": 0
       },
       "totalsForAllChecks": {
+        "contributionHsa": 192.6,
         "contribution401k": 3910.6515,
         "benefitsCost": 582.85,
         "grossPay": 18622.15,
@@ -90,6 +91,7 @@
         "amount": 0
       },
       "totalsForAllChecks": {
+        "contributionHsa": 807.66,
         "contribution401k": 13326.9213,
         "benefitsCost": 1227.66,
         "grossPay": 121153.83,

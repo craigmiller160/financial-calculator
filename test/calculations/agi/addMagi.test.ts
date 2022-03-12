@@ -60,6 +60,7 @@ const data: PersonalDataWithTotals = {
 			estimatedAGI: 5269.423905,
 			estimatedMAGI: 0,
 			totalsForAllChecks: {
+				contributionHsa: 807.66,
 				benefitsCost: 1227.66,
 				contribution401k: 0,
 				grossPay: 121153.83,
@@ -126,6 +127,7 @@ const data: PersonalDataWithTotals = {
 			estimatedAGI: 2540.810805,
 			estimatedMAGI: 0,
 			totalsForAllChecks: {
+				contributionHsa: 192.6,
 				benefitsCost: 582.85,
 				contribution401k: 3910.6515,
 				grossPay: 18622.15,

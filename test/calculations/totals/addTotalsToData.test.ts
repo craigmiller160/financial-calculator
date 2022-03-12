@@ -65,6 +65,7 @@ describe('addTotalsToData', () => {
 					estimatedAGI: 0,
 					estimatedMAGI: 0,
 					totalsForAllChecks: {
+						contributionHsa: 807.66,
 						benefitsCost: 1227.66,
 						contribution401k: 0,
 						grossPay: 121153.83,
@@ -131,6 +132,7 @@ describe('addTotalsToData', () => {
 					estimatedAGI: 0,
 					estimatedMAGI: 0,
 					totalsForAllChecks: {
+						contributionHsa: 192.3,
 						benefitsCost: 582.85,
 						contribution401k: 3910.6515,
 						grossPay: 18622.15,
