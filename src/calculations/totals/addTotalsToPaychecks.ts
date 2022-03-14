@@ -5,7 +5,11 @@ import { annualizePayPeriodValue } from '../utils/annualizePayPeriodValue';
 import { totalValueForChecks } from '../utils/totalValueForChecks';
 
 export const sumBenefits = (benefits: BenefitsCost): number =>
-	benefits.dental + benefits.hsa + benefits.medical + benefits.vision;
+	benefits.dental +
+	benefits.hsa +
+	benefits.medical +
+	benefits.vision +
+	benefits.fsa;
 
 const addTotalToBenefits = (benefits: BenefitsCost): BenefitsCostAndTotal => ({
 	...benefits,

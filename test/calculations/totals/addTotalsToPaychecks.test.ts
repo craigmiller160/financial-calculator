@@ -1,10 +1,26 @@
 import { getTestData } from '../../testutils/TestData';
 import { pipe } from 'fp-ts/function';
 import * as IOEither from 'fp-ts/IOEither';
-import { addTotalsToPaycheck } from '../../../src/calculations/totals/addTotalsToPaychecks';
+import {
+	addTotalsToPaycheck,
+	sumBenefits
+} from '../../../src/calculations/totals/addTotalsToPaychecks';
 import '@relmify/jest-fp-ts';
+import { BenefitsCost } from '../../../src/data/decoders';
 
 describe('addTotalsToPaychecks', () => {
+	it('sums all benefits', () => {
+		const benefits: BenefitsCost = {
+			dental: 1,
+			hsa: 2,
+			medical: 3,
+			vision: 4,
+			fsa: 5
+		};
+		const result = sumBenefits(benefits);
+		expect(result).toEqual(15);
+	});
+
 	it('adds the totals to past paychecks', () => {
 		const result = pipe(
 			getTestData(),
