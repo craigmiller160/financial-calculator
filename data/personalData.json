@@ -6,6 +6,7 @@
       "benefitsCost": {
         "dental": 5.84,
         "hsa": 38.46,
+        "fsa": 0,
         "medical": 68.92,
         "vision": 3.35
       },
@@ -33,7 +34,8 @@
       "endDate": "2022-12-31",
       "benefitsCost": {
         "dental": 0,
-        "hsa": 38.46,
+        "hsa": 0,
+        "fsa": 47.62
         "medical": 0,
         "vision": 0
       },

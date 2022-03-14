@@ -4,6 +4,7 @@ import * as Codecs from '@craigmiller160/ts-functions/Codecs';
 const benefitsCostV = Codecs.readonlyType({
 	dental: ioType.number,
 	hsa: ioType.number,
+	fsa: ioType.number,
 	medical: ioType.number,
 	vision: ioType.number
 });
