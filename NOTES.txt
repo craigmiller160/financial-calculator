@@ -1,0 +1,6 @@
+For FSA
+
+1. Add to paycheck.totalsForAllChecks
+2. Integrate with estimated AGI/MAGI (might already be done because of benefits sum)
+3. Add to PersonalTotalSection.
+4.
