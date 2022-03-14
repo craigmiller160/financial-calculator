@@ -20,6 +20,7 @@
       "benefitsCost": {
         "dental": 10,
         "hsa": 38.46,
+        "fsa": 0,
         "medical": 0,
         "vision": 10
       },
@@ -35,7 +36,7 @@
       "benefitsCost": {
         "dental": 0,
         "hsa": 0,
-        "fsa": 47.62
+        "fsa": 47.62,
         "medical": 0,
         "vision": 0
       },
