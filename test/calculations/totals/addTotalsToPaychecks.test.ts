@@ -21,6 +21,7 @@ describe('addTotalsToPaychecks', () => {
 			benefitsCost: {
 				dental: 5.84,
 				hsa: 38.46,
+				fsa: 0,
 				medical: 68.92,
 				vision: 3.35,
 				total: 116.57
@@ -79,6 +80,7 @@ describe('addTotalsToPaychecks', () => {
 			benefitsCost: {
 				dental: 10,
 				hsa: 38.46,
+				fsa: 0,
 				medical: 0,
 				vision: 10,
 				total: 58.46

@@ -43,6 +43,7 @@ const personalData: PersonalDataWithTotals = {
 			benefitsCost: {
 				dental: 10,
 				hsa: 38.46,
+				fsa: 0,
 				medical: 0,
 				total: 58.46,
 				vision: 10
@@ -111,6 +112,7 @@ const personalData: PersonalDataWithTotals = {
 			benefitsCost: {
 				dental: 5.84,
 				hsa: 38.46,
+				fsa: 0,
 				medical: 68.92,
 				total: 116.57,
 				vision: 3.35
