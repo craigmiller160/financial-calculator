@@ -140,12 +140,12 @@
       "estimatedTakeHomePay": 98099.53596145383
     },
     "combinedWithAdditionalIncome": {
-      "grossPay": 0,
-      "contribution401k": 0,
+      "grossPay": 154863.98,
+      "contribution401k": 20406.0528,
       "contributionHsa": 0,
-      "estimatedAGI": 0,
-      "estimatedMAGI": 0,
-      "estimatedTakeHomePay": 0
+      "estimatedAGI": 120800.32272999999,
+      "estimatedMAGI": 137000,
+      "estimatedTakeHomePay": 98099.53596145383
     }
   },
   "futureRate401k": 0.11,
