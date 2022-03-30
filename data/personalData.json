@@ -18,14 +18,14 @@
       "startDate": "2022-03-25",
       "endDate": "2022-03-25",
       "benefitsCost": {
-        "dental": 10,
-        "hsa": 38.46,
+        "dental": 0,
+        "hsa": 0,
         "fsa": 0,
         "medical": 0,
-        "vision": 10
+        "vision": 0
       },
       "numberOfChecks": 1,
-      "grossPay": 5585.645,
+      "grossPay": 1862.22,
       "rate401k": 0.21
     }
   ],
@@ -49,6 +49,11 @@
       "grossPay": 15088,
       "rate401k": 0.21,
       "date": "2022-03-11"
+    },
+    {
+      "grossPay": 3945.10,
+      "date": "2022-03-25",
+      "rate401k": 0
     }
   ],
   "futureBonuses": [],
