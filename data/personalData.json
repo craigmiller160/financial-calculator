@@ -27,6 +27,20 @@
       "numberOfChecks": 1,
       "grossPay": 1862.22,
       "rate401k": 0.21
+    },
+    {
+      "startDate": "2022-03-14",
+      "endDate": "2022-03-15",
+      "benefitsCost": {
+        "dental": 0,
+        "hsa": 0,
+        "fsa": 0,
+        "medical": 0,
+        "vision": 0
+      },
+      "numberOfChecks": 1,
+      "grossPay": 1136.36,
+      "rate401k": 0
     }
   ],
   "futurePaychecks": [
