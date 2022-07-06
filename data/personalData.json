@@ -69,21 +69,35 @@
       "numberOfChecks": 1,
       "grossPay": 6250.00,
       "rate401k": 0.11
+    },
+    {
+      "startDate": "2022-07-11",
+      "endDate": "2022-09-11",
+      "benefitsCost": {
+        "dental": 0,
+        "hsa": 200,
+        "fsa": 0,
+        "medical": 0,
+        "vision": 0
+      },
+      "rate401k": 0,
+      "numberOfChecks": 4,
+      "grossPay": 5769.23
     }
   ],
   "futurePaychecks": [
     {
-      "startDate": "2022-06-01",
+      "startDate": "2022-09-11",
       "endDate": "2022-12-31",
       "benefitsCost": {
         "dental": 0,
-        "hsa": 0,
-        "fsa": 47.62,
+        "hsa": 200,
+        "fsa": 0,
         "medical": 0,
         "vision": 0
       },
-      "numberOfChecks": 13,
-      "grossPay": 6250.00
+      "numberOfChecks": 8,
+      "grossPay": 5769.23
     }
   ],
   "pastBonuses": [
