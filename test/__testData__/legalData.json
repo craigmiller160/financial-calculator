@@ -1,0 +1,92 @@
+{
+  "contributionLimit401k": 20500,
+  "payrollTaxRates": {
+    "socialSecurity": 0.062,
+    "medicare": 0.0145
+  },
+  "rothIraLimits": [
+    {
+      "maximumIncome": 129000,
+      "contributionLimit": 6000
+    },
+    {
+      "maximumIncome": 130500,
+      "contributionLimit": 5400
+    },
+    {
+      "maximumIncome": 132000,
+      "contributionLimit": 4800
+    },
+    {
+      "maximumIncome": 133500,
+      "contributionLimit": 4200
+    },
+    {
+      "maximumIncome": 135000,
+      "contributionLimit": 3600
+    },
+    {
+      "maximumIncome": 136500,
+      "contributionLimit": 3000
+    },
+    {
+      "maximumIncome": 138000,
+      "contributionLimit": 2400
+    },
+    {
+      "maximumIncome": 139500,
+      "contributionLimit": 1800
+    },
+    {
+      "maximumIncome": 141000,
+      "contributionLimit": 1200
+    },
+    {
+      "maximumIncome": 142500,
+      "contributionLimit": 600
+    }
+  ],
+  "federalTaxBrackets": [
+    {
+      "rate": 0.1,
+      "minimumIncome": 0,
+      "maximumIncome": 10275,
+      "baseAmountOwed": 0
+    },
+    {
+      "rate": 0.12,
+      "minimumIncome": 10275,
+      "maximumIncome": 41775,
+      "baseAmountOwed": 1027.5
+    },
+    {
+      "rate": 0.22,
+      "minimumIncome": 41775,
+      "maximumIncome": 89075,
+      "baseAmountOwed": 4807.5
+    },
+    {
+      "rate": 0.24,
+      "minimumIncome": 89075,
+      "maximumIncome": 170050,
+      "baseAmountOwed": 15213.5
+    },
+    {
+      "rate": 0.32,
+      "minimumIncome": 170050,
+      "maximumIncome": 215950,
+      "baseAmountOwed": 34647.5
+    },
+    {
+      "rate": 0.35,
+      "minimumIncome": 215950,
+      "maximumIncome": 539900,
+      "baseAmountOwed": 49335.5
+    },
+    {
+      "rate": 0.37,
+      "minimumIncome": 539900,
+      "baseAmountOwed": 162718
+    }
+  ]
+}
