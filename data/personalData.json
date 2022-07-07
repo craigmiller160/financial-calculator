@@ -132,7 +132,10 @@
         "vision": 0
       },
       "numberOfChecks": 8,
-      "grossPay": 5769.23
+      "grossPay": 5769.23,
+      "401k": {
+        "employerRate": 0.05
+      }
     }
   ],
   "pastBonuses": [
