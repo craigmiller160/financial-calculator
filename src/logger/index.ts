@@ -30,3 +30,12 @@ export const logger = createLogger({
 	),
 	transports: [new transports.Console()]
 });
+
+export type LoggerMethod = 'debug' | 'info' | 'error' | 'warning';
+
+export const logAndReturn =
+	(level: LoggerMethod, message: string) =>
+	<T>(value: T): T => {
+		logger[level](message);
+		return value;
+	};
