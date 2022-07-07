@@ -4,13 +4,9 @@ export interface TotalByCheck {
 }
 
 export interface Totals {
-	readonly benefits: {
-		readonly totalBenefitsCostByCheck: ReadonlyArray<TotalByCheck>;
-		readonly totalBenefitsCost: number;
-	};
-	readonly grossPay: {
-		readonly totalGrossPayByCheck: ReadonlyArray<TotalByCheck>;
-		readonly totalGrossPayFromBonuses: number;
-		readonly totalGrossPay: number;
-	};
+	readonly totalBenefitsCost: number;
+	readonly totalGrossPay: number;
+	readonly totalEmployeeContribution401k: number;
+	readonly totalEmployerContribution401k: number;
+	readonly totalTaxes: number;
 }
