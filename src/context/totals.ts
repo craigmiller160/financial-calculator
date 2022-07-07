@@ -1,8 +1,3 @@
-export interface TotalByCheck {
-	readonly name: string;
-	readonly amount: number;
-}
-
 export interface Totals {
 	readonly totalBenefitsCost: number;
 	readonly totalGrossPay: number;
