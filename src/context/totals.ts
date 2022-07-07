@@ -1,7 +1,11 @@
-export type TotalType = 'paycheck' | 'bonus';
+export interface TotalBenefitsCost {
+	readonly name: string;
+	readonly amount: number;
+}
 
 export interface Totals {
-	readonly name: string;
-	readonly type: TotalType;
-	readonly benefits: number;
+	readonly benefits: {
+		readonly totalBenefitsCostByCheck: ReadonlyArray<TotalBenefitsCost>;
+		readonly totalBenefitsCost: number;
+	};
 }
