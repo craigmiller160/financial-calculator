@@ -9,4 +9,4 @@ pipe(
 		logger.info('Working so far');
 		return null;
 	})
-);
+)();
