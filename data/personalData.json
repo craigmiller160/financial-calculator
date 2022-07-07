@@ -13,7 +13,7 @@
       },
       "numberOfChecks": 5,
       "grossPay": 3724.43,
-      "401k": {
+      "rates401k": {
         "employeeRate": 0.21,
         "employerRate": 0.05
       }
@@ -31,7 +31,7 @@
       },
       "numberOfChecks": 1,
       "grossPay": 1862.22,
-      "401k": {
+      "rates401k": {
         "employeeRate": 0.21,
         "employerRate": 0.05
       }
@@ -49,7 +49,7 @@
       },
       "numberOfChecks": 1,
       "grossPay": 1136.36,
-      "401k": {
+      "rates401k": {
         "employeeRate": 0,
         "employerRate": 0
       }
@@ -67,7 +67,7 @@
       },
       "numberOfChecks": 5,
       "grossPay": 6250.00,
-      "401k": {
+      "rates401k": {
         "employeeRate": 0,
         "employerRate": 0
       }
@@ -85,7 +85,7 @@
       },
       "numberOfChecks": 1,
       "grossPay": 6250.00,
-      "401k": {
+      "rates401k": {
         "employeeRate": 0.11,
         "employerRate": 0.05
       }
@@ -103,7 +103,7 @@
       },
       "numberOfChecks": 1,
       "grossPay": 568.18,
-      "401k": {
+      "rates401k": {
         "employeeRate": 0,
         "employerRate": 0
       }
@@ -121,7 +121,7 @@
       },
       "numberOfChecks": 4,
       "grossPay": 5769.23,
-      "401k": {
+      "rates401k": {
         "employeeRate": 0,
         "employerRate": 0
       }
@@ -141,7 +141,7 @@
       },
       "numberOfChecks": 8,
       "grossPay": 5769.23,
-      "401k": {
+      "rates401k": {
         "employerRate": 0.05
       }
     }
@@ -150,7 +150,7 @@
     {
       "name": "Cigna Annual Bonus",
       "grossPay": 15088,
-      "401k": {
+      "rates401k": {
         "employeeRate": 0.21,
         "employerRate": 0.05
       },
@@ -160,7 +160,7 @@
       "name": "Cigna Stock Grant",
       "grossPay": 3945.10,
       "date": "2022-03-25",
-      "401k": {
+      "rates401k": {
         "employeeRate": 0,
         "employerRate": 0
       }
