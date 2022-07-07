@@ -48,7 +48,7 @@
       "benefitsCost": {
         "dental": 0,
         "hsa": 0,
-        "fsa": 47.62,
+          "fsa": 55.55,
         "medical": 0,
         "vision": 0
       },
@@ -62,13 +62,27 @@
       "benefitsCost": {
         "dental": 0,
         "hsa": 0,
-        "fsa": 47.62,
+        "fsa": 55.55,
         "medical": 0,
         "vision": 0
       },
       "numberOfChecks": 1,
       "grossPay": 6250.00,
       "rate401k": 0.11
+    },
+    {
+      "startDate": "2022-06-16",
+      "endDate": "2022-06-30",
+      "benefitsCost": {
+        "dental": 0,
+        "hsa": 0,
+        "fsa": 0,
+        "medical": 0,
+        "vision": 0
+      },
+      "numberOfChecks": 1,
+      "grossPay": 568.18,
+      "rate401k": 0
     },
     {
       "startDate": "2022-07-11",
