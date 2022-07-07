@@ -157,7 +157,7 @@
       "date": "2022-03-11"
     },
     {
-      "name": "Cigna Stock Grant",
+      "name": "Final Cigna Payout",
       "grossPay": 3945.10,
       "date": "2022-03-25",
       "rates401k": {
@@ -167,7 +167,10 @@
     }
   ],
   "futureBonuses": [],
-  "additionalIncome": {
-    "taxableInvestmentIncome": 3259.76
-  }
+  "taxableInvestmentIncome": [
+    {
+      "name": "Cigna Stock Grant",
+      "amount": 3259.76
+    }
+  ]
 }

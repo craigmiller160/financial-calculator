@@ -31,7 +31,24 @@ export const bonusCodec = Codecs.readonlyType({
 	rates401k: rates401kCodec
 });
 
+export const taxableInvestmentIncomeCodec = Codecs.readonlyType({
+	name: ioType.string,
+	amount: ioType.number
+});
+
+export const personalDataCodec = Codecs.readonlyType({
+	pastPaychecks: ioType.readonlyArray(paycheckCodec),
+	futurePaychecks: ioType.readonlyArray(paycheckCodec),
+	pastBonuses: ioType.readonlyArray(bonusCodec),
+	futureBonuses: ioType.readonlyArray(bonusCodec),
+	taxableInvestmentIncome: ioType.readonlyArray(taxableInvestmentIncomeCodec)
+});
+
 export type BenefitsCost = ioType.TypeOf<typeof benefitsCostCodec>;
 export type Rates401k = ioType.TypeOf<typeof rates401kCodec>;
 export type Paycheck = ioType.TypeOf<typeof paycheckCodec>;
 export type Bonus = ioType.TypeOf<typeof bonusCodec>;
+export type TaxableInvestmentIncome = ioType.TypeOf<
+	typeof taxableInvestmentIncomeCodec
+>;
+export type PersonalData = ioType.TypeOf<typeof personalDataCodec>;
