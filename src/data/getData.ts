@@ -10,6 +10,7 @@ import { logAndReturn, logger } from '../logger';
 import { PersonalData, personalDataCodec } from './decoders/personalData';
 import { LegalData, legalDataCodec } from './decoders/legalData';
 import * as TypeValidation from '@craigmiller160/ts-functions/TypeValidation';
+import { validateData } from './validateData';
 
 const decodePersonalData = TypeValidation.decode(personalDataCodec);
 const decodeLegalData = TypeValidation.decode(legalDataCodec);
@@ -58,6 +59,9 @@ export const getData = (): IOTryT<Data> => {
 		IOEither.bindTo('personalData'),
 		IOEither.map(logAndReturn('debug', 'Loading legal data')),
 		IOEither.bind('legalData', () => getLegalData),
-		IOEither.map(({ personalData, legalData }) => [personalData, legalData])
+		IOEither.map(
+			({ personalData, legalData }): Data => [personalData, legalData]
+		),
+		IOEither.chainEitherK(validateData)
 	);
 };
