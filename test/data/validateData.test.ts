@@ -53,7 +53,8 @@ describe('validateData', () => {
 			}),
 			IOEither.chainEitherK(validateData)
 		)();
-		// TODO validate details
-		expect(resultEither).toBeLeft();
+		expect(resultEither).toEqualLeft(
+			new Error('All names must be unique. Duplicate: Bonus')
+		);
 	});
 });
