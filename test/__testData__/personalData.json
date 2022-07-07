@@ -1,0 +1,176 @@
+{
+  "pastPaychecks": [
+    {
+      "name": "Cigna Paycheck",
+      "startDate": "2022-01-01",
+      "endDate": "2022-03-11",
+      "benefitsCost": {
+        "dental": 5.84,
+        "hsa": 38.46,
+        "fsa": 0,
+        "medical": 68.92,
+        "vision": 3.35
+      },
+      "numberOfChecks": 5,
+      "grossPay": 3724.43,
+      "rates401k": {
+        "employeeRate": 0.21,
+        "employerRate": 0.05
+      }
+    },
+    {
+      "name": "Cigna Final Paycheck",
+      "startDate": "2022-03-25",
+      "endDate": "2022-03-25",
+      "benefitsCost": {
+        "dental": 0,
+        "hsa": 0,
+        "fsa": 0,
+        "medical": 0,
+        "vision": 0
+      },
+      "numberOfChecks": 1,
+      "grossPay": 1862.22,
+      "rates401k": {
+        "employeeRate": 0.21,
+        "employerRate": 0.05
+      }
+    },
+    {
+      "name": "ClearSpend First Check",
+      "startDate": "2022-03-14",
+      "endDate": "2022-03-15",
+      "benefitsCost": {
+        "dental": 0,
+        "hsa": 0,
+        "fsa": 0,
+        "medical": 0,
+        "vision": 0
+      },
+      "numberOfChecks": 1,
+      "grossPay": 1136.36,
+      "rates401k": {
+        "employeeRate": 0,
+        "employerRate": 0
+      }
+    },
+    {
+      "name": "ClearSpend Pre-401k Check",
+      "startDate": "2022-03-30",
+      "endDate": "2022-5-31",
+      "benefitsCost": {
+        "dental": 0,
+        "hsa": 0,
+        "fsa": 55.55,
+        "medical": 0,
+        "vision": 0
+      },
+      "numberOfChecks": 5,
+      "grossPay": 6250.00,
+      "rates401k": {
+        "employeeRate": 0,
+        "employerRate": 0
+      }
+    },
+    {
+      "name": "ClearSpend 401k Check",
+      "startDate": "2022-06-01",
+      "endDate": "2022-06-15",
+      "benefitsCost": {
+        "dental": 0,
+        "hsa": 0,
+        "fsa": 55.55,
+        "medical": 0,
+        "vision": 0
+      },
+      "numberOfChecks": 1,
+      "grossPay": 6250.00,
+      "rates401k": {
+        "employeeRate": 0.11,
+        "employerRate": 0.05
+      }
+    },
+    {
+      "name": "ClearSpend Final Check",
+      "startDate": "2022-06-16",
+      "endDate": "2022-06-30",
+      "benefitsCost": {
+        "dental": 0,
+        "hsa": 0,
+        "fsa": 0,
+        "medical": 0,
+        "vision": 0
+      },
+      "numberOfChecks": 1,
+      "grossPay": 568.18,
+      "rates401k": {
+        "employeeRate": 0,
+        "employerRate": 0
+      }
+    },
+    {
+      "name": "Schellman Pre-401k Check",
+      "startDate": "2022-07-11",
+      "endDate": "2022-09-11",
+      "benefitsCost": {
+        "dental": 0,
+        "hsa": 200,
+        "fsa": 0,
+        "medical": 0,
+        "vision": 0
+      },
+      "numberOfChecks": 4,
+      "grossPay": 5769.23,
+      "rates401k": {
+        "employeeRate": 0,
+        "employerRate": 0
+      }
+    }
+  ],
+  "futurePaychecks": [
+    {
+      "name": "Schellman 401k Check",
+      "startDate": "2022-09-11",
+      "endDate": "2022-12-31",
+      "benefitsCost": {
+        "dental": 0,
+        "hsa": 200,
+        "fsa": 0,
+        "medical": 0,
+        "vision": 0
+      },
+      "numberOfChecks": 8,
+      "grossPay": 5769.23,
+      "rates401k": {
+        "employerRate": 0.05
+      }
+    }
+  ],
+  "pastBonuses": [
+    {
+      "name": "Cigna Annual Bonus",
+      "grossPay": 15088,
+      "rates401k": {
+        "employeeRate": 0.21,
+        "employerRate": 0.05
+      },
+      "date": "2022-03-11"
+    },
+    {
+      "name": "Final Cigna Payout",
+      "grossPay": 3945.10,
+      "date": "2022-03-25",
+      "rates401k": {
+        "employeeRate": 0,
+        "employerRate": 0
+      }
+    }
+  ],
+  "futureBonuses": [],
+  "taxableInvestmentIncome": [
+    {
+      "name": "Cigna Stock Grant",
+      "amount": 3259.76
+    }
+  ]
+}

@@ -12,8 +12,8 @@ import { LegalData, legalDataCodec } from './decoders/legalData';
 import * as TypeValidation from '@craigmiller160/ts-functions/TypeValidation';
 import { validateData } from './validateData';
 
-const decodePersonalData = TypeValidation.decode(personalDataCodec);
-const decodeLegalData = TypeValidation.decode(legalDataCodec);
+export const decodePersonalData = TypeValidation.decode(personalDataCodec);
+export const decodeLegalData = TypeValidation.decode(legalDataCodec);
 
 const getPersonalDataFilePath = (): IOT<string> =>
 	pipe(
@@ -27,7 +27,7 @@ const getLegalDataFilePath = (): IOT<string> =>
 		IO.map((cwd) => path.join(cwd, 'data', 'legalData.json'))
 	);
 
-const getDataFromFile = <T>(
+export const getDataFromFile = <T>(
 	filePath: string,
 	decoder: TypeDecoder<T>
 ): IOTryT<T> =>
