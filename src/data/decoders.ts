@@ -10,6 +10,7 @@ const benefitsCostV = Codecs.readonlyType({
 });
 
 const basePaycheckV = Codecs.readonlyType({
+	name: ioType.string,
 	startDate: ioType.string,
 	endDate: ioType.string,
 	benefitsCost: benefitsCostV,
