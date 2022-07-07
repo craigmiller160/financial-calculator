@@ -14,7 +14,7 @@ const payrollTaxRatesCodec = Codecs.readonlyType({
 const federalTaxBracketCodec = Codecs.readonlyType({
 	rate: ioType.number,
 	minimumIncome: ioType.number,
-	maximumIncome: ioType.number,
+	maximumIncome: ioType.union([ioType.number, ioType.undefined]),
 	baseAmountOwed: ioType.number
 });
 
