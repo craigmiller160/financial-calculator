@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "prepare": "husky install",
-    "start": "ts-node src",
+    "start": "ts-node old/src",
     "lint": "craig-lint",
     "test": "craig-test"
   },

@@ -21,7 +21,7 @@
     "module": "commonjs"
   },
   "include": [
-    "src/**/*"
+    "old/src/**/*"
   ],
   "exclude": [
     "node_modules",
