@@ -138,13 +138,19 @@
   "pastBonuses": [
     {
       "grossPay": 15088,
-      "rate401k": 0.21,
+      "401k": {
+        "employeeRate": 0.21,
+        "employerRate": 0.05
+      },
       "date": "2022-03-11"
     },
     {
       "grossPay": 3945.10,
       "date": "2022-03-25",
-      "rate401k": 0
+      "401k": {
+        "employeeRate": 0,
+        "employerRate": 0
+      }
     }
   ],
   "futureBonuses": [],
