@@ -95,7 +95,7 @@
         "vision": 0
       },
       "rate401k": 0,
-      "numberOfChecks": 4,
+      "numberOfChecks": 2,
       "grossPay": 5769.23
     }
   ],
@@ -110,7 +110,7 @@
         "medical": 0,
         "vision": 0
       },
-      "numberOfChecks": 8,
+      "numberOfChecks": 10,
       "grossPay": 5769.23
     }
   ],
