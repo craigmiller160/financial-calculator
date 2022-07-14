@@ -20,8 +20,8 @@ const itemToContribution401k = (item: Item): Contribution401kByItem => ({
 });
 
 export const calculatePastContribution401k = (
-	context: Omit<Context, 'pastContribution401k'>
-): Context => {
+	context: Omit<Context, 'pastContribution401k' | 'payrollTaxes'>
+): Omit<Context, 'payrollTaxes'> => {
 	const contributionsByPaycheck = pipe(
 		context.personalData.pastPaychecks,
 		RArray.map(itemToContribution401k)
