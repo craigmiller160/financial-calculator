@@ -5,10 +5,10 @@ import * as IOEither from 'fp-ts/IOEither';
 import { createContext } from './context';
 import { performCalculations } from './calculations';
 import { writeDataFiles } from './output/writeDataFiles';
-import { clearOutput } from './output/clearOutput';
+import { resetOutput } from './output/resetOutput';
 
 pipe(
-	clearOutput(),
+	resetOutput(),
 	IOEither.chain(() => getData()),
 	IOEither.map(createContext),
 	IOEither.map(performCalculations),
