@@ -14,7 +14,7 @@ describe('calculatePastContribution401k', () => {
 		)();
 		expect(result).toEqualRight(
 			expect.objectContaining<
-				Omit<Context, 'personalData' | 'legalData'>
+				Omit<Context, 'personalData' | 'legalData' | 'payrollTaxes'>
 			>({
 				pastContribution401k: {
 					contributionsByPaycheck: [
