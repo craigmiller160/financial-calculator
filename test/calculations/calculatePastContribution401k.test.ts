@@ -51,6 +51,18 @@ describe('calculatePastContribution401k', () => {
 							employeeContribution: 0,
 							employerContribution: 0
 						}
+					],
+					contributionsByBonus: [
+						{
+							name: 'Cigna Annual Bonus',
+							employeeContribution: 3168.48,
+							employerContribution: 754.4
+						},
+						{
+							name: 'Final Cigna Payout',
+							employeeContribution: 0,
+							employerContribution: 0
+						}
 					]
 				}
 			})
