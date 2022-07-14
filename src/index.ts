@@ -13,8 +13,14 @@ pipe(
 	IOEither.map(createContext),
 	IOEither.map(performCalculations),
 	IOEither.chain(writeDataFiles),
-	IOEither.map(() => {
-		logger.info('Working so far');
-		return null;
-	})
+	IOEither.fold(
+		(ex) => () => {
+			console.error(ex);
+			return null;
+		},
+		() => () => {
+			logger.info('Working so far');
+			return null;
+		}
+	)
 )();
