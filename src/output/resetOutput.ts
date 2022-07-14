@@ -6,11 +6,16 @@ import { createOutputPath } from './constants';
 import * as IOEither from 'fp-ts/IOEither';
 import * as File from '@craigmiller160/ts-functions/File';
 
+const rmOutputDirectory = File.rmIfExistsSyncWithOptions({
+	recursive: true,
+	force: true
+});
+
 export const resetOutput = (): IOTryT<unknown> =>
 	pipe(
 		Process.cwd(),
 		IO.map(createOutputPath),
 		IOEither.fromIO,
-		IOEither.chainFirst((path) => File.rmIfExistsSync(path)),
+		IOEither.chainFirst((path) => rmOutputDirectory(path)),
 		IOEither.chain((path) => File.mkdirSync(path))
 	);
