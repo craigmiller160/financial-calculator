@@ -38,7 +38,7 @@ describe('calculatePastContribution401k', () => {
 						},
 						{
 							name: 'ClearSpend 401k Check',
-							employeeContribution: 6250.0,
+							employeeContribution: 687.5,
 							employerContribution: 312.5
 						},
 						{
