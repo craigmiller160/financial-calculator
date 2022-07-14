@@ -5,24 +5,15 @@ import { Taxes } from './taxes';
 import { Totals } from './totals';
 import { Contribution401k } from './contribution401k';
 
-export interface BaseContext {
+export interface Context {
 	readonly personalData: PersonalData;
 	readonly legalData: LegalData;
+	readonly pastContribution401k: Contribution401k;
 }
 
-export interface Context401k extends BaseContext {
-	readonly contribution401k: Contribution401k;
-}
-
-export interface Context401kTaxes extends Context401k {
-	readonly taxes: Taxes;
-}
-
-export interface Context401kTaxesPastTotals extends Context401kTaxes {
-	readonly pastTotals: Totals;
-}
-
-export const createContext = (data: Data): BaseContext => ({
+export const createContext = (
+	data: Data
+): Omit<Context, 'pastContribution401k'> => ({
 	personalData: data[0],
 	legalData: data[1]
 });
