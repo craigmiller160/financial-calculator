@@ -7,10 +7,7 @@ import { pipe } from 'fp-ts/function';
 import * as IO from 'fp-ts/IO';
 import * as Json from '@craigmiller160/ts-functions/Json';
 import * as IOEither from 'fp-ts/IOEither';
-
-const PAST_CONTRIBUTION_401K_FILE = 'pastContribution401k.json';
-
-const createOutputPath = (cwd: string): string => path.join(cwd, 'output');
+import { createOutputPath, PAST_CONTRIBUTION_401K_FILE } from './constants';
 
 const writeJsonToFile = (filePath: string, data: object): IOTryT<void> =>
 	pipe(

@@ -5,9 +5,11 @@ import * as IOEither from 'fp-ts/IOEither';
 import { createContext } from './context';
 import { performCalculations } from './calculations';
 import { writeDataFiles } from './output/writeDataFiles';
+import { clearOutput } from './output/clearOutput';
 
 pipe(
-	getData(),
+	clearOutput(),
+	IOEither.chain(() => getData()),
 	IOEither.map(createContext),
 	IOEither.map(performCalculations),
 	IOEither.chain(writeDataFiles),
