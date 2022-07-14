@@ -1,21 +1,22 @@
 import { Context } from '../context';
 import { pipe } from 'fp-ts/function';
 import * as RArray from 'fp-ts/ReadonlyArray';
-import { Bonus, Paycheck } from '../data/decoders/personalData';
+import { Rates401k } from '../data/decoders/personalData';
 import { Contribution401kByItem } from '../context/contribution401k';
+import { times } from '../utils/decimalMath';
 
-const paycheckToContribution401k = (
-	paycheck: Paycheck
-): Contribution401kByItem => ({
-	name: paycheck.name,
-	employeeContribution: 0,
-	employerContribution: 0
-});
+interface Item {
+	readonly name: string;
+	readonly grossPay: number;
+	readonly rates401k: Rates401k;
+}
 
-const bonusToContribution401k = (bonus: Bonus): Contribution401kByItem => ({
-	name: bonus.name,
-	employeeContribution: 0,
-	employerContribution: 0
+const itemToContribution401k = (item: Item): Contribution401kByItem => ({
+	name: item.name,
+	employeeContribution: times(item.grossPay)(
+		item.rates401k.employeeRate ?? 0
+	),
+	employerContribution: times(item.grossPay)(item.rates401k.employerRate ?? 0)
 });
 
 export const calculatePastContribution401k = (
@@ -23,11 +24,11 @@ export const calculatePastContribution401k = (
 ): Context => {
 	const contributionsByPaycheck = pipe(
 		context.personalData.pastPaychecks,
-		RArray.map(paycheckToContribution401k)
+		RArray.map(itemToContribution401k)
 	);
 	const contributionsByBonus = pipe(
 		context.personalData.pastBonuses,
-		RArray.map(bonusToContribution401k)
+		RArray.map(itemToContribution401k)
 	);
 	return {
 		...context,
