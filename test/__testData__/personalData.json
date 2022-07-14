@@ -119,7 +119,7 @@
         "medical": 0,
         "vision": 0
       },
-      "numberOfChecks": 4,
+      "numberOfChecks": 2,
       "grossPay": 5769.23,
       "rates401k": {
         "employeeRate": 0,
@@ -139,7 +139,7 @@
         "medical": 0,
         "vision": 0
       },
-      "numberOfChecks": 8,
+      "numberOfChecks": 10,
       "grossPay": 5769.23,
       "rates401k": {
         "employerRate": 0.05
