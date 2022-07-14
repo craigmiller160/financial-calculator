@@ -1,4 +1,4 @@
-import { createContext } from '../../src/context';
+import { createContext, Context } from '../../src/context';
 import { getTestData } from '../testutils/getTestData';
 import { pipe } from 'fp-ts/function';
 import * as IOEither from 'fp-ts/IOEither';
@@ -13,7 +13,9 @@ describe('calculatePastContribution401k', () => {
 			IOEither.map(calculatePastContribution401k)
 		)();
 		expect(result).toEqualRight(
-			expect.objectContaining({
+			expect.objectContaining<
+				Omit<Context, 'personalData' | 'legalData'>
+			>({
 				pastContribution401k: {
 					contributionsByPaycheck: [
 						{
