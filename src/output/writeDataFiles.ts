@@ -9,9 +9,11 @@ import * as Json from '@craigmiller160/ts-functions/Json';
 import * as IOEither from 'fp-ts/IOEither';
 import { createOutputPath, PAST_CONTRIBUTION_401K_FILE } from './constants';
 
+const stringify = Json.stringifyIndentE(2);
+
 const writeJsonToFile = (filePath: string, data: object): IOTryT<void> =>
 	pipe(
-		Json.stringifyE(data),
+		stringify(data),
 		IOEither.fromEither,
 		IOEither.chain((json) => File.writeFileSync(filePath)(json))
 	);
