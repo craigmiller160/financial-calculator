@@ -12,6 +12,48 @@ describe('calculatePastContribution401k', () => {
 			IOEither.map((data) => createContext(data)),
 			IOEither.map(calculatePastContribution401k)
 		)();
-		expect(result).toBeRight();
+		expect(result).toEqualRight(
+			expect.objectContaining({
+				pastContribution401k: {
+					contributionsByPaycheck: [
+						{
+							name: 'Cigna Paycheck',
+							employeeContribution: 782.1303,
+							employerContribution: 186.2215
+						},
+						{
+							name: 'Cigna Final Paycheck',
+							employeeContribution: 391.0662,
+							employerContribution: 93.111
+						},
+						{
+							name: 'ClearSpend First Check',
+							employeeContribution: 0,
+							employerContribution: 0
+						},
+						{
+							name: 'ClearSpend Pre-401k Check',
+							employeeContribution: 0,
+							employerContribution: 0
+						},
+						{
+							name: 'ClearSpend 401k Check',
+							employeeContribution: 6250.0,
+							employerContribution: 312.5
+						},
+						{
+							name: 'ClearSpend Final Check',
+							employeeContribution: 0,
+							employerContribution: 0
+						},
+						{
+							name: 'Schellman Pre-401k Check',
+							employeeContribution: 0,
+							employerContribution: 0
+						}
+					]
+				}
+			})
+		);
 	});
 });
