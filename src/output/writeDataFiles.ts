@@ -7,7 +7,11 @@ import { pipe } from 'fp-ts/function';
 import * as IO from 'fp-ts/IO';
 import * as Json from '@craigmiller160/ts-functions/Json';
 import * as IOEither from 'fp-ts/IOEither';
-import { createOutputPath, PAST_CONTRIBUTION_401K_FILE } from './constants';
+import {
+	createOutputPath,
+	PAST_CONTRIBUTION_401K_FILE,
+	PAYROLL_TAXES_FILE
+} from './constants';
 
 const stringify = Json.stringifyIndentE(2);
 
@@ -27,6 +31,12 @@ export const writeDataFiles = (context: Context): IOTryT<Context> =>
 			writeJsonToFile(
 				path.join(outputPath, PAST_CONTRIBUTION_401K_FILE),
 				context.pastContribution401k
+			)
+		),
+		IOEither.chainFirst((outputPath) =>
+			writeJsonToFile(
+				path.join(outputPath, PAYROLL_TAXES_FILE),
+				context.payrollTaxes
 			)
 		),
 		IOEither.map(() => context)
