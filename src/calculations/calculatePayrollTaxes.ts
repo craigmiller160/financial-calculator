@@ -1,6 +1,6 @@
-import { Context } from '../context';
+import { BaseContext } from '../context';
 import { PayrollTaxRates } from '../data/decoders/legalData';
-import { PayrollTaxesByItem } from '../context/payrollTaxes';
+import { PayrollTaxes, PayrollTaxesByItem } from '../context/payrollTaxes';
 import { times } from '../utils/decimalMath';
 import * as RArray from 'fp-ts/ReadonlyArray';
 import { pipe } from 'fp-ts/function';
@@ -18,9 +18,7 @@ const createItemToPayrollTaxes =
 		medicareAmount: times(item.grossPay)(rates.medicare)
 	});
 
-export const calculatePayrollTaxes = (
-	context: Omit<Context, 'payrollTaxes'>
-): Context => {
+export const calculatePayrollTaxes = (context: BaseContext): PayrollTaxes => {
 	const itemToPayrollTaxes = createItemToPayrollTaxes(
 		context.legalData.payrollTaxRates
 	);
@@ -36,10 +34,7 @@ export const calculatePayrollTaxes = (
 	);
 
 	return {
-		...context,
-		payrollTaxes: {
-			payrollTaxesByPaycheck,
-			payrollTaxesByBonus
-		}
+		payrollTaxesByPaycheck,
+		payrollTaxesByBonus
 	};
 };

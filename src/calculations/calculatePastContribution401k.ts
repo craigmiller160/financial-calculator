@@ -1,8 +1,11 @@
-import { Context } from '../context';
+import { BaseContext } from '../context';
 import { pipe } from 'fp-ts/function';
 import * as RArray from 'fp-ts/ReadonlyArray';
 import { Rates401k } from '../data/decoders/personalData';
-import { Contribution401kByItem } from '../context/contribution401k';
+import {
+	Contribution401k,
+	Contribution401kByItem
+} from '../context/contribution401k';
 import { times } from '../utils/decimalMath';
 
 interface Item {
@@ -20,8 +23,8 @@ const itemToContribution401k = (item: Item): Contribution401kByItem => ({
 });
 
 export const calculatePastContribution401k = (
-	context: Omit<Context, 'pastContribution401k' | 'payrollTaxes'>
-): Omit<Context, 'payrollTaxes'> => {
+	context: BaseContext
+): Contribution401k => {
 	const contributionsByPaycheck = pipe(
 		context.personalData.pastPaychecks,
 		RArray.map(itemToContribution401k)
@@ -31,10 +34,7 @@ export const calculatePastContribution401k = (
 		RArray.map(itemToContribution401k)
 	);
 	return {
-		...context,
-		pastContribution401k: {
-			contributionsByPaycheck,
-			contributionsByBonus
-		}
+		contributionsByPaycheck,
+		contributionsByBonus
 	};
 };
