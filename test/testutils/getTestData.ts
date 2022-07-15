@@ -44,6 +44,8 @@ export const getTestData = (): IOTryT<Data> => {
 		getPersonalData,
 		IOEither.bindTo('personalData'),
 		IOEither.bind('legalData', () => getLegalData),
-		IOEither.map(({ personalData, legalData }): Data => [personalData, legalData])
+		IOEither.map(
+			({ personalData, legalData }): Data => [personalData, legalData]
+		)
 	);
 };
