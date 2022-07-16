@@ -10,7 +10,7 @@ import { logAndReturn, logger } from '../logger';
 import { PersonalData, personalDataCodec } from './decoders/personalData';
 import { LegalData, legalDataCodec } from './decoders/legalData';
 import * as TypeValidation from '@craigmiller160/ts-functions/TypeValidation';
-import { validateData } from './validateData';
+import { sortAndValidateData } from './sortAndValidateData';
 
 export const decodePersonalData = TypeValidation.decode(personalDataCodec);
 export const decodeLegalData = TypeValidation.decode(legalDataCodec);
@@ -62,6 +62,6 @@ export const getData = (): IOTryT<Data> => {
 		IOEither.map(
 			({ personalData, legalData }): Data => [personalData, legalData]
 		),
-		IOEither.chainEitherK(validateData)
+		IOEither.chainEitherK(sortAndValidateData)
 	);
 };

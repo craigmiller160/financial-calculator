@@ -2,7 +2,7 @@ import { getTestData } from '../testutils/getTestData';
 import { Bonus } from '../../src/data/decoders/personalData';
 import { pipe } from 'fp-ts/function';
 import * as IOEither from 'fp-ts/IOEither';
-import { validateData } from '../../src/data/validateData';
+import { sortAndValidateData } from '../../src/data/sortAndValidateData';
 import '@relmify/jest-fp-ts';
 import { Data } from '../../src/data/getData';
 
@@ -31,7 +31,7 @@ describe('validateData', () => {
 	it('data is valid', () => {
 		const resultEither = pipe(
 			getTestData(),
-			IOEither.chainEitherK(validateData)
+			IOEither.chainEitherK(sortAndValidateData)
 		)();
 		expect(resultEither).toBeRight();
 	});
@@ -51,7 +51,7 @@ describe('validateData', () => {
 					legal
 				];
 			}),
-			IOEither.chainEitherK(validateData)
+			IOEither.chainEitherK(sortAndValidateData)
 		)();
 		expect(resultEither).toEqualLeft(
 			new Error('All names must be unique. Duplicate: Bonus')
