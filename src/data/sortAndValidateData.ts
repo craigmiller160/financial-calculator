@@ -132,13 +132,20 @@ const paycheckOrderValidationMonoid: MonoidT<TryT<Paycheck>> = {
 };
 
 const validatePaycheckOrder = (
-	paychecks: ReadonlyArray<Paycheck>
+	paychecks: ReadonlyArray<Paycheck>,
+	errorMessage: string
 ): TryT<void> =>
 	pipe(
 		paychecks,
 		RArray.map((paycheck) => Either.right(paycheck)),
 		Monoid.concatAll(paycheckOrderValidationMonoid),
-		Either.map(constVoid)
+		Either.map(constVoid),
+		Either.mapLeft(
+			(ex) =>
+				new Error(errorMessage, {
+					cause: ex
+				})
+		)
 	);
 
 export const sortAndValidateData = (data: Data): TryT<Data> => {
@@ -146,22 +153,16 @@ export const sortAndValidateData = (data: Data): TryT<Data> => {
 	return pipe(
 		validateNames(sortedPersonalData),
 		Either.chain(() =>
-			validatePaycheckOrder(sortedPersonalData.pastPaychecks)
-		),
-		Either.mapLeft(
-			(ex) =>
-				new Error('Error with order of past paychecks', {
-					cause: ex
-				})
+			validatePaycheckOrder(
+				sortedPersonalData.pastPaychecks,
+				'Error with order of past paychecks'
+			)
 		),
 		Either.chain(() =>
-			validatePaycheckOrder(sortedPersonalData.futurePaychecks)
-		),
-		Either.mapLeft(
-			(ex) =>
-				new Error('Error with order of future paychecks', {
-					cause: ex
-				})
+			validatePaycheckOrder(
+				sortedPersonalData.futurePaychecks,
+				'Error with order of future paychecks'
+			)
 		),
 		Either.map((): Data => [sortedPersonalData, data[1]])
 	);
