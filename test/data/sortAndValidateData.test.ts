@@ -1,10 +1,11 @@
 import { getTestData } from '../testutils/getTestData';
 import { Bonus } from '../../src/data/decoders/personalData';
-import { pipe } from 'fp-ts/function';
+import { identity, pipe } from 'fp-ts/function';
 import * as IOEither from 'fp-ts/IOEither';
 import { sortAndValidateData } from '../../src/data/sortAndValidateData';
 import '@relmify/jest-fp-ts';
 import { Data } from '../../src/data/getData';
+import { IOTryT } from '@craigmiller160/ts-functions/types';
 
 const createDuplicateBonuses = (): ReadonlyArray<Bonus> => [
 	{
@@ -27,10 +28,13 @@ const createDuplicateBonuses = (): ReadonlyArray<Bonus> => [
 	}
 ];
 
+const prepareTestData = (modify: (d: Data) => Data = identity): IOTryT<Data> =>
+	pipe(getTestData(), IOEither.map(modify));
+
 describe('validateData', () => {
 	it('data is valid', () => {
 		const resultEither = pipe(
-			getTestData(),
+			prepareTestData(),
 			IOEither.chainEitherK(sortAndValidateData)
 		)();
 		expect(resultEither).toBeRight();
@@ -50,19 +54,16 @@ describe('validateData', () => {
 
 	it('data has duplicate name', () => {
 		const resultEither = pipe(
-			getTestData(),
-			IOEither.map(([personal, legal]): Data => {
-				return [
-					{
-						...personal,
-						pastBonuses: [
-							...personal.pastBonuses,
-							...createDuplicateBonuses()
-						]
-					},
-					legal
-				];
-			}),
+			prepareTestData(([personal, legal]) => [
+				{
+					...personal,
+					pastBonuses: [
+						...personal.pastBonuses,
+						...createDuplicateBonuses()
+					]
+				},
+				legal
+			]),
 			IOEither.chainEitherK(sortAndValidateData)
 		)();
 		expect(resultEither).toEqualLeft(
