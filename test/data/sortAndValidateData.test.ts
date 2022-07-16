@@ -36,6 +36,18 @@ describe('validateData', () => {
 		expect(resultEither).toBeRight();
 	});
 
+	it('data has out of order records', () => {
+		throw new Error();
+	});
+
+	it('past paychecks have invalid date record', () => {
+		throw new Error();
+	});
+
+	it('future paychecks have invalid date record', () => {
+		throw new Error();
+	});
+
 	it('data has duplicate name', () => {
 		const resultEither = pipe(
 			getTestData(),
