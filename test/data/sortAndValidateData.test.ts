@@ -107,7 +107,34 @@ describe('validateData', () => {
 	});
 
 	it('future paychecks have invalid date record', () => {
-		throw new Error();
+		const invalidRecord: Paycheck = {
+			...EMPTY_PAYCHECK,
+			startDate: '2022-10-09',
+			endDate: '2022-11-01'
+		};
+		const resultEither = pipe(
+			prepareTestData(([personal, legal]) => [
+				{
+					...personal,
+					futurePaychecks: [
+						...personal.futurePaychecks,
+						invalidRecord
+					]
+				},
+				legal
+			]),
+			IOEither.chainEitherK(sortAndValidateData)
+		)();
+
+		expect(resultEither).toEqualLeft(
+			expect.objectContaining({
+				message: 'Error with order of future paychecks',
+				cause: expect.objectContaining({
+					message:
+						'A check starts before the previous check ends: 2022-12-31 2022-10-09'
+				})
+			})
+		);
 	});
 
 	it('paycheck has end date before start date', () => {
