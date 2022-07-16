@@ -7,58 +7,27 @@ import '@relmify/jest-fp-ts';
 import { Data } from '../../src/data/getData';
 import { IOTryT } from '@craigmiller160/ts-functions/types';
 import { Right } from 'fp-ts/Either';
+import { EMPTY_BONUS, EMPTY_PAYCHECK } from '../testutils/emptyData';
 
 const createDuplicateBonuses = (): ReadonlyArray<Bonus> => [
-	{
-		name: 'Bonus',
-		date: '2022-01-01',
-		grossPay: 100,
-		rates401k: {
-			employerRate: 0,
-			employeeRate: undefined
-		}
-	},
-	{
-		name: 'Bonus',
-		date: '2022-01-01',
-		grossPay: 100,
-		rates401k: {
-			employerRate: 0,
-			employeeRate: undefined
-		}
-	}
+	EMPTY_BONUS,
+	EMPTY_BONUS
 ];
 
 const prepareTestData = (modify: (d: Data) => Data = identity): IOTryT<Data> =>
 	pipe(getTestData(), IOEither.map(modify));
 
 const createNewPaycheck = (index: number): Paycheck => ({
+	...EMPTY_PAYCHECK,
 	startDate: `2200-0${index}-01`,
 	endDate: `2200-0${index}-02`,
-	grossPay: 0,
-	numberOfChecks: 0,
-	rates401k: {
-		employerRate: 0,
-		employeeRate: 0
-	},
-	name: `New Paycheck ${index}`,
-	benefitsCost: {
-		dental: 0,
-		vision: 0,
-		fsa: 0,
-		hsa: 0,
-		medical: 0
-	}
+	name: `New Paycheck ${index}`
 });
 
 const createNewBonus = (index: number): Bonus => ({
+	...EMPTY_BONUS,
 	date: `2200-0${index}-01`,
-	grossPay: 0,
-	name: `New Bonus ${index}`,
-	rates401k: {
-		employerRate: 0,
-		employeeRate: 0
-	}
+	name: `New Bonus ${index}`
 });
 
 describe('validateData', () => {
