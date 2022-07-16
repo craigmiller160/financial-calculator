@@ -96,12 +96,73 @@ const sortPersonalData = (personalData: PersonalData): PersonalData => {
 	};
 };
 
-const validateDates = (personalData: PersonalData): TryT<void> => {};
+const paycheckOrderValidationMonoid: MonoidT<TryT<Paycheck>> = {
+	empty: Either.right({
+		startDate: '1900-01-01',
+		endDate: '1900-01-01',
+		name: '',
+		grossPay: 0,
+		rates401k: {
+			employerRate: 0,
+			employeeRate: 0
+		},
+		benefitsCost: {
+			hsa: 0,
+			fsa: 0,
+			medical: 0,
+			vision: 0,
+			dental: 0
+		},
+		numberOfChecks: 0
+	}),
+	concat: (a, b) =>
+		pipe(
+			[a, b],
+			Either.sequenceArray,
+			Either.filterOrElse(
+				([check1, check2]) =>
+					compareDates(check1.endDate, check2.startDate) <= 0,
+				([check1, check2]) =>
+					new Error(
+						`A check starts before the previous check ends: ${check1.endDate} ${check2.startDate}`
+					)
+			),
+			Either.chain(() => b)
+		)
+};
+
+const validatePaycheckOrder = (
+	paychecks: ReadonlyArray<Paycheck>
+): TryT<void> =>
+	pipe(
+		paychecks,
+		RArray.map((paycheck) => Either.right(paycheck)),
+		Monoid.concatAll(paycheckOrderValidationMonoid),
+		Either.map(constVoid)
+	);
 
 export const sortAndValidateData = (data: Data): TryT<Data> => {
 	const sortedPersonalData = sortPersonalData(data[0]);
 	return pipe(
 		validateNames(sortedPersonalData),
+		Either.chain(() =>
+			validatePaycheckOrder(sortedPersonalData.pastPaychecks)
+		),
+		Either.mapLeft(
+			(ex) =>
+				new Error('Error with order of past paychecks', {
+					cause: ex
+				})
+		),
+		Either.chain(() =>
+			validatePaycheckOrder(sortedPersonalData.futurePaychecks)
+		),
+		Either.mapLeft(
+			(ex) =>
+				new Error('Error with order of future paychecks', {
+					cause: ex
+				})
+		),
 		Either.map((): Data => [sortedPersonalData, data[1]])
 	);
 };
