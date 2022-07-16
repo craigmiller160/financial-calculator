@@ -96,10 +96,12 @@ describe('validateData', () => {
 		)();
 
 		expect(resultEither).toEqualLeft(
-			new Error('Error with order of past paychecks', {
-				cause: new Error(
-					'A check starts before the previous check ends: 2022-09-11 2022-09-09'
-				)
+			expect.objectContaining({
+				message: 'Error with order of past paychecks',
+				cause: expect.objectContaining({
+					message:
+						'A check starts before the previous check ends: 2022-09-11 2022-09-09'
+				})
 			})
 		);
 	});
