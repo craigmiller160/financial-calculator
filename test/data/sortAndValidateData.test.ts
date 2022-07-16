@@ -6,7 +6,7 @@ import { sortAndValidateData } from '../../src/data/sortAndValidateData';
 import '@relmify/jest-fp-ts';
 import { Data } from '../../src/data/getData';
 import { IOTryT } from '@craigmiller160/ts-functions/types';
-import { Right } from 'fp-ts/Either';
+import { Left, Right } from 'fp-ts/Either';
 import { EMPTY_BONUS, EMPTY_PAYCHECK } from '../testutils/emptyData';
 
 const createDuplicateBonuses = (): ReadonlyArray<Bonus> => [
@@ -93,14 +93,12 @@ describe('validateData', () => {
 			IOEither.chainEitherK(sortAndValidateData)
 		)();
 
-		expect(resultEither).toEqualLeft(
-			expect.objectContaining({
-				message: 'Error with order of past paychecks',
-				cause: expect.objectContaining({
-					message:
-						'A check starts before the previous check ends: 2022-09-11 2022-09-09'
-				})
-			})
+		expect(resultEither).toBeLeft();
+		const error = (resultEither as Left<Error>).left;
+		expect(error.message).toEqual('Error with order of past paychecks');
+		expect(error.cause).toBeTruthy();
+		expect(error.cause?.message).toEqual(
+			'The check Empty Paycheck starts before Schellman Pre-401k Check ends'
 		);
 	});
 
@@ -124,14 +122,12 @@ describe('validateData', () => {
 			IOEither.chainEitherK(sortAndValidateData)
 		)();
 
-		expect(resultEither).toEqualLeft(
-			expect.objectContaining({
-				message: 'Error with order of future paychecks',
-				cause: expect.objectContaining({
-					message:
-						'A check starts before the previous check ends: 2022-12-31 2022-10-09'
-				})
-			})
+		expect(resultEither).toBeLeft();
+		const error = (resultEither as Left<Error>).left;
+		expect(error.message).toEqual('Error with order of future paychecks');
+		expect(error.cause).toBeTruthy();
+		expect(error.cause?.message).toEqual(
+			'The check Empty Paycheck starts before Schellman 401k Check ends'
 		);
 	});
 
