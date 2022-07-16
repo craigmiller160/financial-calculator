@@ -9,6 +9,8 @@ import { IOTryT } from '@craigmiller160/ts-functions/types';
 import { Right } from 'fp-ts/Either';
 import { EMPTY_BONUS, EMPTY_PAYCHECK } from '../testutils/emptyData';
 
+// TODO improve error messages, add item names
+
 const createDuplicateBonuses = (): ReadonlyArray<Bonus> => [
 	EMPTY_BONUS,
 	EMPTY_BONUS
@@ -77,10 +79,36 @@ describe('validateData', () => {
 	});
 
 	it('past paychecks have invalid date record', () => {
-		throw new Error();
+		const invalidRecord: Paycheck = {
+			...EMPTY_PAYCHECK,
+			startDate: '2022-09-09',
+			endDate: '2022-10-01'
+		};
+		const resultEither = pipe(
+			prepareTestData(([personal, legal]) => [
+				{
+					...personal,
+					pastPaychecks: [...personal.pastPaychecks, invalidRecord]
+				},
+				legal
+			]),
+			IOEither.chainEitherK(sortAndValidateData)
+		)();
+
+		expect(resultEither).toEqualLeft(
+			new Error('Error with order of past paychecks', {
+				cause: new Error(
+					'A check starts before the previous check ends: 2022-09-11 2022-09-09'
+				)
+			})
+		);
 	});
 
 	it('future paychecks have invalid date record', () => {
+		throw new Error();
+	});
+
+	it('paycheck has end date before start date', () => {
 		throw new Error();
 	});
 
