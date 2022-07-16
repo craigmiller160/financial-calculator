@@ -99,7 +99,7 @@ describe('validateData', () => {
 			IOEither.chainEitherK(sortAndValidateData)
 		)();
 		expect(resultEither).toEqualLeft(
-			new Error('All names must be unique. Duplicate: Bonus')
+			new Error('All names must be unique. Duplicate: Empty Bonus')
 		);
 	});
 });
