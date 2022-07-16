@@ -155,8 +155,7 @@ const validateEndDateAfterStartDate = (
 	pipe(
 		paychecks,
 		RArray.findFirst(
-			(paycheck) =>
-				compareDates(paycheck.startDate, paycheck.endDate) <= 0
+			(paycheck) => compareDates(paycheck.startDate, paycheck.endDate) > 0
 		),
 		Option.fold(
 			() => Either.right(constVoid()),
