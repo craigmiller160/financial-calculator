@@ -124,7 +124,7 @@ const paycheckOrderValidationMonoid: MonoidT<TryT<Paycheck>> = {
 					compareDates(check1.endDate, check2.startDate) <= 0,
 				([check1, check2]) =>
 					new Error(
-						`A check starts before the previous check ends: ${check1.endDate} ${check2.startDate}`
+						`The check ${check2.name} starts before ${check1.name} ends`
 					)
 			),
 			Either.chain(() => b)

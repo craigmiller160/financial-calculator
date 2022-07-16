@@ -9,8 +9,6 @@ import { IOTryT } from '@craigmiller160/ts-functions/types';
 import { Right } from 'fp-ts/Either';
 import { EMPTY_BONUS, EMPTY_PAYCHECK } from '../testutils/emptyData';
 
-// TODO improve error messages, add item names
-
 const createDuplicateBonuses = (): ReadonlyArray<Bonus> => [
 	EMPTY_BONUS,
 	EMPTY_BONUS
