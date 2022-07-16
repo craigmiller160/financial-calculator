@@ -131,7 +131,11 @@ describe('validateData', () => {
 		);
 	});
 
-	it('paycheck has end date before start date', () => {
+	it('past paycheck has end date before start date', () => {
+		throw new Error();
+	});
+
+	it('future paycheck has end date before start date', () => {
 		throw new Error();
 	});
 

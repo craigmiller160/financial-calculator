@@ -148,10 +148,49 @@ const validatePaycheckOrder = (
 		)
 	);
 
+const validateEndDateAfterStartDate = (
+	paychecks: ReadonlyArray<Paycheck>,
+	errorMessage: string
+): TryT<void> =>
+	pipe(
+		paychecks,
+		RArray.findFirst(
+			(paycheck) =>
+				compareDates(paycheck.startDate, paycheck.endDate) <= 0
+		),
+		Option.fold(
+			() => Either.right(constVoid()),
+			(paycheck) =>
+				Either.left(
+					new Error(
+						`Paycheck ${paycheck.name} has end date before start date`
+					)
+				)
+		),
+		Either.mapLeft(
+			(ex) =>
+				new Error(errorMessage, {
+					cause: ex
+				})
+		)
+	);
+
 export const sortAndValidateData = (data: Data): TryT<Data> => {
 	const sortedPersonalData = sortPersonalData(data[0]);
 	return pipe(
 		validateNames(sortedPersonalData),
+		Either.chain(() =>
+			validateEndDateAfterStartDate(
+				sortedPersonalData.pastPaychecks,
+				'Error with dates of past paycheck'
+			)
+		),
+		Either.chain(() =>
+			validateEndDateAfterStartDate(
+				sortedPersonalData.futurePaychecks,
+				'Error with dates of future paycheck'
+			)
+		),
 		Either.chain(() =>
 			validatePaycheckOrder(
 				sortedPersonalData.pastPaychecks,
