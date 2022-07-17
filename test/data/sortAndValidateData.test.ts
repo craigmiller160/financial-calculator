@@ -158,7 +158,32 @@ describe('validateData', () => {
 	});
 
 	it('future paycheck has end date before start date', () => {
-		throw new Error();
+		const invalidRecord: Paycheck = {
+			...EMPTY_PAYCHECK,
+			startDate: '2022-09-09',
+			endDate: '2022-08-01'
+		};
+		const resultEither = pipe(
+			prepareTestData(([personal, legal]) => [
+				{
+					...personal,
+					futurePaychecks: [
+						...personal.futurePaychecks,
+						invalidRecord
+					]
+				},
+				legal
+			]),
+			IOEither.chainEitherK(sortAndValidateData)
+		)();
+
+		expect(resultEither).toBeLeft();
+		const error = (resultEither as Left<Error>).left;
+		expect(error.message).toEqual('Error with dates of future paycheck');
+		expect(error.cause).toBeTruthy();
+		expect(error.cause?.message).toEqual(
+			'Paycheck Empty Paycheck has end date before start date'
+		);
 	});
 
 	it('data has duplicate name', () => {
