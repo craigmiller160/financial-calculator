@@ -11,15 +11,15 @@ pipe(
 	resetOutput(),
 	IOEither.chain(() => getData()),
 	IOEither.map(createContext),
-	IOEither.map(performCalculations),
+	IOEither.chainEitherK(performCalculations),
 	IOEither.chain(writeDataFiles),
 	IOEither.fold(
 		(ex) => () => {
 			console.error(ex);
 			return null;
 		},
-		() => () => {
-			logger.info('Working so far');
+		(context) => () => {
+			logger.info(`Working so far. 401k Rate: ${context.futureRate401k}`);
 			return null;
 		}
 	)

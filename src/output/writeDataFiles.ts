@@ -9,6 +9,7 @@ import * as Json from '@craigmiller160/ts-functions/Json';
 import * as IOEither from 'fp-ts/IOEither';
 import {
 	createOutputPath,
+	FUTURE_CONTRIBUTION_401K_FILE,
 	PAST_CONTRIBUTION_401K_FILE,
 	PAYROLL_TAXES_FILE
 } from './constants';
@@ -37,6 +38,12 @@ export const writeDataFiles = (context: Context): IOTryT<Context> =>
 			writeJsonToFile(
 				path.join(outputPath, PAYROLL_TAXES_FILE),
 				context.payrollTaxes
+			)
+		),
+		IOEither.chainFirst((outputPath) =>
+			writeJsonToFile(
+				path.join(outputPath, FUTURE_CONTRIBUTION_401K_FILE),
+				context.futureContribution401k
 			)
 		),
 		IOEither.map(() => context)
