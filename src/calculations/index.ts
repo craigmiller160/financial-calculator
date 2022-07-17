@@ -14,15 +14,19 @@ export const performCalculations = (context: BaseContext): TryT<Context> => {
 	const payrollTaxes = calculatePayrollTaxes(context);
 	return pipe(
 		calculateFuture401kRate(context, pastContribution401k),
-		Either.map((rate401k) =>
-			calculateFutureContribution401k(context, rate401k)
+		Either.bindTo('futureRate401k'),
+		Either.bind('futureContribution401k', ({ futureRate401k }) =>
+			Either.right(
+				calculateFutureContribution401k(context, futureRate401k)
+			)
 		),
 		Either.map(
-			(futureContribution401k): Context => ({
+			({ futureRate401k, futureContribution401k }): Context => ({
 				...context,
 				pastContribution401k,
 				payrollTaxes,
-				futureContribution401k
+				futureContribution401k,
+				futureRate401k
 			})
 		)
 	);

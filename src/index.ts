@@ -19,7 +19,7 @@ pipe(
 			return null;
 		},
 		(context) => () => {
-			logger.info(`Working so far. 401k Rate: ${context.future401kRate}`);
+			logger.info(`Working so far. 401k Rate: ${context.futureRate401k}`);
 			return null;
 		}
 	)
