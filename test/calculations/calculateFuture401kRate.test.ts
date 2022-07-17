@@ -19,8 +19,8 @@ const generatePastContribution401k = (
 		RArray.map(
 			(paycheck): Contribution401kByItem => ({
 				name: paycheck.name,
-				employeeContribution: 1000,
-				employerContribution: 1000
+				employeeContribution: 500,
+				employerContribution: 500
 			})
 		)
 	);
@@ -29,8 +29,8 @@ const generatePastContribution401k = (
 		RArray.map(
 			(bonus): Contribution401kByItem => ({
 				name: bonus.name,
-				employeeContribution: 1000,
-				employerContribution: 1000
+				employeeContribution: 500,
+				employerContribution: 500
 			})
 		)
 	);
