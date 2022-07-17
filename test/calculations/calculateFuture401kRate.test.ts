@@ -9,6 +9,7 @@ import { IOTryT } from '@craigmiller160/ts-functions/types';
 import * as IOEither from 'fp-ts/IOEither';
 import { getTestBaseContext } from '../testutils/getTestContext';
 import { calculateFuture401kRate } from '../../src/calculations/calculateFuture401kRate';
+import '@relmify/jest-fp-ts';
 
 const generatePastContribution401k = (
 	context: BaseContext
@@ -55,13 +56,13 @@ const prepareTestData = (): IOTryT<TestData> =>
 
 describe('calculateFuture401kRate', () => {
 	it('calculate the rate', () => {
-		pipe(
+		const resultEither = pipe(
 			prepareTestData(),
 			IOEither.map(([context, contribution]) =>
 				calculateFuture401kRate(context, contribution)
 			)
-		);
-		throw new Error();
+		)();
+		expect(resultEither).toBeRight();
 	});
 
 	it('cannot find a past paycheck', () => {
