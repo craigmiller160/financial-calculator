@@ -1,13 +1,19 @@
 import { BaseContext } from '../context';
-import { Contribution401k, Contribution401kByItem } from '../context/contribution401k';
+import {
+	Contribution401k,
+	Contribution401kByItem
+} from '../context/contribution401k';
 import { Paycheck } from '../data/decoders/personalData';
 import { findNamedItemE } from '../utils/finders';
 import { pipe } from 'fp-ts/function';
 import * as Either from 'fp-ts/Either';
-import { MonoidT, TryT } from '@craigmiller160/ts-functions/types';
-import { plus, times } from '../utils/decimalMath';
+import { MonoidT, TryT, PredicateT } from '@craigmiller160/ts-functions/types';
+import { minus, plus, times } from '../utils/decimalMath';
 import * as RArray from 'fp-ts/ReadonlyArray';
 import * as Monoid from 'fp-ts/Monoid';
+
+// 0.1%
+const INTERVAL_FIND_401K = 0.001;
 
 type UnnamedContribution401kItem = Omit<Contribution401kByItem, 'name'>;
 
@@ -71,6 +77,37 @@ const getTotalPastContribution = (
 			)
 		}))
 	);
+};
+
+interface FindRateValues {
+	readonly contributionLimit401k: number;
+	readonly newRate401k: number;
+	readonly newFutureContribution401k: number;
+	readonly totalPastContribution401k: number;
+	readonly totalFutureIncomeFor401k: number;
+}
+
+const isOver401kLimit: PredicateT<FindRateValues> = (values) => {
+	const totalContribution = plus(values.totalPastContribution401k)(
+		values.newFutureContribution401k
+	);
+	return totalContribution > values.contributionLimit401k;
+};
+
+const findNewRate401k = (values: FindRateValues): number => {
+	const newRate401k = plus(values.newRate401k)(INTERVAL_FIND_401K);
+	const newFutureContribution401k = times(values.totalFutureIncomeFor401k)(
+		newRate401k
+	);
+	const newValues: FindRateValues = {
+		...values,
+		newRate401k,
+		newFutureContribution401k
+	};
+	if (isOver401kLimit(newValues)) {
+		return minus(newRate401k)(INTERVAL_FIND_401K);
+	}
+	return findNewRate401k(values);
 };
 
 export const calculateFuture401kRate = (
