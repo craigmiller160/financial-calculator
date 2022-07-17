@@ -132,24 +132,20 @@ const getTotalFutureIncome = (context: BaseContext): number =>
 export const calculateFuture401kRate = (
 	context: BaseContext,
 	pastContribution401k: Contribution401k
-): number => {
+): TryT<number> => {
 	const totalFutureIncomeFor401k = getTotalFutureIncome(context);
-	pipe(
+	return pipe(
 		getTotalPastContribution(context, pastContribution401k),
-		Either.bindTo('totalPastContribution401k'),
-		Either.bind('newRate401k', ({ totalPastContribution401k }) => {
-			const findValues: FindRateValues = {
+		Either.map(
+			(totalPastContribution401k): FindRateValues => ({
 				totalPastContribution401k:
 					totalPastContribution401k.employeeContribution,
 				totalFutureIncomeFor401k,
 				newRate401k: INTERVAL_FIND_401K,
 				newFutureContribution401k: 0,
 				contributionLimit401k: context.legalData.contributionLimit401k
-			};
-			return Either.right(findNewRate401k(findValues));
-		})
+			})
+		),
+		Either.map(findNewRate401k)
 	);
-
-	getTotalPastContribution(context, pastContribution401k);
-	throw new Error();
 };
