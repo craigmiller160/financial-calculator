@@ -8,7 +8,10 @@ export const performCalculations = (context: BaseContext): Context => {
 	logger.debug('Performing calculations on data');
 	const pastContribution401k = calculatePastContribution401k(context);
 	const payrollTaxes = calculatePayrollTaxes(context);
-	const future401kRate = calculateFuture401kRate(context);
+	const future401kRate = calculateFuture401kRate(
+		context,
+		pastContribution401k
+	);
 	return {
 		...context,
 		pastContribution401k,
