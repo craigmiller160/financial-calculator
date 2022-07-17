@@ -7,8 +7,8 @@ import { Paycheck } from '../data/decoders/personalData';
 import { findNamedItemE } from '../utils/finders';
 import { pipe } from 'fp-ts/function';
 import * as Either from 'fp-ts/Either';
-import { MonoidT, TryT, PredicateT } from '@craigmiller160/ts-functions/types';
-import { minus, plus, times } from '../utils/decimalMath';
+import { MonoidT, PredicateT, TryT } from '@craigmiller160/ts-functions/types';
+import { decimalMonoidSum, minus, plus, times } from '../utils/decimalMath';
 import * as RArray from 'fp-ts/ReadonlyArray';
 import * as Monoid from 'fp-ts/Monoid';
 
@@ -110,9 +110,46 @@ const findNewRate401k = (values: FindRateValues): number => {
 	return findNewRate401k(values);
 };
 
+interface GrossPayItem {
+	readonly grossPay: number;
+}
+
+const getGrossPays = (
+	items: ReadonlyArray<GrossPayItem>
+): ReadonlyArray<number> =>
+	pipe(
+		items,
+		RArray.map((item) => item.grossPay)
+	);
+
+const getTotalFutureIncome = (context: BaseContext): number =>
+	pipe(
+		getGrossPays(context.personalData.futurePaychecks),
+		RArray.concat(getGrossPays(context.personalData.futureBonuses)),
+		Monoid.concatAll(decimalMonoidSum)
+	);
+
 export const calculateFuture401kRate = (
 	context: BaseContext,
 	pastContribution401k: Contribution401k
 ): number => {
+	const totalFutureIncomeFor401k = getTotalFutureIncome(context);
+	pipe(
+		getTotalPastContribution(context, pastContribution401k),
+		Either.bindTo('totalPastContribution401k'),
+		Either.bind('newRate401k', ({ totalPastContribution401k }) => {
+			const findValues: FindRateValues = {
+				totalPastContribution401k:
+					totalPastContribution401k.employeeContribution,
+				totalFutureIncomeFor401k,
+				newRate401k: INTERVAL_FIND_401K,
+				newFutureContribution401k: 0,
+				contributionLimit401k: context.legalData.contributionLimit401k
+			};
+			return Either.right(findNewRate401k(findValues));
+		})
+	);
+
+	getTotalPastContribution(context, pastContribution401k);
 	throw new Error();
 };
