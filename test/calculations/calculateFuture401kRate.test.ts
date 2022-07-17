@@ -68,6 +68,24 @@ describe('calculateFuture401kRate', () => {
 	});
 
 	it('cannot find a past paycheck', () => {
-		throw new Error();
+		const resultEither = pipe(
+			prepareTestData(),
+			IOEither.map(
+				([context, contribution]): TestData => [
+					context,
+					{
+						...contribution,
+						contributionsByPaycheck:
+							contribution.contributionsByPaycheck.slice(1)
+					}
+				]
+			),
+			IOEither.chainEitherK(([context, contribution]) =>
+				calculateFuture401kRate(context, contribution)
+			)
+		)();
+		expect(resultEither).toEqualLeft(
+			new Error('Unable to find named item: Cigna Paycheck')
+		);
 	});
 });
