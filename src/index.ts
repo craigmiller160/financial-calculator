@@ -18,8 +18,8 @@ pipe(
 			console.error(ex);
 			return null;
 		},
-		() => () => {
-			logger.info('Working so far');
+		(context) => () => {
+			logger.info(`Working so far. 401k Rate: ${context.future401kRate}`);
 			return null;
 		}
 	)
