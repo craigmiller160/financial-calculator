@@ -58,11 +58,13 @@ describe('calculateFuture401kRate', () => {
 	it('calculate the rate', () => {
 		const resultEither = pipe(
 			prepareTestData(),
-			IOEither.map(([context, contribution]) =>
+			IOEither.chainEitherK(([context, contribution]) =>
 				calculateFuture401kRate(context, contribution)
 			)
 		)();
-		expect(resultEither).toBeRight();
+		// 9,000 in past contributions, 11,500 in remaining contributions
+		// 57,692.30 in future income
+		expect(resultEither).toEqualRight(0.199);
 	});
 
 	it('cannot find a past paycheck', () => {
