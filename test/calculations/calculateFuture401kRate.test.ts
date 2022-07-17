@@ -2,14 +2,13 @@ import {
 	Contribution401k,
 	Contribution401kByItem
 } from '../../src/context/contribution401k';
-import { Data } from '../../src/data/getData';
 import { pipe } from 'fp-ts/function';
 import * as RArray from 'fp-ts/ReadonlyArray';
 import { BaseContext } from '../../src/context';
 import { IOTryT } from '@craigmiller160/ts-functions/types';
-import { getTestData } from '../testutils/getTestData';
 import * as IOEither from 'fp-ts/IOEither';
 import { getTestBaseContext } from '../testutils/getTestContext';
+import { calculateFuture401kRate } from '../../src/calculations/calculateFuture401kRate';
 
 const generatePastContribution401k = (
 	context: BaseContext
@@ -56,6 +55,12 @@ const prepareTestData = (): IOTryT<TestData> =>
 
 describe('calculateFuture401kRate', () => {
 	it('calculate the rate', () => {
+		pipe(
+			prepareTestData(),
+			IOEither.map(([context, contribution]) =>
+				calculateFuture401kRate(context, contribution)
+			)
+		);
 		throw new Error();
 	});
 
