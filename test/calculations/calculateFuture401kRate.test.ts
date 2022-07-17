@@ -72,12 +72,15 @@ describe('calculateFuture401kRate', () => {
 			prepareTestData(),
 			IOEither.map(
 				([context, contribution]): TestData => [
-					context,
 					{
-						...contribution,
-						contributionsByPaycheck:
-							contribution.contributionsByPaycheck.slice(1)
-					}
+						...context,
+						personalData: {
+							...context.personalData,
+							pastPaychecks:
+								context.personalData.pastPaychecks.slice(1)
+						}
+					},
+					contribution
 				]
 			),
 			IOEither.chainEitherK(([context, contribution]) =>
