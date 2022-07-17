@@ -12,6 +12,7 @@ export interface BaseContext {
 export interface Context extends BaseContext {
 	readonly pastContribution401k: Contribution401k;
 	readonly payrollTaxes: PayrollTaxes;
+	readonly future401kRate: number;
 }
 
 export const createContext = (data: Data): BaseContext => ({
