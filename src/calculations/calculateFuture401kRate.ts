@@ -107,7 +107,7 @@ const findNewRate401k = (values: FindRateValues): number => {
 	if (isOver401kLimit(newValues)) {
 		return minus(newRate401k)(INTERVAL_FIND_401K);
 	}
-	return findNewRate401k(values);
+	return findNewRate401k(newValues);
 };
 
 interface GrossPayItem {
