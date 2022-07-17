@@ -6,6 +6,7 @@ import { calculateFuture401kRate } from './calculateFuture401kRate';
 import { pipe } from 'fp-ts/function';
 import * as Either from 'fp-ts/Either';
 import { TryT } from '@craigmiller160/ts-functions/types';
+import { calculateFutureContribution401k } from './calculateFutureContribution401k';
 
 export const performCalculations = (context: BaseContext): TryT<Context> => {
 	logger.debug('Performing calculations on data');
@@ -13,12 +14,15 @@ export const performCalculations = (context: BaseContext): TryT<Context> => {
 	const payrollTaxes = calculatePayrollTaxes(context);
 	return pipe(
 		calculateFuture401kRate(context, pastContribution401k),
+		Either.map((rate401k) =>
+			calculateFutureContribution401k(context, rate401k)
+		),
 		Either.map(
-			(future401kRate): Context => ({
+			(futureContribution401k): Context => ({
 				...context,
 				pastContribution401k,
 				payrollTaxes,
-				future401kRate
+				futureContribution401k
 			})
 		)
 	);
