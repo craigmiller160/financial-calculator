@@ -11,7 +11,7 @@ pipe(
 	resetOutput(),
 	IOEither.chain(() => getData()),
 	IOEither.map(createContext),
-	IOEither.map(performCalculations),
+	IOEither.chainEitherK(performCalculations),
 	IOEither.chain(writeDataFiles),
 	IOEither.fold(
 		(ex) => () => {
