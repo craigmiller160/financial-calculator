@@ -3,7 +3,7 @@ import {
 	Contribution401k,
 	Contribution401kByItem
 } from '../context/contribution401k';
-import { Paycheck } from '../data/decoders/personalData';
+import { Bonus, Paycheck } from '../data/decoders/personalData';
 import { findNamedItemE } from '../utils/finders';
 import { pipe } from 'fp-ts/function';
 import * as Either from 'fp-ts/Either';
@@ -110,24 +110,33 @@ const findNewRate401k = (values: FindRateValues): number => {
 	return findNewRate401k(newValues);
 };
 
-interface GrossPayItem {
-	readonly grossPay: number;
-}
-
-const getGrossPays = (
-	items: ReadonlyArray<GrossPayItem>
-): ReadonlyArray<number> =>
+const getTotalGrossPayForBonuses = (bonuses: ReadonlyArray<Bonus>): number =>
 	pipe(
-		items,
-		RArray.map((item) => item.grossPay)
-	);
-
-const getTotalFutureIncome = (context: BaseContext): number =>
-	pipe(
-		getGrossPays(context.personalData.futurePaychecks),
-		RArray.concat(getGrossPays(context.personalData.futureBonuses)),
+		bonuses,
+		RArray.map((bonus) => bonus.grossPay),
 		Monoid.concatAll(decimalMonoidSum)
 	);
+
+const getTotalGrossPayForPaychecks = (
+	paychecks: ReadonlyArray<Paycheck>
+): number =>
+	pipe(
+		paychecks,
+		RArray.map((paycheck) =>
+			times(paycheck.grossPay)(paycheck.numberOfChecks)
+		),
+		Monoid.concatAll(decimalMonoidSum)
+	);
+
+const getTotalFutureIncome = (context: BaseContext): number => {
+	const totalForPaychecks = getTotalGrossPayForPaychecks(
+		context.personalData.futurePaychecks
+	);
+	const totalForBonuses = getTotalGrossPayForBonuses(
+		context.personalData.futureBonuses
+	);
+	return plus(totalForPaychecks)(totalForBonuses);
+};
 
 export const calculateFuture401kRate = (
 	context: BaseContext,
