@@ -5,10 +5,17 @@ import {
 import { Data } from '../../src/data/getData';
 import { pipe } from 'fp-ts/function';
 import * as RArray from 'fp-ts/ReadonlyArray';
+import { BaseContext } from '../../src/context';
+import { IOTryT } from '@craigmiller160/ts-functions/types';
+import { getTestData } from '../testutils/getTestData';
+import * as IOEither from 'fp-ts/IOEither';
+import { getTestBaseContext } from '../testutils/getTestContext';
 
-const generatePastContribution401k = (data: Data): Contribution401k => {
+const generatePastContribution401k = (
+	context: BaseContext
+): Contribution401k => {
 	const contributionsByPaycheck = pipe(
-		data[0].pastPaychecks,
+		context.personalData.pastPaychecks,
 		RArray.map(
 			(paycheck): Contribution401kByItem => ({
 				name: paycheck.name,
@@ -18,7 +25,7 @@ const generatePastContribution401k = (data: Data): Contribution401k => {
 		)
 	);
 	const contributionsByBonus = pipe(
-		data[0].pastBonuses,
+		context.personalData.pastBonuses,
 		RArray.map(
 			(bonus): Contribution401kByItem => ({
 				name: bonus.name,
@@ -32,6 +39,20 @@ const generatePastContribution401k = (data: Data): Contribution401k => {
 		contributionsByBonus
 	};
 };
+
+type TestData = [BaseContext, Contribution401k];
+
+const prepareTestData = (): IOTryT<TestData> =>
+	pipe(
+		getTestBaseContext(),
+		IOEither.bindTo('context'),
+		IOEither.bind('contribution', ({ context }) =>
+			IOEither.right(generatePastContribution401k(context))
+		),
+		IOEither.map(
+			({ context, contribution }): TestData => [context, contribution]
+		)
+	);
 
 describe('calculateFuture401kRate', () => {
 	it('calculate the rate', () => {
